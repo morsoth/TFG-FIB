@@ -1,0 +1,8 @@
+../TSL2591/TSL2591.c:12:26:writeRegister	32	static
+../TSL2591/TSL2591.c:22:26:readRegister	40	static
+../TSL2591/TSL2591.c:32:19:TSL2591_Init	24	static
+../TSL2591/TSL2591.c:47:6:TSL2591_Enable	24	static
+../TSL2591/TSL2591.c:52:6:TSL2591_Disable	24	static
+../TSL2591/TSL2591.c:57:19:TSL2591_ReadChannels	32	static
+../TSL2591/TSL2591.c:70:7:TSL2591_CalculateLux	40	static
+../TSL2591/TSL2591.c:104:7:TSL2591_CalculateIrradiance	16	static

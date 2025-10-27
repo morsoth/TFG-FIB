@@ -53,7 +53,6 @@ void setup() {
 	ina.operatingMode = INA3221_MODE_SHUNT_BUS_CONTINUOUS;
 	if (INA3221_Init(&ina) == HAL_OK) printf("INA3221 inicializado correctamente\r\n");
 	else printf("INA3221 no inicializado\r\n");
-
 }
 
 void loop() {
@@ -74,13 +73,13 @@ void loop() {
 
 	printf("\r\n");
 
-	for (int ch = 1; ch <= 3; ++ch) {
-		if (INA3221_ReadVoltage(&ina, ch, &busVoltage_V[ch - 1], &shuntVoltage_V[ch - 1]) == HAL_OK) {
-			current_mA[ch - 1] = INA3221_CalculateCurrent_mA(&ina, ch, shuntVoltage_V[ch - 1]);
-			power_mW[ch - 1] = INA3221_CalculatePower_mW(busVoltage_V[ch - 1], current_mA[ch - 1]);
+	for (int ch = 0; ch < 3; ++ch) {
+		if (INA3221_ReadVoltage(&ina, ch+1, &busVoltage_V[ch], &shuntVoltage_V[ch]) == HAL_OK) {
+			current_mA[ch] = INA3221_CalculateCurrent_mA(&ina, ch+1, shuntVoltage_V[ch]);
+			power_mW[ch] = INA3221_CalculatePower_mW(busVoltage_V[ch], current_mA[ch]);
 
 			printf("CH%d: Bus Voltage: %.3f V, Shunt Voltage: %.2f mV, Current: %.2f mA, Power: %.2f mW\r\n",
-					ch, busVoltage_V[ch - 1], shuntVoltage_V[ch - 1]*1000, current_mA[ch - 1], power_mW[ch - 1]);
+					ch+1, busVoltage_V[ch], shuntVoltage_V[ch]*1000, current_mA[ch], power_mW[ch]);
 		}
 		else printf("Error al leer el INA3221\r\n");
 	}

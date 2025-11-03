@@ -1,0 +1,175 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "9fa2563f-04cb-468b-9731-6177268fcdbf")
+	(paper "A4")
+	(title_block
+		(title "Lanza Meteorológica - PCB Main")
+	)
+	(lib_symbols)
+	(text "Lanza Meteorológica - PCB Main"
+		(exclude_from_sim no)
+		(at 26.67 36.83 0)
+		(effects
+			(font
+				(size 3.175 3.175)
+				(thickness 0.508)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "a02775c8-28f2-4c7b-a76d-f1137491b64d")
+	)
+	(text_box "Page 1 - Top Sheet\nPage 2 - STM32WB55RG\nPage 3 - Power Management"
+		(exclude_from_sim no)
+		(at 25.4 74.93 0)
+		(size 101.6 7.62)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "4305ef05-2fc1-4a4d-bd7b-8b0da48c187d")
+	)
+	(text_box "a"
+		(exclude_from_sim no)
+		(at 25.4 38.1 0)
+		(size 101.6 25.4)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "5edf4795-8828-4540-98b4-741066d99345")
+	)
+	(text_box "Table of Contents"
+		(exclude_from_sim no)
+		(at 25.4 69.85 0)
+		(size 101.6 3.81)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type color)
+			(color 255 255 194 1)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "7e8c3f1c-d121-4028-8208-eaa8c8058a79")
+	)
+	(sheet
+		(at 25.4 88.9)
+		(size 44.45 5.08)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "401ae2bf-b50a-48e9-9bd2-721497aaba14")
+		(property "Sheetname" "STM32WB55RG"
+			(at 25.4 88.1884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "STM32WB55RG.kicad_sch"
+			(at 25.4 94.5646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "PCB Main"
+				(path "/9fa2563f-04cb-468b-9731-6177268fcdbf"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 101.6)
+		(size 44.45 5.08)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b888a684-3263-4153-9730-9658fff4b3b0")
+		(property "Sheetname" "Power Management"
+			(at 25.4 100.8884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Power Management.kicad_sch"
+			(at 25.4 107.2646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "PCB Main"
+				(path "/9fa2563f-04cb-468b-9731-6177268fcdbf"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

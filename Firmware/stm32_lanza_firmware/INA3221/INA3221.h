@@ -5,10 +5,10 @@
  *      Author: pzaragoza
  */
 
-#include "stm32wbxx_hal.h"
-
 #ifndef INA3221_H_
 #define INA3221_H_
+
+#include "stm32wbxx_hal.h"
 
 #define INA3221_ADDRESS             (0x40 << 1) // I2C address
 

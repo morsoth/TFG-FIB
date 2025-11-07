@@ -12,6 +12,7 @@
 
 #include "TSL2591.h"
 #include "INA3221.h"
+#include "SEN0308.h"
 
 void printData();
 void printHeaderCSV();
@@ -20,11 +21,12 @@ void I2C_bus_scan();
 
 extern I2C_HandleTypeDef hi2c1;
 extern RTC_HandleTypeDef hrtc;
+extern ADC_HandleTypeDef hadc1;
 
 RTC_TimeTypeDef time;
 RTC_DateTypeDef date;
 
-int status[3];
+uint8_t status[3];
 
 TSL2591_t tsl;
 uint16_t full, ir;
@@ -36,6 +38,10 @@ float busVoltage_V[3];
 float shuntVoltage_V[3];
 float current_mA[3];
 float power_mW[3];
+
+SEN0308_t sen;
+uint16_t rawMoisture;
+uint8_t soilMoisture;
 
 void setup() {
 	I2C_bus_scan();
@@ -59,7 +65,14 @@ void setup() {
 	if (INA3221_Init(&ina) == HAL_OK) printf("INA3221 inicializado correctamente\r\n");
 	else printf("INA3221 no inicializado\r\n");
 
-	printHeaderCSV();
+	// SEN0308
+	sen.hadc = &hadc1;
+	sen.airRaw = 3620;
+	sen.waterRaw = 520;
+	if (SEN0308_Init(&sen) == HAL_OK) printf("SEN0308 inicializado correctamente\r\n");
+	else printf("SEN0308 no inicializado\r\n");
+
+	//printHeaderCSV();
 }
 
 void loop() {
@@ -84,8 +97,13 @@ void loop() {
 		status[s] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3 << s);
 	}
 
-	//printData();
-	printDataCSV();
+	if (SEN0308_ReadRawAvg(&sen, &rawMoisture, 10) == HAL_OK) {
+		soilMoisture = SEN0308_CalculateRelative(&sen, rawMoisture);
+	}
+	else printf("Error al leer el SEN0308\r\n\r\n");
+
+	printData();
+	//printDataCSV();
 
 	HAL_GPIO_TogglePin(GPIOB, LD1_Pin);
 	HAL_Delay(1000);
@@ -96,7 +114,7 @@ void printData() {
 
 	printf("\r\n");
 
-	printf("Status[0]: %d, Status[1]: %d, Status[2]: %d\r\n", status[0], status[1], status[2]);
+	printf("Status[0]: %u, Status[1]: %u, Status[2]: %u\r\n", status[0], status[1], status[2]);
 
 	printf("\r\n");
 
@@ -108,6 +126,10 @@ void printData() {
 		printf("CH%d: Bus Voltage: %.3f V, Shunt Voltage: %.2f mV, Current: %.2f mA, Power: %.2f mW\r\n",
 				ch+1, busVoltage_V[ch], shuntVoltage_V[ch]*1000, current_mA[ch], power_mW[ch]);
 	}
+
+	printf("\r\n");
+
+	printf("Raw Moisture: %u, Relative Moisture: %u\%%\r\n", rawMoisture, soilMoisture);
 
 	printf("\r\n");
 }

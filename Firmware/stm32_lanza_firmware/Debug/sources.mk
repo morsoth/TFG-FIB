@@ -26,5 +26,6 @@ Core/Src \
 Core/Startup \
 Drivers/STM32WBxx_HAL_Driver/Src \
 INA3221 \
+SEN0308 \
 TSL2591 \
 

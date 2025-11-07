@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "AEM10941-QFN")(type "KiCad")(uri "${KIPRJMOD}/../libs/symbols/AEM10941-QFN.kicad_sym")(options "")(descr ""))
+  (lib (name "PZG_Jumpers")(type "KiCad")(uri "C:/Users/pzaragoza/Documents/GitHub/TFG-FIB/pcb/libs/symbols/PZG_Jumpers.kicad_sym")(options "")(descr ""))
+)

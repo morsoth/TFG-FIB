@@ -13,6 +13,9 @@
 #include "TSL2591.h"
 #include "INA3221.h"
 
+void printData();
+void printHeaderCSV();
+void printDataCSV();
 void I2C_bus_scan();
 
 extern I2C_HandleTypeDef hi2c1;
@@ -20,6 +23,8 @@ extern RTC_HandleTypeDef hrtc;
 
 RTC_TimeTypeDef time;
 RTC_DateTypeDef date;
+
+int status[3];
 
 TSL2591_t tsl;
 uint16_t full, ir;
@@ -53,41 +58,78 @@ void setup() {
 	ina.operatingMode = INA3221_MODE_SHUNT_BUS_CONTINUOUS;
 	if (INA3221_Init(&ina) == HAL_OK) printf("INA3221 inicializado correctamente\r\n");
 	else printf("INA3221 no inicializado\r\n");
+
+	printHeaderCSV();
 }
 
 void loop() {
 	if (HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN) != HAL_OK) printf("Error al leer la hora\r\n");
 	if (HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN) != HAL_OK) printf("Error al leer la fecha\r\n");
 
-	printf("%02d:%02d:%02d - %02d/%02d/20%02d\r\n", time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, date.Year);
-
-	printf("\r\n");
-
 	if (TSL2591_ReadChannels(&tsl, &full, &ir) == HAL_OK) {
 		lux = TSL2591_CalculateLux(&tsl, full, ir);
 		irradiance_Wm2 = TSL2591_CalculateIrradiance(lux);
-
-		printf("Total: %u, Visible: %u, Infrared: %u, Lux: %.2f, Irradiance: %.2f\r\n", full, full-ir, ir, lux, irradiance_Wm2);
 	}
-	else printf("Error al leer el TSL2591\r\n");
-
-	printf("\r\n");
+	else printf("Error al leer el TSL2591\r\n\r\n");
 
 	for (int ch = 0; ch < 3; ++ch) {
 		if (INA3221_ReadVoltage(&ina, ch+1, &busVoltage_V[ch], &shuntVoltage_V[ch]) == HAL_OK) {
 			current_mA[ch] = INA3221_CalculateCurrent_mA(&ina, ch+1, shuntVoltage_V[ch]);
 			power_mW[ch] = INA3221_CalculatePower_mW(busVoltage_V[ch], current_mA[ch]);
-
-			printf("CH%d: Bus Voltage: %.3f V, Shunt Voltage: %.2f mV, Current: %.2f mA, Power: %.2f mW\r\n",
-					ch+1, busVoltage_V[ch], shuntVoltage_V[ch]*1000, current_mA[ch], power_mW[ch]);
 		}
-		else printf("Error al leer el INA3221\r\n");
+		else printf("Error al leer el INA3221\r\n\r\n");
 	}
+
+	for (int s = 0; s < 3; ++s) {
+		status[s] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3 << s);
+	}
+
+	//printData();
+	printDataCSV();
+
+	HAL_GPIO_TogglePin(GPIOB, LD1_Pin);
+	HAL_Delay(1000);
+}
+
+void printData() {
+	printf("%02d:%02d:%02d - %02d/%02d/20%02d\r\n", time.Hours, time.Minutes, time.Seconds, date.Date, date.Month, date.Year);
 
 	printf("\r\n");
 
-	HAL_GPIO_TogglePin(GPIOB, LD1_Pin);
-	HAL_Delay(500);
+	printf("Status[0]: %d, Status[1]: %d, Status[2]: %d\r\n", status[0], status[1], status[2]);
+
+	printf("\r\n");
+
+	printf("Total: %u, Visible: %u, Infrared: %u, Lux: %.2f, Irradiance: %.2f\r\n", full, full-ir, ir, lux, irradiance_Wm2);
+
+	printf("\r\n");
+
+	for (int ch = 0; ch < 3; ++ch) {
+		printf("CH%d: Bus Voltage: %.3f V, Shunt Voltage: %.2f mV, Current: %.2f mA, Power: %.2f mW\r\n",
+				ch+1, busVoltage_V[ch], shuntVoltage_V[ch]*1000, current_mA[ch], power_mW[ch]);
+	}
+
+	printf("\r\n");
+}
+
+void printHeaderCSV() {
+	printf("timestamp,status_0, status_1,status_2,voltage_PV,current_PV,power_PV,voltage_BAT,current_BAT,power_BAT,voltage_LOAD,current_LOAD,power_LOAD,total,ir,lux,irradiance");
+
+	printf("\r\n");
+}
+
+void printDataCSV() {
+	printf("%02d:%02d:%02d", time.Hours, time.Minutes, time.Seconds);
+
+	printf(",%d,%d,%d", status[0], status[1], status[2]);
+
+	for (int ch = 0; ch < 3; ++ch) {
+		printf(",%.3f,%.2f,%.2f", busVoltage_V[ch], current_mA[ch], power_mW[ch]);
+	}
+
+	printf(",%u,%u,%.2f,%.2f", full, ir, lux, irradiance_Wm2);
+
+	printf("\r\n");
 }
 
 void I2C_bus_scan() {

@@ -1,4 +1,0 @@
-(fp_lib_table
-  (version 7)
-  (lib (name "AEM10941-QFN")(type "KiCad")(uri "C:/Users/pzaragoza/Documents/GitHub/TFG-FIB/PCBs/libs/footprints/AEM10941-QFN.pretty")(options "")(descr ""))
-)

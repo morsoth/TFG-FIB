@@ -5,14 +5,17 @@
  *      Author: pzaragoza
  */
 
-#include "stdio.h"
+#include <stdio.h>
 
 #include "app.h"
 #include "main.h"
 
 #include "TSL2591.h"
 #include "INA3221.h"
+#include "SHT3x.h"
 #include "SEN0308.h"
+
+#include "../../DS18B20/DS18B20.h"
 
 void printData();
 void printHeaderCSV();
@@ -39,9 +42,17 @@ float shuntVoltage_V[3];
 float current_mA[3];
 float power_mW[3];
 
+SHT3X_t sht;
+float airTemp_C;
+float airHummidity_perc;
+float dewPoint_C[3]; // TODO: seleccionar mejor manera de calcularlo
+
+DS18B20_t dfr;
+float soilTemp_C;
+
 SEN0308_t sen;
 uint16_t rawMoisture;
-uint8_t soilMoisture;
+uint8_t soilMoisture_perc;
 
 void setup() {
 	I2C_bus_scan();
@@ -65,8 +76,25 @@ void setup() {
 	if (INA3221_Init(&ina) == HAL_OK) printf("INA3221 inicializado correctamente\r\n");
 	else printf("INA3221 no inicializado\r\n");
 
+	// SHT3x
+	sht.hi2c = &hi2c1;
+	sht.clockStretch = SHT3X_NOSTRETCH;
+	sht.repeatability = SHT3X_REPEAT_MED;
+	if (SHT3X_Init(&sht) == HAL_OK) printf("SHT3x inicializado correctamente\r\n");
+	else printf("SHT3x no inicializado\r\n");
+	SHT3X_Heater(&sht, SHT3X_HEATER_OFF);
+
+	// DFR0198 (DS18B20)
+	sen.port = GPIOA;
+	sen.pin = GPIO_PIN_1;
+	dfr.resolution = DS18B20_RES_12_BIT;
+	if (DS18B20_Init(&dfr) == HAL_OK) printf("DFR0198 inicializado correctamente\r\n");
+	else printf("DFR0198 no inicializado\r\n");
+
 	// SEN0308
 	sen.hadc = &hadc1;
+	sen.port = GPIOA;
+	sen.pin = GPIO_PIN_0;
 	sen.airRaw = 3620;
 	sen.waterRaw = 520;
 	if (SEN0308_Init(&sen) == HAL_OK) printf("SEN0308 inicializado correctamente\r\n");
@@ -97,8 +125,15 @@ void loop() {
 		status[s] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3 << s);
 	}
 
+	if (SHT3X_ReadSingleShot(&sht, &airTemp_C, &airHummidity_perc) == HAL_OK) {
+		dewPoint_C[0] = airTemp_C - (100 - airHummidity_perc)/5;
+		dewPoint_C[1] = SHT3X_CalculateDewpoint_Simple(airTemp_C, airHummidity_perc);
+		dewPoint_C[2] = SHT3X_CalculateDewpoint(airTemp_C, airHummidity_perc);
+	}
+	else printf("Error al leer el SHT3x\r\n\r\n");
+
 	if (SEN0308_ReadRawAvg(&sen, &rawMoisture, 10) == HAL_OK) {
-		soilMoisture = SEN0308_CalculateRelative(&sen, rawMoisture);
+		soilMoisture_perc = SEN0308_CalculateRelative(&sen, rawMoisture);
 	}
 	else printf("Error al leer el SEN0308\r\n\r\n");
 
@@ -129,13 +164,17 @@ void printData() {
 
 	printf("\r\n");
 
-	printf("Raw Moisture: %u, Relative Moisture: %u\%%\r\n", rawMoisture, soilMoisture);
+	printf("Air Temperature: %.2fºC, Air Hummidity: %.2f\%%, Dew point: %.2fºC | %.2fºC | %.2fºC\r\n", airTemp_C, airHummidity_perc, dewPoint_C[0],dewPoint_C[1],dewPoint_C[2]);
+
+	printf("\r\n");
+
+	printf("Raw Moisture: %u, Relative Moisture: %u\%%\r\n", rawMoisture, soilMoisture_perc);
 
 	printf("\r\n");
 }
 
 void printHeaderCSV() {
-	printf("timestamp,status_0, status_1,status_2,voltage_PV,current_PV,power_PV,voltage_BAT,current_BAT,power_BAT,voltage_LOAD,current_LOAD,power_LOAD,total,ir,lux,irradiance");
+	printf("timestamp,status_0,status_1,status_2,voltage_PV,current_PV,power_PV,voltage_BAT,current_BAT,power_BAT,voltage_LOAD,current_LOAD,power_LOAD,total,ir,lux,irradiance");
 
 	printf("\r\n");
 }

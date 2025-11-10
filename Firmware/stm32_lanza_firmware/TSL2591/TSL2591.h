@@ -12,6 +12,7 @@
 
 #define TSL2591_ADDR          (0x29 << 1) // I2C address
 
+// Commands
 #define TSL2591_CMD_BIT       0xA0 // Needed to access registers
 
 // Registers

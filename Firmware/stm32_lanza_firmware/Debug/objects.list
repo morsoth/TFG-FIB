@@ -6,6 +6,7 @@
 "./Core/Src/sysmem.o"
 "./Core/Src/system_stm32wbxx.o"
 "./Core/Startup/startup_stm32wb55rgvx.o"
+"./DFR0198/DFR0198.o"
 "./Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal.o"
 "./Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_adc.o"
 "./Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_adc_ex.o"
@@ -31,4 +32,5 @@
 "./Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_rcc.o"
 "./INA3221/INA3221.o"
 "./SEN0308/SEN0308.o"
+"./SHT3x/SHT3x.o"
 "./TSL2591/TSL2591.o"

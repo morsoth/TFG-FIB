@@ -1,6 +1,6 @@
-../Core/Src/app.c:46:6:setup	4
-../Core/Src/app.c:78:6:loop	8
-../Core/Src/app.c:112:6:printData	2
-../Core/Src/app.c:137:6:printHeaderCSV	1
-../Core/Src/app.c:143:6:printDataCSV	2
-../Core/Src/app.c:157:6:I2C_bus_scan	5
+../Core/Src/app.c:53:6:setup	5
+../Core/Src/app.c:93:6:loop	9
+../Core/Src/app.c:134:6:printData	2
+../Core/Src/app.c:163:6:printHeaderCSV	1
+../Core/Src/app.c:169:6:printDataCSV	2
+../Core/Src/app.c:183:6:I2C_bus_scan	5

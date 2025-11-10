@@ -24,8 +24,10 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
+DFR0198 \
 Drivers/STM32WBxx_HAL_Driver/Src \
 INA3221 \
 SEN0308 \
+SHT3x \
 TSL2591 \
 

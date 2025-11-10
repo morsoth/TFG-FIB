@@ -132,6 +132,11 @@ void loop() {
 	}
 	else printf("Error al leer el SHT3x\r\n\r\n");
 
+	if (DS18B20_ReadTemperature(&dfr, &soilTemp_C) == HAL_OK) {
+
+	}
+	else printf("Error al leer el SEN0308\r\n\r\n");
+
 	if (SEN0308_ReadRawAvg(&sen, &rawMoisture, 10) == HAL_OK) {
 		soilMoisture_perc = SEN0308_CalculateRelative(&sen, rawMoisture);
 	}
@@ -168,7 +173,11 @@ void printData() {
 
 	printf("\r\n");
 
-	printf("Raw Moisture: %u, Relative Moisture: %u\%%\r\n", rawMoisture, soilMoisture_perc);
+	printf("Soil temperature: %.2fºC\r\n", soilTemp_C);
+
+	printf("\r\n");
+
+	printf("Raw Moisture: %u, Soil Moisture: %u\%%\r\n", rawMoisture, soilMoisture_perc);
 
 	printf("\r\n");
 }

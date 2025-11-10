@@ -6,7 +6,7 @@
 "./Core/Src/sysmem.o"
 "./Core/Src/system_stm32wbxx.o"
 "./Core/Startup/startup_stm32wb55rgvx.o"
-"./DFR0198/DFR0198.o"
+"./DS18B20/DS18B20.o"
 "./Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal.o"
 "./Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_adc.o"
 "./Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_adc_ex.o"

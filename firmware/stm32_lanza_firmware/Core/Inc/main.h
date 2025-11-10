@@ -57,6 +57,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define SEN0308_Pin GPIO_PIN_0
+#define SEN0308_GPIO_Port GPIOA
+#define DFR0198_Pin GPIO_PIN_1
+#define DFR0198_GPIO_Port GPIOA
 #define B1_Pin GPIO_PIN_4
 #define B1_GPIO_Port GPIOC
 #define LD2_Pin GPIO_PIN_0

@@ -1,4 +1,4 @@
-DFR0198/DFR0198.o: ../DFR0198/DFR0198.c ../DFR0198/DFR0198.h \
+DS18B20/DS18B20.o: ../DS18B20/DS18B20.c ../DS18B20/DS18B20.h \
  ../Drivers/STM32WBxx_HAL_Driver/Inc/stm32wbxx_hal.h \
  ../Core/Inc/stm32wbxx_hal_conf.h \
  ../Drivers/STM32WBxx_HAL_Driver/Inc/stm32wbxx_hal_dma.h \
@@ -40,7 +40,7 @@ DFR0198/DFR0198.o: ../DFR0198/DFR0198.c ../DFR0198/DFR0198.h \
  ../Drivers/STM32WBxx_HAL_Driver/Inc/stm32wbxx_hal_uart.h \
  ../Drivers/STM32WBxx_HAL_Driver/Inc/stm32wbxx_hal_uart_ex.h \
  ../Drivers/STM32WBxx_HAL_Driver/Inc/stm32wbxx_ll_system.h
-../DFR0198/DFR0198.h:
+../DS18B20/DS18B20.h:
 ../Drivers/STM32WBxx_HAL_Driver/Inc/stm32wbxx_hal.h:
 ../Core/Inc/stm32wbxx_hal_conf.h:
 ../Drivers/STM32WBxx_HAL_Driver/Inc/stm32wbxx_hal_dma.h:

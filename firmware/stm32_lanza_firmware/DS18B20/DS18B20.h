@@ -25,10 +25,10 @@
 
 // Resolution
 typedef enum {
-    DS18B20_RES_9_BIT  = 9,
-    DS18B20_RES_10_BIT = 10,
-    DS18B20_RES_11_BIT = 11,
-    DS18B20_RES_12_BIT = 12,
+    DS18B20_RES_9_BIT  = 0x1F,
+    DS18B20_RES_10_BIT = 0x3F,
+    DS18B20_RES_11_BIT = 0x5F,
+    DS18B20_RES_12_BIT = 0x7F,
 } DS18B20_Resolution_t;
 
 // Struct

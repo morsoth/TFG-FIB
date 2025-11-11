@@ -13,9 +13,8 @@
 #include "TSL2591.h"
 #include "INA3221.h"
 #include "SHT3x.h"
+#include "DS18B20.h"
 #include "SEN0308.h"
-
-#include "../../DS18B20/DS18B20.h"
 
 void printData();
 void printHeaderCSV();
@@ -85,16 +84,16 @@ void setup() {
 	SHT3X_Heater(&sht, SHT3X_HEATER_OFF);
 
 	// DFR0198 (DS18B20)
-	sen.port = GPIOA;
-	sen.pin = GPIO_PIN_1;
+	dfr.port = DFR0198_GPIO_Port;
+	dfr.pin = DFR0198_Pin;
 	dfr.resolution = DS18B20_RES_12_BIT;
 	if (DS18B20_Init(&dfr) == HAL_OK) printf("DFR0198 inicializado correctamente\r\n");
 	else printf("DFR0198 no inicializado\r\n");
 
 	// SEN0308
 	sen.hadc = &hadc1;
-	sen.port = GPIOA;
-	sen.pin = GPIO_PIN_0;
+	sen.port = SEN0308_GPIO_Port;
+	sen.pin = SEN0308_Pin;
 	sen.airRaw = 3620;
 	sen.waterRaw = 520;
 	if (SEN0308_Init(&sen) == HAL_OK) printf("SEN0308 inicializado correctamente\r\n");
@@ -135,7 +134,7 @@ void loop() {
 	if (DS18B20_ReadTemperature(&dfr, &soilTemp_C) == HAL_OK) {
 
 	}
-	else printf("Error al leer el SEN0308\r\n\r\n");
+	else printf("Error al leer el DFR0198\r\n\r\n");
 
 	if (SEN0308_ReadRawAvg(&sen, &rawMoisture, 10) == HAL_OK) {
 		soilMoisture_perc = SEN0308_CalculateRelative(&sen, rawMoisture);

@@ -7,16 +7,23 @@
 
 #include "DS18B20.h"
 
-static inline void DWT_DelayInit(void) {
+static inline uint8_t DWT_DelayInit(void) {
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
     DWT->CYCCNT = 0;
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+
+    __NOP();
+    __NOP();
+    __NOP();
+
+    if(DWT->CYCCNT) return 1;
+    else return 0;
 }
 
 static inline void delay_us(uint32_t us) {
-    uint32_t cycles = (SystemCoreClock/1000000U) * us;
+    uint32_t cycles = (SystemCoreClock/1000000) * us;
     uint32_t start = DWT->CYCCNT;
-    while ((DWT->CYCCNT - start) < cycles) { __NOP(); }
+    while ((DWT->CYCCNT - start) < cycles);
 }
 
 static inline void releasePin(GPIO_TypeDef *port, uint16_t pin) {
@@ -32,7 +39,10 @@ static inline uint8_t readPin(GPIO_TypeDef *port, uint16_t pin) {
 }
 
 static uint8_t resetPresence(GPIO_TypeDef *port, uint16_t pin) {
-    /* Master reset: pull low >=480us, then release; sample presence ~70us */
+	releasePin(port, pin);
+	delay_us(10);
+	if (!readPin(port, pin)) return 0;
+
 	pullLowPin(port, pin);
     delay_us(480);
 
@@ -48,17 +58,17 @@ static uint8_t resetPresence(GPIO_TypeDef *port, uint16_t pin) {
 static void writeBit(GPIO_TypeDef *port, uint16_t pin, uint8_t bit) {
     if (bit){
     	pullLowPin(port, pin);
-        delay_us(6);
+        delay_us(10);
 
         releasePin(port, pin);
-        delay_us(64);
+        delay_us(55);
     }
     else {
     	pullLowPin(port, pin);
-        delay_us(60);
+        delay_us(65);
 
         releasePin(port, pin);
-        delay_us(10);
+        delay_us(5);
     }
 }
 
@@ -76,21 +86,20 @@ static uint8_t readBit(GPIO_TypeDef *port, uint16_t pin) {
 }
 
 static void writeByte(GPIO_TypeDef *port, uint16_t pin, uint8_t val) {
-    for (int i = 0; i < 8; ++i) {
-        writeBit(port, pin, val & 0x01u);
-        val >>= 1;
+    for (uint8_t bitMask = 0x01; bitMask != 0; bitMask <<= 1) {
+        writeBit(port, pin, (val & bitMask) ? 1:0);
     }
 }
 
 static uint8_t readByte(GPIO_TypeDef *port, uint16_t pin) {
-    uint8_t v=0;
+    uint8_t r = 0;
 
-    for (int i = 0; i < 8; ++i) {
+    for (uint8_t bitMask = 0x01; bitMask != 0; bitMask <<= 1) {
         uint8_t b = readBit(port, pin);
-        v |= (uint8_t)(b << i);
+        r |= bitMask * b;
     }
 
-    return v;
+    return r;
 }
 
 static uint8_t crc8(const uint8_t *data, uint8_t len) {
@@ -99,38 +108,31 @@ static uint8_t crc8(const uint8_t *data, uint8_t len) {
     while (len--) {
         uint8_t inbyte = *data++;
 
-        for (uint8_t i=0;i<8;i++){
-            uint8_t mix = (crc ^ inbyte) & 0x01u;
+        for (uint8_t i = 8; i != 0; --i){
+            uint8_t mix = (crc ^ inbyte) & 0x01;
             crc >>= 1;
             if (mix) crc ^= 0x8C;
             inbyte >>= 1;
         }
     }
+
     return crc;
 }
 
-static uint8_t resolutionToConfig(DS18B20_Resolution_t r) {
-    switch (r) {
-        case DS18B20_RES_9_BIT:  return 0x1F;
-        case DS18B20_RES_10_BIT: return 0x3F;
-        case DS18B20_RES_11_BIT: return 0x5F;
-        default:                 return 0x7F;
-    }
-}
-
 HAL_StatusTypeDef DS18B20_Init(DS18B20_t *dev) {
-	DWT_DelayInit();
+	if (!DWT_DelayInit()) return HAL_ERROR;
     releasePin(dev->port, dev->pin);
 
     if (!resetPresence(dev->port, dev->pin)) return HAL_ERROR;
 
-    uint8_t cfg = resolutionToConfig(dev->resolution);
+    uint8_t cfg = (uint8_t)dev->resolution;
 
 	writeByte(dev->port, dev->pin, DS18B20_CMD_SKIP_ROM);
 	writeByte(dev->port, dev->pin, DS18B20_CMD_WRITE_SCRATCH);
 	writeByte(dev->port, dev->pin, 0x00); // TH
 	writeByte(dev->port, dev->pin, 0x00); // TL
 	writeByte(dev->port, dev->pin, cfg);  // CONFIG
+
 	return HAL_OK;
 }
 
@@ -142,7 +144,7 @@ HAL_StatusTypeDef DS18B20_ReadTemperature(DS18B20_t *dev, float *temp_c){
 	writeByte(dev->port, dev->pin, DS18B20_CMD_CONVERT_T);
 
 	// Espera por fin de conversión
-    uint32_t timeout_ms;
+    int32_t timeout_ms;
     switch (dev->resolution){
         case DS18B20_RES_9_BIT:  timeout_ms = 94;  break;
         case DS18B20_RES_10_BIT: timeout_ms = 188; break;
@@ -171,7 +173,7 @@ HAL_StatusTypeDef DS18B20_ReadTemperature(DS18B20_t *dev, float *temp_c){
 
 	// Conversión a ºC
     int16_t raw = (int16_t)((scratch[1] << 8) | scratch[0]);
-    *temp_c = (float)raw / 16.0f;
+    *temp_c = (float)raw * 0.0625f;
 
     return HAL_OK;
 }

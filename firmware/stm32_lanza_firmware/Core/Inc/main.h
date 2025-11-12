@@ -58,8 +58,14 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 #define DFR0198_Pin GPIO_PIN_2
-#define DFR0198_GPIO_Port GPIOC
-#define SEN0308_Pin GPIO_PIN_0
+#define DFR0198_GPIO_Port GPIOA
+#define S0_Pin GPIO_PIN_3
+#define S0_GPIO_Port GPIOA
+#define S1_Pin GPIO_PIN_4
+#define S1_GPIO_Port GPIOA
+#define S2_Pin GPIO_PIN_5
+#define S2_GPIO_Port GPIOA
+#define SEN0308_Pin GPIO_PIN_8
 #define SEN0308_GPIO_Port GPIOA
 #define B1_Pin GPIO_PIN_4
 #define B1_GPIO_Port GPIOC

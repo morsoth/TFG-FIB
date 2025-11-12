@@ -64,7 +64,6 @@ HAL_StatusTypeDef SHT3X_SoftReset(SHT3X_t *dev);
 
 HAL_StatusTypeDef SHT3X_ReadRaw(SHT3X_t *dev, uint16_t *rawT, uint16_t *rawRH);
 HAL_StatusTypeDef SHT3X_ReadSingleShot(SHT3X_t *dev, float *temp_c, float *rh_perc);
-float SHT3X_CalculateDewpoint_Simple(float temp_c, float rh_perc);
 float SHT3X_CalculateDewpoint(float temp_c, float rh_perc);
 
 HAL_StatusTypeDef SHT3X_ReadStatus(SHT3X_t *dev, uint16_t *status);

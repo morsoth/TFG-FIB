@@ -111,16 +111,6 @@ HAL_StatusTypeDef SHT3X_ReadSingleShot(SHT3X_t *dev, float *temp_c, float *rh_pe
     return HAL_OK;
 }
 
-float SHT3X_CalculateDewpoint_Simple(float temp_c, float rh_perc) {
-	if (rh_perc < 1.0f) rh_perc = 1.0f; // Evita log(0)
-	if (rh_perc > 100.0f) rh_perc = 100.0f;
-
-	float a = 17.625f, b = 243.04f;
-	float gamma = logf(rh_perc / 100.0f) + (a * temp_c) / (b + temp_c);
-
-	return (b * gamma) / (a - gamma);
-}
-
 float SHT3X_CalculateDewpoint(float temp_c, float rh_perc) {
 	if (rh_perc < 1.0f) rh_perc = 1.0f; // Evita log(0)
 	if (rh_perc > 100.0f) rh_perc = 100.0f;

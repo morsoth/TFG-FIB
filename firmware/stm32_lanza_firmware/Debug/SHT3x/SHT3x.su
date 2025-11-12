@@ -7,8 +7,7 @@
 ../SHT3x/SHT3x.c:65:19:SHT3X_SoftReset	16	static
 ../SHT3x/SHT3x.c:69:19:SHT3X_ReadRaw	40	static
 ../SHT3x/SHT3x.c:97:19:SHT3X_ReadSingleShot	32	static
-../SHT3x/SHT3x.c:114:7:SHT3X_CalculateDewpoint_Simple	32	static
-../SHT3x/SHT3x.c:124:7:SHT3X_CalculateDewpoint	32	static
-../SHT3x/SHT3x.c:143:19:SHT3X_ReadStatus	24	static
-../SHT3x/SHT3x.c:159:19:SHT3X_ClearStatus	16	static
-../SHT3x/SHT3x.c:163:19:SHT3X_Heater	16	static
+../SHT3x/SHT3x.c:114:7:SHT3X_CalculateDewpoint	32	static
+../SHT3x/SHT3x.c:133:19:SHT3X_ReadStatus	24	static
+../SHT3x/SHT3x.c:149:19:SHT3X_ClearStatus	16	static
+../SHT3x/SHT3x.c:153:19:SHT3X_Heater	16	static

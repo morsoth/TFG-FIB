@@ -465,7 +465,8 @@
     ],
     "pinned_symbol_libs": [
       "PZG_Jumpers",
-      "PZG_Battery"
+      "PZG_Battery",
+      "PZG_Switches"
     ]
   },
   "meta": {
@@ -758,6 +759,10 @@
     [
       "b888a684-3263-4153-9730-9658fff4b3b0",
       "Power Management"
+    ],
+    [
+      "ec8f88e8-78d2-4fac-b943-5ef9b1e2e231",
+      "RF"
     ]
   ],
   "text_variables": {}

@@ -2224,7 +2224,7 @@
 	)
 	(text "Configurar MPPT"
 		(exclude_from_sim no)
-		(at 55.88 87.63 0)
+		(at 71.12 99.06 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2334,7 +2334,7 @@
 	(text_box "SRC: 5V 110mA\nHVOUT: 3.3V 80mA\nBUCK: 2.2V 20mA"
 		(exclude_from_sim no)
 		(at 121.92 73.66 0)
-		(size 34.29 7.62)
+		(size 33.02 7.62)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)
@@ -2374,10 +2374,31 @@
 		)
 		(uuid "2106e516-19de-4190-aa0b-1ee5058dc77e")
 	)
+	(text_box "C5: CSRC\nC6: CBOOST\nC7: CBUCK\nC8: CHV\nC9: CBATT\n\nL1: LBOOST\nL2: LBUCK"
+		(exclude_from_sim no)
+		(at 34.29 81.28 0)
+		(size 15.24 17.78)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type color)
+			(color 255 229 191 1)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "59d70769-31a0-4a65-b3fb-260bfd621980")
+	)
 	(text_box "HVOUT is 3.3V when BATT is "
 		(exclude_from_sim no)
 		(at 121.92 85.09 0)
-		(size 34.29 12.7)
+		(size 33.02 12.7)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)
@@ -3655,28 +3676,6 @@
 		(uuid "08ec8a64-a3c1-4edd-a415-f0d88ed81fe1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 118.4342 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "VBAT"
-		(shape output)
-		(at 224.79 58.42 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "1ddac0fb-69dc-4b86-ab43-4cc91646e248")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 232.19 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5127,6 +5126,72 @@
 			(project "PCB Main"
 				(path "/9fa2563f-04cb-468b-9731-6177268fcdbf/b888a684-3263-4153-9730-9658fff4b3b0"
 					(reference "C9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 226.06 58.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3a383934-3f2d-4a3c-b503-b4e3ece8c122")
+		(property "Reference" "#PWR048"
+			(at 226.06 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VBATT"
+			(at 226.06 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 226.06 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f3b5b8b7-95b7-4f73-b1d8-8e8cf43935b9")
+		)
+		(instances
+			(project "PCB Main"
+				(path "/9fa2563f-04cb-468b-9731-6177268fcdbf/b888a684-3263-4153-9730-9658fff4b3b0"
+					(reference "#PWR048")
 					(unit 1)
 				)
 			)

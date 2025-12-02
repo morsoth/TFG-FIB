@@ -55,6 +55,32 @@ extern I2C_HandleTypeDef hi2c1;
 extern RTC_HandleTypeDef hrtc;
 extern ADC_HandleTypeDef hadc1;
 
+typedef struct {
+	uint8_t hours, minutes, seconds;	// 3 bytes (24 bits)
+	uint8_t day, month, year;			// 3 bytes (24 bits)
+
+	uint8_t status_2;					// 1 bytes (8 bits)
+
+	float irradiance_Wm2;				// 4 bytes (32 bits)
+
+	float airTemp_C;					// 4 bytes (32 bits)
+	float airHummidity_perc;			// 4 bytes (32 bits)
+	//float dewPoint_C;					// 4 bytes (32 bits)
+
+	float soilTemp_C;					// 4 bytes (32 bits)
+	uint8_t soilMoisture_perc;			// 1 byte  (8 bits)
+
+	uint16_t validDataVector;			// 2 bytes (16 bits)
+} SampleData_t;
+
+enum validDataBit { HOURS_BIT, MINUTES_BIT, SECONDS_BIT, DAY_BIT, MONTH_BIT, YEAR_BIT, STATUS_2_BIT, IRRADIANCE_BIT, AIR_TEMP_BIT, AIR_HUM_BIT, SOIL_TEMP_BIT, SOIL_MOIST_BIT};
+
+#define VALID_BIT_SET(sample, bit)		((sample).validDataVector |= ((uint16_t)1 << (bit)))
+#define VALID_BIT_CLEAR(sample, bit)	((sample).validDataVector &= ~((uint16_t)1 << (bit)))
+#define VALID_BIT_IS_SET(sample, bit)	((((sample).validDataVector) >> (bit)) & 1)
+
+SampleData_t sampleData = {0};
+
 RTC_TimeTypeDef time;
 RTC_DateTypeDef date;
 
@@ -82,7 +108,19 @@ float soilTemp_C;
 SEN0308_t sen;
 uint16_t rawMoisture;
 uint8_t soilMoisture_perc;
-
+/*
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	switch (GPIO_Pin) {
+		case S0_INT_Pin:
+			break;
+		case S1_INT_Pin:
+			break;
+		default:
+			__NOP();
+			break;
+	}
+}
+*/
 void setup() {
 	I2C_bus_scan();
 
@@ -114,14 +152,44 @@ void loop() {
 	printDataCSV();
 #endif
 
-	HAL_GPIO_TogglePin(GPIOB, LD1_Pin);
+	//HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+	HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, 1);
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
+	HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, 1);
 	HAL_Delay(1000);
 }
 
 // RTC
 void readRTC() {
-	if (HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN) != HAL_OK) printf("Error al leer la hora\r\n");
-	if (HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN) != HAL_OK) printf("Error al leer la fecha\r\n");
+	// Reads RTC time
+	if (HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN) == HAL_OK) {
+		VALID_BIT_SET(sampleData, HOURS_BIT);
+		VALID_BIT_SET(sampleData, MINUTES_BIT);
+		VALID_BIT_SET(sampleData, SECONDS_BIT);
+	}
+	// Error while reading RTC time
+	else {
+		printf("Error while reading RTC time\r\n");
+
+		VALID_BIT_CLEAR(sampleData, HOURS_BIT);
+		VALID_BIT_CLEAR(sampleData, MINUTES_BIT);
+		VALID_BIT_CLEAR(sampleData, SECONDS_BIT);
+	}
+
+	// Reads RTC date
+	if (HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN) == HAL_OK) {
+		VALID_BIT_SET(sampleData, DAY_BIT);
+		VALID_BIT_SET(sampleData, MONTH_BIT);
+		VALID_BIT_SET(sampleData, YEAR_BIT);
+	}
+	// Error while reading RTC date
+	else {
+		printf("Error while reading RTC date\r\n");
+
+		VALID_BIT_CLEAR(sampleData, DAY_BIT);
+		VALID_BIT_CLEAR(sampleData, MONTH_BIT);
+		VALID_BIT_CLEAR(sampleData, YEAR_BIT);
+	}
 }
 
 void printRTC() {
@@ -130,9 +198,12 @@ void printRTC() {
 
 // Status
 void readStatus() {
-	for (int s = 0; s < 3; ++s) {
-		status[s] = HAL_GPIO_ReadPin(S0_GPIO_Port, S0_Pin << s);
-	}
+	// Reads status pins
+	//status[0] = HAL_GPIO_ReadPin(S0_GPIO_Port, S0_Pin);
+	//status[1] = HAL_GPIO_ReadPin(S1_GPIO_Port, S1_Pin);
+	//status[2] = HAL_GPIO_ReadPin(S2_GPIO_Port, S2_Pin);
+
+	VALID_BIT_SET(sampleData, STATUS_2_BIT);
 }
 
 void printStatus() {
@@ -155,12 +226,22 @@ void initINA3221() {
 }
 
 void readINA3221() {
+	// Iterates the 3 channels
 	for (int ch = 0; ch < 3; ++ch) {
+		// Reads bus & shunt voltages
 		if (INA3221_ReadVoltage(&ina, ch+1, &busVoltage_V[ch], &shuntVoltage_V[ch]) == HAL_OK) {
+			// Calculates current
 			current_mA[ch] = INA3221_CalculateCurrent_mA(&ina, ch+1, shuntVoltage_V[ch]);
+
+			// Calculates power
 			power_mW[ch] = INA3221_CalculatePower_mW(busVoltage_V[ch], current_mA[ch]);
 		}
-		else printf("Error al leer el INA3221\r\n\r\n");
+		// Error while reading the sensor
+		else {
+			printf("Error while reading INA3221\r\n\r\n");
+
+			return;
+		}
 	}
 }
 
@@ -184,11 +265,22 @@ void initTSL2591() {
 }
 
 void readTSL2591() {
+	// Reads total & ir
 	if (TSL2591_ReadChannels(&tsl, &full, &ir) == HAL_OK) {
+		// Calculates lux
 		lux = TSL2591_CalculateLux(&tsl, full, ir);
+
+		// Calculates irradiance
 		irradiance_Wm2 = TSL2591_CalculateIrradiance(lux);
+
+		VALID_BIT_SET(sampleData, IRRADIANCE_BIT);
 	}
-	else printf("Error al leer el TSL2591\r\n\r\n");
+	// Error while reading the sensor
+	else {
+		printf("Error while reading TSL2591\r\n\r\n");
+
+		VALID_BIT_CLEAR(sampleData, IRRADIANCE_BIT);
+	}
 }
 
 void printTSL2591() {
@@ -208,14 +300,48 @@ void initSHT3X() {
 }
 
 void readSHT3X() {
-	if (SHT3X_ReadSingleShot(&sht, &airTemp_C, &airHummidity_perc) == HAL_OK) {
-		dewPoint_C = SHT3X_CalculateDewpoint(airTemp_C, airHummidity_perc);
+	for (int8_t tries = 3; tries >= 0; --tries) {
+		// Reads air temperature & air hummidity
+		if (SHT3X_ReadSingleShot(&sht, &airTemp_C, &airHummidity_perc) == HAL_OK) {
+			// Calculates dew point
+			dewPoint_C = SHT3X_CalculateDewpoint(airTemp_C, airHummidity_perc);
+		}
+		// Error while reading the sensor
+		else {
+			printf("Error while reading SHT3x\r\n\r\n");
+
+			VALID_BIT_CLEAR(sampleData, AIR_TEMP_BIT);
+			VALID_BIT_CLEAR(sampleData, AIR_HUM_BIT);
+			//VALID_BIT_CLEAR(sampleData, DEW_POINT_BIT);
+
+			return;
+		}
+
+		// RH > 95% or T-Td < 1ºC - Activate heater
+		if (airHummidity_perc > 95.0f || airTemp_C - dewPoint_C < 1.0f) {
+			SHT3X_Heater(&sht, SHT3X_HEATER_ON);
+			HAL_Delay(15000);
+			SHT3X_Heater(&sht, SHT3X_HEATER_OFF);
+			HAL_Delay(60000);
+		}
+		// Valid reading
+		else {
+			VALID_BIT_SET(sampleData, AIR_TEMP_BIT);
+			VALID_BIT_SET(sampleData, AIR_HUM_BIT);
+			//VALID_BIT_SET(sampleData, DEW_POINT_BIT);
+
+			return;
+		}
 	}
-	else printf("Error al leer el SHT3x\r\n\r\n");
+
+	// Limit tries
+	VALID_BIT_CLEAR(sampleData, AIR_TEMP_BIT);
+	VALID_BIT_CLEAR(sampleData, AIR_HUM_BIT);
+	//VALID_BIT_CLEAR(sampleData, DEW_POINT_BIT);
 }
 
 void printSHT3X() {
-	printf("Air Temperature: %.2fºC, Air Hummidity: %.2f\%%, Dew point: %.2fºC\r\n\r\n", airTemp_C, airHummidity_perc, dewPoint_C);
+	printf("Air Temperature: %.2fºC, Air Hummidity: %.2f%%, Dew point: %.2fºC\r\n\r\n", airTemp_C, airHummidity_perc, dewPoint_C);
 }
 
 // DFR0198 (DS18B20)
@@ -229,8 +355,16 @@ void initDFR0198()  {
 }
 
 void readDFR0198() {
-	if (DS18B20_ReadTemperature(&dfr, &soilTemp_C) == HAL_OK) { }
-	else printf("Error al leer el DFR0198\r\n\r\n");
+	// Reads soil temperature
+	if (DS18B20_ReadTemperature(&dfr, &soilTemp_C) == HAL_OK) {
+		VALID_BIT_SET(sampleData, SOIL_TEMP_BIT);
+	}
+	// Error while reading the sensor
+	else {
+		printf("Error while reading DFR0198\r\n");
+
+		VALID_BIT_CLEAR(sampleData, SOIL_TEMP_BIT);
+	}
 }
 
 void printDFR0198() {
@@ -249,14 +383,22 @@ void initSEN0308() {
 }
 
 void readSEN0308() {
+	// Reads soil moisture
 	if (SEN0308_ReadRawAvg(&sen, &rawMoisture, 10) == HAL_OK) {
 		soilMoisture_perc = SEN0308_CalculateRelative(&sen, rawMoisture);
+
+		VALID_BIT_SET(sampleData, SOIL_MOIST_BIT);
 	}
-	else printf("Error al leer el SEN0308\r\n\r\n");
+	// Error while reading the sensor
+	else {
+		printf("Error while reading SEN0308\r\n\r\n");
+
+		VALID_BIT_CLEAR(sampleData, SOIL_MOIST_BIT);
+	}
 }
 
 void printSEN0308() {
-	printf("Raw Moisture: %u, Soil Moisture: %u\%%\r\n\r\n", rawMoisture, soilMoisture_perc);
+	printf("Raw Moisture: %u, Soil Moisture: %u%%\r\n\r\n", rawMoisture, soilMoisture_perc);
 }
 
 void printData() {
@@ -276,8 +418,8 @@ void printHeaderCSV() {
 	printf(",Voltage BAT (V),Current BAT (mA),Power BAT (mW)");
 	printf(",Voltage LOAD (V),Current LOAD (mA),Power LOAD (mW)");
 	printf(",Total,IR,Lux,Irradiance (Wb/m2)");
-	printf(",Air temperature (ºC),Air hummidity (%), Dew point (ºC)");
-	printf(",Soil temperature (ºC),Soil moisture (%)");
+	printf(",Air temperature (ºC),Air hummidity (%%), Dew point (ºC)");
+	printf(",Soil temperature (ºC),Soil moisture (%%)");
 
 	printf("\r\n");
 }

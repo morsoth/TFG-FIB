@@ -1,0 +1,45 @@
+Altium Designer Pick and Place Locations
+C:\Users\laurym\Documents\MCD_Appli\DORY\Boards\STM32WB55_Application_Boards\STM32WB55_DB_QFN68_IPD\04-OUTPUTS\08-Reports\Pick Place\Pick_and_Place_STM32WB55_DB_QFN68_IPD.csv
+
+========================================================================================================================
+File Design Information:
+
+Date:       06/06/18
+Time:       10:40
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mm
+
+"Designator","Comment","Layer","Footprint","Center-X(mm)","Center-Y(mm)","Rotation","Description"
+"FLT1","IPD","TopLayer","IPD","15.2580","29.2700","360","IPD"
+"C12","100nF","TopLayer","0402_CAP_NPOL","11.5000","22.1870","270","Capacitor_not polarized"
+"D1","BAT54K","TopLayer","SOD523","23.9014","23.6474","90","Schottky Diode"
+"CN2","HEADER_1X13","BottomLayer","Header_F_1x13x2.54_TH_V","27.7000","19.3600","270",""
+"X2","NX2012_32K768","TopLayer","NX2012_2P","23.1000","21.0370","90","Crystal NDK 2.0x1.2mm  32.768 KHz"
+"X1","NX2016_32M","TopLayer","NX2016_4P","10.7300","27.8900","0","Crystal NDK 2.0x1.6mm  32 MHz"
+"SB2","Open","TopLayer","SB-tiny","24.3000","17.0910","90","Solder Jumper"
+"R2","10K","TopLayer","0402_RES","22.9000","16.9870","270","Resistor"
+"R1","100K","TopLayer","0402_RES","24.9500","23.7900","270","Resistor"
+"Label_4","LOGO_ROHS","TopLayer","SYMBOL_RoHS_China","-113.0410","-152.3920","0",""
+"Label_2","LOGO_ROHS","BottomLayer","SYMBOL_RoHS","-113.0410","-152.3920","180",""
+"L3","IND_FCM1608KF-601T03","TopLayer","0603_COIL","23.1010","27.9860","270",""
+"L2","10uH","TopLayer","0805_COIL_H0.85","7.8770","25.3959","180","Coil Murata 10uH ref: LQM21FN100M70L"
+"C10","100nF","TopLayer","0402_CAP_NPOL","23.7010","25.9860","360","Capacitor_not polarized"
+"C9","100nF","TopLayer","0402_CAP_NPOL","15.6000","16.5600","180","Capacitor_not polarized"
+"C8","100nF","TopLayer","0402_CAP_NPOL","21.7010","16.9849","90","Capacitor_not polarized"
+"C5","100nF","TopLayer","0402_CAP_NPOL","20.2010","16.9860","270","Capacitor_not polarized"
+"C15","4.3pF","TopLayer","0402_CAP_NPOL","24.5000","21.1870","270","Capacitor_not polarized"
+"C14","4.3pF","TopLayer","0402_CAP_NPOL","23.7000","19.1870","360","Capacitor_not polarized"
+"C6","100nF","TopLayer","0402_CAP_NPOL","17.4700","29.6000","90","Capacitor_not polarized"
+"C7","100nF","TopLayer","0402_CAP_NPOL","11.5000","19.6870","270","Capacitor_not polarized"
+"C16","100nF","TopLayer","0402_CAP_NPOL","22.7838","23.7998","90","Capacitor_not polarized"
+"C2","100pF","TopLayer","0402_CAP_NPOL","13.7000","29.6600","270","Capacitor_not polarized"
+"C1","100nF","TopLayer","0402_CAP_NPOL","12.7000","29.6700","270","Capacitor_not polarized"
+"C13","4.7uF","TopLayer","0402_CAP_NPOL","11.5593","24.6818","90","Capacitor_not polarized"
+"C11","4.7uF","TopLayer","0402_CAP_NPOL","10.3500","22.1900","270","Capacitor_not polarized"
+"CN1","HEADER_1X13","BottomLayer","Header_F_1x13x2.54_TH_V","2.3000","19.3600","270",""
+"SB1","Open","TopLayer","SB-tiny","6.7288","20.8160","270","Solder Jumper"
+"U1","STM32WBxx_QFN68","TopLayer","STM32WBxxx_QFN68","16.9883","23.2828","180",""
+"Label_3","LOGO_ST","BottomLayer","LOGO_ST_Size3","-113.0410","-152.3920","180",""
+"J1","SMA_T_9.52_NF","TopLayer","SMA_T_9.52_NF","15.0000","37.9095","90",""
+"Label_1","LOGO_ST","TopLayer","LOGO_ST_Size3","-113.0410","-152.3920","360",""

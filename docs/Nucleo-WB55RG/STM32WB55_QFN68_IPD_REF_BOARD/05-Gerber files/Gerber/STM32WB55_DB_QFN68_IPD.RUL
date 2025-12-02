@@ -1,0 +1,6 @@
+DRC Rules Export File for PCB: C:\Users\laurym\Documents\MCD_Appli\DORY\Boards\STM32WB55_Application_Boards\STM32WB55_DB_QFN68_IPD\STM32WB55_DB_QFN68_IPD.PcbDoc
+RuleKind=Clearance|RuleName=Clearance_Antenne|Scope=Board|Minimum=4.33
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=3.94
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=2.95
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=1.97
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0

@@ -666,7 +666,7 @@
 	)
 	(rectangle
 		(start 101.6 76.2)
-		(end 201.93 119.38)
+		(end 205.74 119.38)
 		(stroke
 			(width 0)
 			(type default)
@@ -678,7 +678,7 @@
 	)
 	(text "PCB Anthenna"
 		(exclude_from_sim no)
-		(at 190.5 81.28 0)
+		(at 195.58 81.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -732,32 +732,32 @@
 		(uuid "3482a56a-7b8d-43b4-8a90-0b8c52e6b811")
 	)
 	(junction
-		(at 144.78 104.14)
+		(at 149.86 104.14)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "19348193-9085-4bd7-9d5d-5a984bf0eaae")
 	)
 	(junction
-		(at 144.78 109.22)
+		(at 149.86 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "aad6ae13-08ca-41aa-85b8-15ef4921f213")
 	)
 	(junction
-		(at 173.99 93.98)
+		(at 179.07 93.98)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cc1be869-56ff-4170-8b50-ba8dcd223dd6")
 	)
 	(junction
-		(at 144.78 106.68)
+		(at 149.86 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fc9534e7-364e-46e7-97a1-ad34f4e22fbe")
 	)
 	(wire
 		(pts
-			(xy 144.78 104.14) (xy 144.78 106.68)
+			(xy 149.86 104.14) (xy 149.86 106.68)
 		)
 		(stroke
 			(width 0)
@@ -767,7 +767,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 86.36) (xy 187.96 85.09)
+			(xy 193.04 86.36) (xy 193.04 85.09)
 		)
 		(stroke
 			(width 0)
@@ -777,7 +777,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 93.98) (xy 190.5 93.98)
+			(xy 179.07 93.98) (xy 195.58 93.98)
 		)
 		(stroke
 			(width 0)
@@ -787,7 +787,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 83.82) (xy 193.04 83.82)
+			(xy 194.31 83.82) (xy 198.12 83.82)
 		)
 		(stroke
 			(width 0)
@@ -797,7 +797,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 88.9) (xy 187.96 87.63)
+			(xy 193.04 88.9) (xy 193.04 87.63)
 		)
 		(stroke
 			(width 0)
@@ -807,7 +807,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 88.9) (xy 187.96 88.9)
+			(xy 198.12 88.9) (xy 193.04 88.9)
 		)
 		(stroke
 			(width 0)
@@ -817,7 +817,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 101.6) (xy 144.78 101.6)
+			(xy 148.59 101.6) (xy 149.86 101.6)
 		)
 		(stroke
 			(width 0)
@@ -827,7 +827,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 109.22) (xy 143.51 109.22)
+			(xy 149.86 109.22) (xy 148.59 109.22)
 		)
 		(stroke
 			(width 0)
@@ -837,7 +837,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 106.68) (xy 144.78 106.68)
+			(xy 148.59 106.68) (xy 149.86 106.68)
 		)
 		(stroke
 			(width 0)
@@ -847,7 +847,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 101.6) (xy 144.78 104.14)
+			(xy 149.86 101.6) (xy 149.86 104.14)
 		)
 		(stroke
 			(width 0)
@@ -857,7 +857,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 86.36) (xy 187.96 86.36)
+			(xy 198.12 86.36) (xy 193.04 86.36)
 		)
 		(stroke
 			(width 0)
@@ -867,7 +867,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 93.98) (xy 163.83 93.98)
+			(xy 148.59 93.98) (xy 168.91 93.98)
 		)
 		(stroke
 			(width 0)
@@ -877,7 +877,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 93.98) (xy 115.57 93.98)
+			(xy 113.03 93.98) (xy 120.65 93.98)
 		)
 		(stroke
 			(width 0)
@@ -887,7 +887,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 85.09) (xy 193.04 83.82)
+			(xy 198.12 85.09) (xy 198.12 83.82)
 		)
 		(stroke
 			(width 0)
@@ -897,7 +897,7 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 93.98) (xy 173.99 93.98)
+			(xy 176.53 93.98) (xy 179.07 93.98)
 		)
 		(stroke
 			(width 0)
@@ -907,7 +907,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 104.14) (xy 144.78 104.14)
+			(xy 148.59 104.14) (xy 149.86 104.14)
 		)
 		(stroke
 			(width 0)
@@ -917,7 +917,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 85.09) (xy 193.04 85.09)
+			(xy 193.04 85.09) (xy 198.12 85.09)
 		)
 		(stroke
 			(width 0)
@@ -927,7 +927,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 109.22) (xy 144.78 110.49)
+			(xy 149.86 109.22) (xy 149.86 110.49)
 		)
 		(stroke
 			(width 0)
@@ -937,7 +937,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 87.63) (xy 193.04 87.63)
+			(xy 193.04 87.63) (xy 198.12 87.63)
 		)
 		(stroke
 			(width 0)
@@ -947,7 +947,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 90.17) (xy 193.04 88.9)
+			(xy 198.12 90.17) (xy 198.12 88.9)
 		)
 		(stroke
 			(width 0)
@@ -957,7 +957,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 87.63) (xy 193.04 86.36)
+			(xy 198.12 87.63) (xy 198.12 86.36)
 		)
 		(stroke
 			(width 0)
@@ -967,7 +967,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 106.68) (xy 144.78 109.22)
+			(xy 149.86 106.68) (xy 149.86 109.22)
 		)
 		(stroke
 			(width 0)
@@ -977,7 +977,7 @@
 	)
 	(wire
 		(pts
-			(xy 190.5 90.17) (xy 193.04 90.17)
+			(xy 195.58 90.17) (xy 198.12 90.17)
 		)
 		(stroke
 			(width 0)
@@ -987,7 +987,7 @@
 	)
 	(wire
 		(pts
-			(xy 190.5 93.98) (xy 190.5 90.17)
+			(xy 195.58 93.98) (xy 195.58 90.17)
 		)
 		(stroke
 			(width 0)
@@ -996,7 +996,7 @@
 		(uuid "e1b58ebf-0155-4d9b-899d-8599ed11c299")
 	)
 	(label "ANT"
-		(at 185.42 93.98 0)
+		(at 190.5 93.98 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1030,7 +1030,7 @@
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
-		(at 146.05 93.98 0)
+		(at 115.57 93.98 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1038,9 +1038,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "9deb2875-e1ca-47fd-a345-e8855d5a7bb7")
-		(property "Netclass" "50R"
-			(at 146.7485 91.44 0)
+		(uuid "213db077-5757-40f7-b16a-382c8658607b")
+		(property "Netclass" "62R"
+			(at 116.2685 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1049,7 +1049,7 @@
 			)
 		)
 		(property "Component Class" ""
-			(at -40.64 39.37 0)
+			(at -86.36 -2.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1061,7 +1061,38 @@
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
-		(at 177.8 93.98 0)
+		(at 151.13 93.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9deb2875-e1ca-47fd-a345-e8855d5a7bb7")
+		(property "Netclass" "50R"
+			(at 151.8285 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Component Class" ""
+			(at -35.56 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 182.88 93.98 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1071,7 +1102,7 @@
 		)
 		(uuid "c542e1b6-8ae9-4b59-bda6-6779d5f03ce7")
 		(property "Netclass" "50R"
-			(at 178.4985 91.44 0)
+			(at 183.5785 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1080,7 +1111,7 @@
 			)
 		)
 		(property "Component Class" ""
-			(at -8.89 39.37 0)
+			(at -3.81 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1091,7 +1122,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 173.99 101.6 0)
+		(at 179.07 101.6 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1100,7 +1131,7 @@
 		(fields_autoplaced yes)
 		(uuid "6bbfe43c-e417-4c43-ad36-355e2c5701c8")
 		(property "Reference" "#PWR039"
-			(at 173.99 107.95 0)
+			(at 179.07 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1109,7 +1140,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 173.99 106.68 0)
+			(at 179.07 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1117,7 +1148,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 173.99 101.6 0)
+			(at 179.07 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1126,7 +1157,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 173.99 101.6 0)
+			(at 179.07 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1135,7 +1166,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 173.99 101.6 0)
+			(at 179.07 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1157,7 +1188,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 144.78 110.49 0)
+		(at 149.86 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1166,7 +1197,7 @@
 		(fields_autoplaced yes)
 		(uuid "8ab4fab5-0a71-4c0d-989c-4b3a6b696359")
 		(property "Reference" "#PWR068"
-			(at 144.78 116.84 0)
+			(at 149.86 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1175,7 +1206,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 144.78 115.57 0)
+			(at 149.86 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1183,7 +1214,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 144.78 110.49 0)
+			(at 149.86 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1192,7 +1223,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 144.78 110.49 0)
+			(at 149.86 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1201,7 +1232,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 144.78 110.49 0)
+			(at 149.86 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1223,7 +1254,7 @@
 	)
 	(symbol
 		(lib_id "MLPF-WB55-01E3:MLPF-WB55-01E3")
-		(at 128.27 101.6 0)
+		(at 133.35 101.6 0)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1233,7 +1264,7 @@
 		(fields_autoplaced yes)
 		(uuid "d183fd33-7526-4ef9-9dda-33fd8aba7ca5")
 		(property "Reference" "FLT1"
-			(at 129.54 86.36 0)
+			(at 134.62 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1241,7 +1272,7 @@
 			)
 		)
 		(property "Value" "Low_Pass_Filter_2.4GHz_50R"
-			(at 129.54 88.9 0)
+			(at 134.62 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1249,7 +1280,7 @@
 			)
 		)
 		(property "Footprint" "MLPF-WB55-01E3:MLPF-WB55-01E3"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1259,7 +1290,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.st.com/resource/en/datasheet/mlpf-wb55-01e3.pdf"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1268,7 +1299,7 @@
 			)
 		)
 		(property "Description" "2.4GHz~2.5GHz 50Ω 0.9dB Low Pass RF Filter SMD-6P,1.6x1mm"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1277,7 +1308,7 @@
 			)
 		)
 		(property "Component" "MLPF-WB55-01E3"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1286,7 +1317,7 @@
 			)
 		)
 		(property "Manufacturer" "STMicroelectronics"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1295,7 +1326,7 @@
 			)
 		)
 		(property "Package" "SMD-6P 1.6x1mm"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1304,7 +1335,7 @@
 			)
 		)
 		(property "Supplier" "JLCPCB"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1313,7 +1344,7 @@
 			)
 		)
 		(property "Supplier Part #" "C2651048"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1322,7 +1353,7 @@
 			)
 		)
 		(property "Supplier Part Type" "Extended"
-			(at 128.27 101.6 0)
+			(at 133.35 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1359,7 +1390,7 @@
 	)
 	(symbol
 		(lib_id "Device:L")
-		(at 167.64 93.98 90)
+		(at 172.72 93.98 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1368,7 +1399,7 @@
 		(fields_autoplaced yes)
 		(uuid "ecaa6a3c-b2d3-4e5b-809b-d4e364132b22")
 		(property "Reference" "L6"
-			(at 167.64 88.9 90)
+			(at 172.72 88.9 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1376,7 +1407,7 @@
 			)
 		)
 		(property "Value" "3.6nH"
-			(at 167.64 91.44 90)
+			(at 172.72 91.44 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1384,7 +1415,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
-			(at 167.64 93.98 0)
+			(at 172.72 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1393,7 +1424,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 167.64 93.98 0)
+			(at 172.72 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1402,7 +1433,7 @@
 			)
 		)
 		(property "Description" "3.6nH 0.14Ω 750mA Inductor ±5% 0402 SMD"
-			(at 167.64 93.98 0)
+			(at 172.72 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1411,7 +1442,7 @@
 			)
 		)
 		(property "Package" "0402"
-			(at 167.64 93.98 0)
+			(at 172.72 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1420,7 +1451,7 @@
 			)
 		)
 		(property "Manufacturer" " Murata Electronics"
-			(at 167.64 93.98 0)
+			(at 172.72 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1429,7 +1460,7 @@
 			)
 		)
 		(property "Supplier Part #" "C19216"
-			(at 167.64 93.98 0)
+			(at 172.72 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1438,7 +1469,7 @@
 			)
 		)
 		(property "Supplier" "JLCPCB"
-			(at 167.64 93.98 0)
+			(at 172.72 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1447,7 +1478,7 @@
 			)
 		)
 		(property "Supplier Part Type" "Extended"
-			(at 167.64 93.98 90)
+			(at 172.72 93.98 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1456,7 +1487,7 @@
 			)
 		)
 		(property "Component" "LQG15HS3N6S02D"
-			(at 167.64 93.98 90)
+			(at 172.72 93.98 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1481,7 +1512,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 173.99 97.79 180)
+		(at 179.07 97.79 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1489,7 +1520,7 @@
 		(dnp no)
 		(uuid "fb75ed1d-86b8-4979-a40a-2f5775bb8609")
 		(property "Reference" "C29"
-			(at 177.8 96.5199 0)
+			(at 182.88 96.5199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1498,7 +1529,7 @@
 			)
 		)
 		(property "Value" "1.2pF"
-			(at 177.8 99.0599 0)
+			(at 182.88 99.0599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1507,7 +1538,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 173.0248 93.98 0)
+			(at 178.1048 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1516,7 +1547,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 173.99 97.79 0)
+			(at 179.07 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1525,7 +1556,7 @@
 			)
 		)
 		(property "Description" "1.2pF 50V C0G 0402 Multilayer Ceramic Capacitor SMD"
-			(at 173.99 97.79 0)
+			(at 179.07 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1534,7 +1565,7 @@
 			)
 		)
 		(property "Package" "0402"
-			(at 173.99 97.79 0)
+			(at 179.07 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1543,7 +1574,7 @@
 			)
 		)
 		(property "Manufacturer" "Murata Electronics"
-			(at 173.99 97.79 0)
+			(at 179.07 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1552,7 +1583,7 @@
 			)
 		)
 		(property "Supplier Part #" "C76899"
-			(at 173.99 97.79 0)
+			(at 179.07 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1561,7 +1592,7 @@
 			)
 		)
 		(property "Supplier" "JLCPCB"
-			(at 173.99 97.79 0)
+			(at 179.07 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1570,7 +1601,7 @@
 			)
 		)
 		(property "Supplier Part Type" "Extended"
-			(at 173.99 97.79 0)
+			(at 179.07 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1579,7 +1610,7 @@
 			)
 		)
 		(property "Component" "GJM1555C1H1R2WB01D"
-			(at 173.99 97.79 0)
+			(at 179.07 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -3943,7 +3943,7 @@
 		)
 		(uuid "b552421f-b739-4161-8d5b-3315109cba99")
 	)
-	(text_box "		C24*C25\n9 - 2 = ------ ; C24=C25=14pF\n		C24+C25"
+	(text_box "		C24*C25\n9 - 3 = ------ ; C24=C25=12pF\n		C24+C25"
 		(exclude_from_sim no)
 		(at 228.6 85.09 0)
 		(size 39.37 7.62)
@@ -4208,7 +4208,7 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 111.76) (xy 77.47 111.76)
+			(xy 66.04 113.03) (xy 66.04 111.76)
 		)
 		(stroke
 			(width 0)
@@ -4558,6 +4558,16 @@
 	)
 	(wire
 		(pts
+			(xy 66.04 111.76) (xy 77.47 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d756240-1741-4a24-a759-7078a47e8b62")
+	)
+	(wire
+		(pts
 			(xy 67.31 96.52) (xy 77.47 96.52)
 		)
 		(stroke
@@ -4858,7 +4868,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 160.02) (xy 128.27 160.02)
+			(xy 123.19 160.02) (xy 127 160.02)
 		)
 		(stroke
 			(width 0)
@@ -4888,7 +4898,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 146.05) (xy 213.36 146.05)
+			(xy 209.55 146.05) (xy 214.63 146.05)
 		)
 		(stroke
 			(width 0)
@@ -5198,7 +5208,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 143.51) (xy 214.63 143.51)
+			(xy 209.55 143.51) (xy 213.36 143.51)
 		)
 		(stroke
 			(width 0)
@@ -6029,8 +6039,8 @@
 		)
 	)
 	(global_label "MISO"
-		(shape input)
-		(at 213.36 146.05 0)
+		(shape output)
+		(at 214.63 146.05 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6040,7 +6050,7 @@
 		)
 		(uuid "c7eafc8d-f323-4e5b-843c-27b4259d6650")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 220.9414 146.05 0)
+			(at 222.2114 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6139,8 +6149,8 @@
 		)
 	)
 	(global_label "MOSI"
-		(shape output)
-		(at 214.63 143.51 0)
+		(shape input)
+		(at 213.36 143.51 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6150,7 +6160,7 @@
 		)
 		(uuid "f2ec2b5a-6935-4100-9a04-4409eb466280")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 222.2114 143.51 0)
+			(at 220.9414 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6161,8 +6171,8 @@
 		)
 	)
 	(global_label "MISO"
-		(shape output)
-		(at 128.27 160.02 0)
+		(shape input)
+		(at 127 160.02 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6172,7 +6182,7 @@
 		)
 		(uuid "ffbdeeb3-ddf1-4594-84d2-e66c57745c18")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 135.8514 160.02 0)
+			(at 134.5814 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6892,7 +6902,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 66.04 115.57 180)
+		(at 66.04 116.84 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6901,7 +6911,7 @@
 		(fields_autoplaced yes)
 		(uuid "2c754eac-5e94-43cb-a612-730452707c94")
 		(property "Reference" "R13"
-			(at 68.58 114.2999 0)
+			(at 68.58 115.5699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6910,7 +6920,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 68.58 116.8399 0)
+			(at 68.58 118.1099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6919,7 +6929,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 67.818 115.57 90)
+			(at 67.818 116.84 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6928,7 +6938,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 66.04 115.57 0)
+			(at 66.04 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6937,7 +6947,7 @@
 			)
 		)
 		(property "Description" "10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 SMD"
-			(at 66.04 115.57 0)
+			(at 66.04 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6946,7 +6956,7 @@
 			)
 		)
 		(property "Component" "0402WGF1002TCE"
-			(at 66.04 115.57 0)
+			(at 66.04 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6955,7 +6965,7 @@
 			)
 		)
 		(property "Package" "0402"
-			(at 66.04 115.57 0)
+			(at 66.04 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6964,7 +6974,7 @@
 			)
 		)
 		(property "Manufacturer" "UNI-ROYAL"
-			(at 66.04 115.57 0)
+			(at 66.04 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6973,7 +6983,7 @@
 			)
 		)
 		(property "Supplier Part #" "C25744"
-			(at 66.04 115.57 0)
+			(at 66.04 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6982,7 +6992,7 @@
 			)
 		)
 		(property "Supplier" "JLCPCB"
-			(at 66.04 115.57 0)
+			(at 66.04 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6991,7 +7001,7 @@
 			)
 		)
 		(property "Supplier Part Type" "Basic"
-			(at 66.04 115.57 0)
+			(at 66.04 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8614,7 +8624,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "15pF"
+		(property "Value" "12pF"
 			(at 256.54 72.3899 0)
 			(effects
 				(font
@@ -8641,7 +8651,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "15pF 50V C0G ±5% 0402 Multilayer Ceramic Capacitor SMD"
+		(property "Description" "12pF 50V C0G ±5% 0402 Multilayer Ceramic Capacitor SMD"
 			(at 252.73 71.12 0)
 			(effects
 				(font
@@ -8668,7 +8678,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier Part #" "C1548"
+		(property "Supplier Part #" "C1547"
 			(at 252.73 71.12 0)
 			(effects
 				(font
@@ -8686,7 +8696,7 @@
 				(hide yes)
 			)
 		)
-		(property "Component" "0402CG150J500NT"
+		(property "Component" "0402CG120J500NT"
 			(at 252.73 71.12 0)
 			(effects
 				(font
@@ -9432,7 +9442,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "15pF"
+		(property "Value" "12pF"
 			(at 236.22 72.3899 0)
 			(effects
 				(font
@@ -9459,7 +9469,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "15pF 50V C0G ±5% 0402 Multilayer Ceramic Capacitor SMD"
+		(property "Description" "12pF 50V C0G ±5% 0402 Multilayer Ceramic Capacitor SMD"
 			(at 232.41 71.12 0)
 			(effects
 				(font
@@ -9486,7 +9496,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier Part #" "C1548"
+		(property "Supplier Part #" "C1547"
 			(at 232.41 71.12 0)
 			(effects
 				(font
@@ -9504,7 +9514,7 @@
 				(hide yes)
 			)
 		)
-		(property "Component" "0402CG150J500NT"
+		(property "Component" "0402CG120J500NT"
 			(at 232.41 71.12 0)
 			(effects
 				(font
@@ -10492,7 +10502,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 66.04 119.38 0)
+		(at 66.04 120.65 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10501,7 +10511,7 @@
 		(fields_autoplaced yes)
 		(uuid "a2fe86a6-bc99-4302-b36f-75b021251826")
 		(property "Reference" "#PWR037"
-			(at 66.04 125.73 0)
+			(at 66.04 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10510,7 +10520,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 66.04 124.46 0)
+			(at 66.04 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10518,7 +10528,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 66.04 119.38 0)
+			(at 66.04 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10527,7 +10537,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 66.04 119.38 0)
+			(at 66.04 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10536,7 +10546,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 66.04 119.38 0)
+			(at 66.04 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11197,7 +11207,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10pF 32MHz 60Ω SMD2016-4P Crystal"
+		(property "Description" "8pF 32MHz 60Ω SMD2016-4P Crystal"
 			(at 196.85 69.85 0)
 			(effects
 				(font
@@ -11206,7 +11216,7 @@
 				(hide yes)
 			)
 		)
-		(property "Component" "NX2016SA-32M-EXS00A-CS06465"
+		(property "Component" "Q22FA12800025"
 			(at 196.85 69.85 0)
 			(effects
 				(font
@@ -11224,7 +11234,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "NDK"
+		(property "Manufacturer" "Seiko Epson"
 			(at 196.85 69.85 0)
 			(effects
 				(font
@@ -11233,7 +11243,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier Part #" "C1986260"
+		(property "Supplier Part #" "C187794"
 			(at 196.85 69.85 0)
 			(effects
 				(font

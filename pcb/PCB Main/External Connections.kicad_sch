@@ -1585,7 +1585,7 @@
 		)
 		(uuid "4ba59ab6-9107-4d81-ae5e-88baa87eac67")
 	)
-	(text_box "Pin 1 (Vref) doesn't supply the STM32, it's just voltage reference for STLINK. Pin 19 does."
+	(text_box "Pin 1 (Vref) doesn't supply the STM32, it's just voltage reference for STLINK. Pin 7 does."
 		(exclude_from_sim no)
 		(at 210.82 102.87 0)
 		(size 35.56 8.89)

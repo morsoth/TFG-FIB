@@ -6752,7 +6752,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.33"
+		(property "Value" "0.22"
 			(at 50.8 151.1299 0)
 			(effects
 				(font
@@ -6779,7 +6779,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "330mΩ 2W Current Sense Resistor ±1% ±50ppm/℃ 2512 SMD"
+		(property "Description" "220mΩ 2W Current Sense Resistor ±1% ±50ppm/℃ 2512 SMD"
 			(at 48.26 149.86 0)
 			(effects
 				(font
@@ -6788,7 +6788,7 @@
 				(hide yes)
 			)
 		)
-		(property "Component" "RLP25FEER330"
+		(property "Component" "RLP25FEER220"
 			(at 48.26 149.86 0)
 			(effects
 				(font
@@ -6815,7 +6815,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier Part #" "C393076"
+		(property "Supplier Part #" "C912987"
 			(at 48.26 149.86 0)
 			(effects
 				(font
@@ -6942,7 +6942,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.33"
+		(property "Value" "0.22"
 			(at 50.8 171.4499 0)
 			(effects
 				(font
@@ -6969,7 +6969,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "330mΩ 2W Current Sense Resistor ±1% ±50ppm/℃ 2512 SMD"
+		(property "Description" "220mΩ 2W Current Sense Resistor ±1% ±50ppm/℃ 2512 SMD"
 			(at 48.26 170.18 0)
 			(effects
 				(font
@@ -6978,7 +6978,7 @@
 				(hide yes)
 			)
 		)
-		(property "Component" "RLP25FEER330"
+		(property "Component" "RLP25FEER220"
 			(at 48.26 170.18 0)
 			(effects
 				(font
@@ -7005,7 +7005,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier Part #" "C393076"
+		(property "Supplier Part #" "C912987"
 			(at 48.26 170.18 0)
 			(effects
 				(font
@@ -7577,7 +7577,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.33"
+		(property "Value" "0.22"
 			(at 50.8 130.8099 0)
 			(effects
 				(font
@@ -7604,7 +7604,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "330mΩ 2W Current Sense Resistor ±1% ±50ppm/℃ 2512 SMD"
+		(property "Description" "220mΩ 2W Current Sense Resistor ±1% ±50ppm/℃ 2512 SMD"
 			(at 48.26 129.54 0)
 			(effects
 				(font
@@ -7613,7 +7613,7 @@
 				(hide yes)
 			)
 		)
-		(property "Component" "RLP25FEER330"
+		(property "Component" "RLP25FEER220"
 			(at 48.26 129.54 0)
 			(effects
 				(font
@@ -7640,7 +7640,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier Part #" "C393076"
+		(property "Supplier Part #" "C912987"
 			(at 48.26 129.54 0)
 			(effects
 				(font

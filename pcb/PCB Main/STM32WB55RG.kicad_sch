@@ -4147,10 +4147,6 @@
 		(uuid "8d89f845-bfbf-41e8-94fa-b22e97e49c36")
 	)
 	(no_connect
-		(at 123.19 96.52)
-		(uuid "931d07f8-3aec-4ab9-be34-ebc5f90811e4")
-	)
-	(no_connect
 		(at 77.47 137.16)
 		(uuid "98657cc8-ae19-44a7-9e1f-c61d147cede4")
 	)
@@ -4545,6 +4541,16 @@
 			(type default)
 		)
 		(uuid "4b1bdcce-7202-4dfa-83a7-40a2243be72b")
+	)
+	(wire
+		(pts
+			(xy 123.19 96.52) (xy 128.27 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b52fd9d-eac1-4d8e-bf4a-4881845c24b6")
 	)
 	(wire
 		(pts
@@ -5055,16 +5061,6 @@
 			(type default)
 		)
 		(uuid "cd54a880-12b9-40f9-9523-cc129ebab49e")
-	)
-	(wire
-		(pts
-			(xy 72.39 134.62) (xy 77.47 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cecb3139-dc10-4957-ba80-f455ba9c9d88")
 	)
 	(wire
 		(pts
@@ -5598,6 +5594,28 @@
 			)
 		)
 	)
+	(global_label "GATE_SENS"
+		(shape output)
+		(at 128.27 96.52 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "11ae7c92-4461-4077-95f1-8594e1d6d023")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 141.5965 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "WP_FRAM"
 		(shape output)
 		(at 72.39 152.4 180)
@@ -5726,28 +5744,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "GATE_SENS"
-		(shape output)
-		(at 72.39 134.62 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "579f26cd-d1d4-478d-b65e-db07702a40df")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 59.0635 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)

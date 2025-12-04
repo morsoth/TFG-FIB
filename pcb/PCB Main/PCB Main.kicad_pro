@@ -137,7 +137,7 @@
         "min_text_thickness": 0.15,
         "min_through_hole_diameter": 0.3,
         "min_track_width": 0.1,
-        "min_via_annular_width": 0.15,
+        "min_via_annular_width": 0.05,
         "min_via_diameter": 0.25,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
@@ -225,7 +225,7 @@
           "drill": 0.0
         },
         {
-          "diameter": 0.3,
+          "diameter": 0.4,
           "drill": 0.2
         },
         {
@@ -575,6 +575,9 @@
       ],
       "/STM32WB55RG/VDDA": [
         "PWR"
+      ],
+      "Net-(C29-Pad2)": [
+        "50R"
       ],
       "Net-(FLT1-PadOUT)": [
         "50R"

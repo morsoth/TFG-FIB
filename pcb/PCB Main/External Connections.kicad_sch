@@ -2832,7 +2832,7 @@
 		(dnp no)
 		(uuid "226f83e0-dd3a-4e87-af6d-8d45ee8d2f23")
 		(property "Reference" "BT1"
-			(at 189.23 57.15 0)
+			(at 187.96 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2841,7 +2841,7 @@
 			)
 		)
 		(property "Value" "CR2032"
-			(at 184.15 59.69 0)
+			(at 186.69 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2849,7 +2849,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PZG_Batteries:SMTU2032C"
+		(property "Footprint" "PZG_Batteries:1066"
 			(at 196.85 158.42 0)
 			(effects
 				(font
@@ -2878,7 +2878,7 @@
 				(hide yes)
 			)
 		)
-		(property "Component" "SMTU2032-C"
+		(property "Component" "1066"
 			(at 180.34 63.5 0)
 			(effects
 				(font
@@ -2887,7 +2887,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "Renata"
+		(property "Manufacturer" "KEYSTONE"
 			(at 180.34 63.5 0)
 			(effects
 				(font
@@ -2896,7 +2896,7 @@
 				(hide yes)
 			)
 		)
-		(property "Package" "SMD"
+		(property "Package" "PTH"
 			(at 180.34 63.5 0)
 			(effects
 				(font
@@ -2905,7 +2905,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier" "Mouser"
+		(property "Supplier" "Farnell"
 			(at 180.34 63.5 0)
 			(effects
 				(font
@@ -2914,7 +2914,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier Part #" "614-SMTU2032-C"
+		(property "Supplier Part #" "1339839"
 			(at 180.34 63.5 0)
 			(effects
 				(font

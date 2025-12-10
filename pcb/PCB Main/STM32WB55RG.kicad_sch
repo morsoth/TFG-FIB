@@ -9571,7 +9571,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 256.032 115.57 90)
 			(effects
 				(font
@@ -11503,7 +11503,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 239.522 115.57 90)
 			(effects
 				(font
@@ -11956,7 +11956,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "10nH 1.3Ω 100mA Inductor ±2% 0402 SMD"
+		(property "Description" "10nH 400mΩ 300mA Inductor ±5% 0402 SMD"
 			(at 53.34 90.17 0)
 			(effects
 				(font
@@ -11974,7 +11974,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" " Murata Electronics"
+		(property "Manufacturer" "Sunlord"
 			(at 53.34 90.17 0)
 			(effects
 				(font
@@ -11983,7 +11983,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier Part #" "C162639"
+		(property "Supplier Part #" "C27147"
 			(at 53.34 90.17 0)
 			(effects
 				(font
@@ -12010,7 +12010,7 @@
 				(hide yes)
 			)
 		)
-		(property "Component" "LQP15MN10NG02D"
+		(property "Component" "SDCL1005C10NJTDF"
 			(at 53.34 90.17 0)
 			(effects
 				(font

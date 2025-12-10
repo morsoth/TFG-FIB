@@ -1138,15 +1138,16 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 166.37 97.79 180)
+		(at 166.37 97.79 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(uuid "319b7a12-3a70-452e-8797-03ec63eb91e4")
 		(property "Reference" "C29"
-			(at 170.18 96.5199 0)
+			(at 162.56 96.5199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1155,7 +1156,7 @@
 			)
 		)
 		(property "Value" "1.2pF"
-			(at 170.18 99.0599 0)
+			(at 162.56 99.0599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1164,7 +1165,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 165.4048 93.98 0)
+			(at 167.3352 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)

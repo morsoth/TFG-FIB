@@ -1681,6 +1681,15 @@
 				(hide yes)
 			)
 		)
+		(property "Component" "-"
+			(at 25.4 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project ""
 				(path "/9fa2563f-04cb-468b-9731-6177268fcdbf"
@@ -1782,6 +1791,15 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
+			(at 25.4 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Component" "-"
 			(at 25.4 129.54 0)
 			(effects
 				(font
@@ -1899,6 +1917,15 @@
 				(hide yes)
 			)
 		)
+		(property "Component" "-"
+			(at 25.4 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "PCB Main"
 				(path "/9fa2563f-04cb-468b-9731-6177268fcdbf"
@@ -2000,6 +2027,15 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
+			(at 25.4 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Component" "-"
 			(at 25.4 116.84 0)
 			(effects
 				(font

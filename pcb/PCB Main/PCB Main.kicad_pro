@@ -135,7 +135,7 @@
         "min_silk_clearance": 0.15,
         "min_text_height": 1.0,
         "min_text_thickness": 0.15,
-        "min_through_hole_diameter": 0.15,
+        "min_through_hole_diameter": 0.3,
         "min_track_width": 0.1,
         "min_via_annular_width": 0.05,
         "min_via_diameter": 0.25,
@@ -223,10 +223,6 @@
         {
           "diameter": 0.0,
           "drill": 0.0
-        },
-        {
-          "diameter": 0.4,
-          "drill": 0.2
         },
         {
           "diameter": 0.6,
@@ -616,7 +612,7 @@
       "plot": "",
       "pos_files": "outputs/pos/",
       "specctra_dsn": "",
-      "step": ".step",
+      "step": "PCB Main.step",
       "svg": "",
       "vrml": ""
     },
@@ -643,7 +639,7 @@
             "group_by": false,
             "label": "#",
             "name": "${ITEM_NUMBER}",
-            "show": true
+            "show": false
           },
           {
             "group_by": false,
@@ -662,12 +658,6 @@
             "label": "Value",
             "name": "Value",
             "show": true
-          },
-          {
-            "group_by": false,
-            "label": "Exclude from BOM",
-            "name": "${EXCLUDE_FROM_BOM}",
-            "show": false
           },
           {
             "group_by": true,
@@ -731,6 +721,12 @@
           },
           {
             "group_by": true,
+            "label": "Exclude from BOM",
+            "name": "${EXCLUDE_FROM_BOM}",
+            "show": true
+          },
+          {
+            "group_by": true,
             "label": "Exclude from Board",
             "name": "${EXCLUDE_FROM_BOARD}",
             "show": true
@@ -747,7 +743,7 @@
         "include_excluded_from_bom": true,
         "name": "MyDefault",
         "sort_asc": true,
-        "sort_field": "${ITEM_NUMBER}"
+        "sort_field": "Reference"
       }
     ],
     "bom_settings": {
@@ -757,7 +753,7 @@
           "group_by": false,
           "label": "#",
           "name": "${ITEM_NUMBER}",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
@@ -776,12 +772,6 @@
           "label": "Value",
           "name": "Value",
           "show": true
-        },
-        {
-          "group_by": false,
-          "label": "Exclude from BOM",
-          "name": "${EXCLUDE_FROM_BOM}",
-          "show": false
         },
         {
           "group_by": true,
@@ -845,6 +835,12 @@
         },
         {
           "group_by": true,
+          "label": "Exclude from BOM",
+          "name": "${EXCLUDE_FROM_BOM}",
+          "show": true
+        },
+        {
+          "group_by": true,
           "label": "Exclude from Board",
           "name": "${EXCLUDE_FROM_BOARD}",
           "show": true
@@ -861,7 +857,7 @@
       "include_excluded_from_bom": true,
       "name": "",
       "sort_asc": true,
-      "sort_field": "${ITEM_NUMBER}"
+      "sort_field": "Reference"
     },
     "connection_grid_size": 50.0,
     "drawing": {

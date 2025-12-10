@@ -1551,7 +1551,7 @@
 		)
 		(uuid "db41933c-5be8-4550-a08d-f0de35428154")
 	)
-	(text "UART"
+	(text "USART"
 		(exclude_from_sim no)
 		(at 48.26 125.73 0)
 		(effects
@@ -1711,7 +1711,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 105.41) (xy 185.42 105.41)
+			(xy 180.34 105.41) (xy 186.69 105.41)
 		)
 		(stroke
 			(width 0)
@@ -1781,7 +1781,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 105.41) (xy 146.05 105.41)
+			(xy 140.97 105.41) (xy 147.32 105.41)
 		)
 		(stroke
 			(width 0)
@@ -1818,16 +1818,6 @@
 			(type default)
 		)
 		(uuid "5c66e7ad-99ab-44e1-a4a1-5fecc5ed4618")
-	)
-	(wire
-		(pts
-			(xy 146.05 110.49) (xy 146.05 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5dbb8baa-7819-4499-9aee-b4802ea2116a")
 	)
 	(wire
 		(pts
@@ -1911,7 +1901,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 107.95) (xy 186.69 107.95)
+			(xy 180.34 107.95) (xy 185.42 107.95)
 		)
 		(stroke
 			(width 0)
@@ -2169,53 +2159,9 @@
 		)
 		(uuid "ff9251d5-517a-42f7-8dee-64e663973e81")
 	)
-	(global_label "DFR0198"
-		(shape output)
-		(at 147.32 107.95 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "23d2a7a7-ba95-4669-88cd-36cb9fa2eddc")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 158.7718 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "SEN0308"
-		(shape output)
-		(at 186.69 107.95 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "309bb633-f2a4-4106-bfb2-6d756d34860f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 198.2022 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "VDD_SENS"
 		(shape input)
-		(at 185.42 105.41 0)
+		(at 146.05 110.49 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2223,9 +2169,9 @@
 			)
 			(justify left)
 		)
-		(uuid "36a73c83-f3f3-4be4-ac71-b26712c0169f")
+		(uuid "027f6a1d-5955-4364-bef7-d63281530322")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 197.8999 105.41 0)
+			(at 158.5299 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2325,28 +2271,6 @@
 	)
 	(global_label "VDD_SENS"
 		(shape input)
-		(at 146.05 105.41 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "6365ea02-bbf3-4bea-a940-e4535d3c5934")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 158.5299 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "VDD_SENS"
-		(shape input)
 		(at 67.31 104.14 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2389,6 +2313,28 @@
 			)
 		)
 	)
+	(global_label "DFR0198"
+		(shape output)
+		(at 147.32 105.41 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "89af6aa1-e0e9-4d6d-a721-c8a594b2a466")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 158.7718 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "3V3_EXT"
 		(shape output)
 		(at 220.98 78.74 180)
@@ -2407,6 +2353,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "SEN0308"
+		(shape output)
+		(at 186.69 105.41 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a27ec7e6-1212-4f13-acf7-38b415e1479b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 198.2022 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -2521,6 +2489,28 @@
 			)
 		)
 	)
+	(global_label "VDD_SENS"
+		(shape input)
+		(at 185.42 107.95 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ed1d36e4-4b9c-48a8-8a8c-ef64ae82295c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 197.8999 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SDA"
 		(shape bidirectional)
 		(at 67.31 106.68 0)
@@ -2549,7 +2539,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -2598,6 +2588,15 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
+			(at 57.15 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" "PTH"
 			(at 57.15 138.43 0)
 			(effects
 				(font
@@ -2827,7 +2826,7 @@
 		(at 180.34 63.5 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "226f83e0-dd3a-4e87-af6d-8d45ee8d2f23")
@@ -2953,7 +2952,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -3010,6 +3009,15 @@
 				(hide yes)
 			)
 		)
+		(property "Package" "PTH"
+			(at 57.15 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "270b1bd8-6768-49e0-a14d-b83a96a97874")
 		)
@@ -3037,7 +3045,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -3094,6 +3102,15 @@
 				(hide yes)
 			)
 		)
+		(property "Package" "PTH"
+			(at 175.26 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "94cc5851-f03d-474a-bcd2-a03715418711")
 		)
@@ -3118,7 +3135,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -3167,6 +3184,15 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
+			(at 96.52 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" "PTH"
 			(at 96.52 106.68 0)
 			(effects
 				(font
@@ -3334,7 +3360,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -3383,6 +3409,15 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
+			(at 135.89 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" "PTH"
 			(at 135.89 107.95 0)
 			(effects
 				(font
@@ -3480,7 +3515,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -3529,6 +3564,15 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
+			(at 95.25 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" "PTH"
 			(at 95.25 135.89 0)
 			(effects
 				(font
@@ -4012,7 +4056,7 @@
 		(at 81.28 74.93 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "999f3ea5-ce65-4b9d-a053-7abae911f7c5")
@@ -4050,7 +4094,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "01x02 2.5mm Pin Connector Horizontal"
 			(at 81.28 74.93 0)
 			(effects
 				(font
@@ -4060,6 +4104,24 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
+			(at 81.28 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" "PTH"
+			(at 81.28 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "JST"
 			(at 81.28 74.93 0)
 			(effects
 				(font
@@ -4154,7 +4216,7 @@
 		(at 231.14 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -4195,7 +4257,25 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "01x07 2.54mm Pin Header Vertical"
+			(at 231.14 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" "PTH"
+			(at 231.14 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Supplier Part Type" "-"
 			(at 231.14 71.12 0)
 			(effects
 				(font
@@ -4624,7 +4704,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 146.05 111.76 0)
+		(at 147.32 107.95 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4633,7 +4713,7 @@
 		(fields_autoplaced yes)
 		(uuid "d8cec73d-fb9a-436d-b757-afb4e116f7e5")
 		(property "Reference" "#PWR063"
-			(at 146.05 118.11 0)
+			(at 153.67 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4642,15 +4722,16 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 146.05 116.84 0)
+			(at 151.13 107.9499 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 146.05 111.76 0)
+			(at 147.32 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4659,7 +4740,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 146.05 111.76 0)
+			(at 147.32 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4668,7 +4749,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 146.05 111.76 0)
+			(at 147.32 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4883,7 +4964,7 @@
 		(at 124.46 74.93 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "fad8a85b-9191-4ef2-ad6d-b02c01d18755")
@@ -4921,7 +5002,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "01x02 2.5mm Pin Connector Horizontal"
 			(at 124.46 74.93 0)
 			(effects
 				(font
@@ -4931,6 +5012,24 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
+			(at 124.46 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" "PTH"
+			(at 124.46 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "JST"
 			(at 124.46 74.93 0)
 			(effects
 				(font

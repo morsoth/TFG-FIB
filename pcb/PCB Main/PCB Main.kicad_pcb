@@ -18557,7 +18557,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -0 -0 -0)
 			)
 		)
 	)
@@ -43173,6 +43173,42 @@
 		)
 	)
 	(zone
+		(net 76)
+		(net_name "VBAT")
+		(layer "F.Cu")
+		(uuid "4b7194c4-da6a-48ef-b521-6b4005c49d33")
+		(name "$teardrop_padvia$")
+		(hatch none 0.1)
+		(priority 30000)
+		(attr
+			(teardrop
+				(type padvia)
+			)
+		)
+		(connect_pads yes
+			(clearance 0)
+		)
+		(min_thickness 0.0254)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 1)
+			(island_area_min 10)
+		)
+		(polygon
+			(pts
+				(xy 80.5085 35.912243) (xy 81.3085 35.912243) (xy 81.74951 34.394403) (xy 80.915843 34.077576) (xy 80.082176 34.394403)
+			)
+		)
+		(filled_polygon
+			(layer "F.Cu")
+			(pts
+				(xy 80.5085 35.912243) (xy 81.3085 35.912243) (xy 81.74951 34.394403) (xy 80.915843 34.077576) (xy 80.082176 34.394403)
+			)
+		)
+	)
+	(zone
 		(net 66)
 		(net_name "WAR_INA")
 		(layer "F.Cu")
@@ -49270,45 +49306,6 @@
 				(xy 56.233617 47.136992) (xy 56.22556 47.1409) (xy 56.217904 47.138619) (xy 55.984517 46.965608)
 				(xy 55.983212 46.964482) (xy 55.853286 46.834556) (xy 55.849859 46.826283) (xy 55.853286 46.81801)
 				(xy 55.855799 46.816099) (xy 56.223829 46.607933) (xy 56.232716 46.606844)
-			)
-		)
-	)
-	(zone
-		(net 76)
-		(net_name "VBAT")
-		(layer "F.Cu")
-		(uuid "c7395329-b226-4312-8d3f-9f9f4f1e961f")
-		(name "$teardrop_padvia$")
-		(hatch none 0.1)
-		(priority 30001)
-		(attr
-			(teardrop
-				(type padvia)
-			)
-		)
-		(connect_pads yes
-			(clearance 0)
-		)
-		(min_thickness 0.0254)
-		(filled_areas_thickness no)
-		(fill yes
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 1)
-			(island_area_min 10)
-		)
-		(polygon
-			(pts
-				(xy 80.5085 35.912243) (xy 81.3085 35.912243) (xy 81.74951 34.394403) (xy 80.915843 34.077576) (xy 80.082176 34.394403)
-			)
-		)
-		(filled_polygon
-			(layer "F.Cu")
-			(pts
-				(xy 81.739419 34.390568) (xy 81.745936 34.396711) (xy 81.746498 34.404769) (xy 81.310951 35.903807)
-				(xy 81.305352 35.910796) (xy 81.299716 35.912243) (xy 80.517366 35.912243) (xy 80.509093 35.908816)
-				(xy 80.506102 35.903707) (xy 80.085069 34.404703) (xy 80.086131 34.395811) (xy 80.092176 34.390602)
-				(xy 80.911688 34.079155) (xy 80.919998 34.079155)
 			)
 		)
 	)

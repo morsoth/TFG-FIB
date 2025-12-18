@@ -26,6 +26,7 @@ Core/Src \
 Core/Startup \
 DS18B20 \
 Drivers/STM32WBxx_HAL_Driver/Src \
+FRAM \
 INA3221 \
 SEN0308 \
 SHT3x \

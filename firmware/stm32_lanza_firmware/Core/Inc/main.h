@@ -57,44 +57,36 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define PV_INT_Pin GPIO_PIN_0
-#define PV_INT_GPIO_Port GPIOA
-#define CRI_INT_Pin GPIO_PIN_1
-#define CRI_INT_GPIO_Port GPIOA
-#define WAR_INT_Pin GPIO_PIN_2
-#define WAR_INT_GPIO_Port GPIOA
-#define S0_INT_Pin GPIO_PIN_3
-#define S0_INT_GPIO_Port GPIOA
-#define S0_INT_EXTI_IRQn EXTI3_IRQn
-#define S1_INT_Pin GPIO_PIN_4
-#define S1_INT_GPIO_Port GPIOA
-#define S1_INT_EXTI_IRQn EXTI4_IRQn
-#define S2_Pin GPIO_PIN_5
-#define S2_GPIO_Port GPIOA
+#define PV_INA_Pin GPIO_PIN_0
+#define PV_INA_GPIO_Port GPIOA
+#define CRI_INA_Pin GPIO_PIN_1
+#define CRI_INA_GPIO_Port GPIOA
+#define WAR_INA_Pin GPIO_PIN_2
+#define WAR_INA_GPIO_Port GPIOA
+#define S0_AEM_Pin GPIO_PIN_3
+#define S0_AEM_GPIO_Port GPIOA
+#define S0_AEM_EXTI_IRQn EXTI3_IRQn
+#define S1_AEM_Pin GPIO_PIN_4
+#define S1_AEM_GPIO_Port GPIOA
+#define S1_AEM_EXTI_IRQn EXTI4_IRQn
+#define S2_AEM_Pin GPIO_PIN_5
+#define S2_AEM_GPIO_Port GPIOA
+#define GATE_SENS_Pin GPIO_PIN_6
+#define GATE_SENS_GPIO_Port GPIOA
 #define DFR0198_Pin GPIO_PIN_7
 #define DFR0198_GPIO_Port GPIOA
 #define SEN0308_Pin GPIO_PIN_8
 #define SEN0308_GPIO_Port GPIOA
-#define B1_Pin GPIO_PIN_4
-#define B1_GPIO_Port GPIOC
-#define LD2_Pin GPIO_PIN_0
-#define LD2_GPIO_Port GPIOB
-#define LD3_Pin GPIO_PIN_1
-#define LD3_GPIO_Port GPIOB
 #define USER_LED_Pin GPIO_PIN_10
 #define USER_LED_GPIO_Port GPIOA
-#define FRAM_WP_Pin GPIO_PIN_12
-#define FRAM_WP_GPIO_Port GPIOC
-#define B2_Pin GPIO_PIN_0
-#define B2_GPIO_Port GPIOD
-#define B3_Pin GPIO_PIN_1
-#define B3_GPIO_Port GPIOD
-#define LD1_Pin GPIO_PIN_5
-#define LD1_GPIO_Port GPIOB
-#define STLINK_RX_Pin GPIO_PIN_6
-#define STLINK_RX_GPIO_Port GPIOB
-#define STLINK_TX_Pin GPIO_PIN_7
-#define STLINK_TX_GPIO_Port GPIOB
+#define CS_FRAM_Pin GPIO_PIN_11
+#define CS_FRAM_GPIO_Port GPIOA
+#define WP_FRAM_Pin GPIO_PIN_12
+#define WP_FRAM_GPIO_Port GPIOC
+#define USART_RX_Pin GPIO_PIN_6
+#define USART_RX_GPIO_Port GPIOB
+#define USART_TX_Pin GPIO_PIN_7
+#define USART_TX_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

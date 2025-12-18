@@ -13,6 +13,7 @@ RM := rm -rf
 -include SHT3x/subdir.mk
 -include SEN0308/subdir.mk
 -include INA3221/subdir.mk
+-include FRAM/subdir.mk
 -include Drivers/STM32WBxx_HAL_Driver/Src/subdir.mk
 -include DS18B20/subdir.mk
 -include Core/Startup/subdir.mk

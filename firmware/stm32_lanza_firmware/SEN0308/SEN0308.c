@@ -5,6 +5,7 @@
  *      Author: pzaragoza
  */
 
+#include <stdio.h>
 #include "SEN0308.h"
 
 HAL_StatusTypeDef SEN0308_Init(SEN0308_t *dev) {
@@ -17,10 +18,16 @@ HAL_StatusTypeDef SEN0308_ReadRaw(SEN0308_t *dev, uint16_t *rawMoisture) {
 	HAL_StatusTypeDef status;
 
 	status = HAL_ADC_Start(dev->hadc);
-	if (status != HAL_OK) return status;
+	if (status != HAL_OK) {
+		HAL_ADC_Stop(dev->hadc);
+		return status;
+	}
 
 	status = HAL_ADC_PollForConversion(dev->hadc, SEN0308_POLL_TIMEOUT_MS);
-	if (status != HAL_OK) return status;
+	if (status != HAL_OK) {
+		HAL_ADC_Stop(dev->hadc);
+		return status;
+	}
 
 	*rawMoisture = (uint32_t)HAL_ADC_GetValue(dev->hadc);
 
@@ -45,7 +52,7 @@ HAL_StatusTypeDef SEN0308_ReadRawAvg(SEN0308_t *dev, uint16_t *rawMoisture, uint
 
 		moistureAcc += (uint32_t)rawRead;
 
-		HAL_Delay(10);
+		HAL_Delay(5);
 	}
 
 	*rawMoisture = (uint16_t)(moistureAcc/numSamples);

@@ -55,7 +55,8 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern RTC_HandleTypeDef hrtc;
+extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -199,6 +200,62 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles RTC wake-up interrupt through EXTI line 19.
+  */
+void RTC_WKUP_IRQHandler(void)
+{
+  /* USER CODE BEGIN RTC_WKUP_IRQn 0 */
+
+  /* USER CODE END RTC_WKUP_IRQn 0 */
+  HAL_RTCEx_WakeUpTimerIRQHandler(&hrtc);
+  /* USER CODE BEGIN RTC_WKUP_IRQn 1 */
+
+  /* USER CODE END RTC_WKUP_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line0 interrupt.
+  */
+void EXTI0_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI0_IRQn 0 */
+
+  /* USER CODE END EXTI0_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(PV_INA_Pin);
+  /* USER CODE BEGIN EXTI0_IRQn 1 */
+
+  /* USER CODE END EXTI0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line1 interrupt.
+  */
+void EXTI1_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI1_IRQn 0 */
+
+  /* USER CODE END EXTI1_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(CRI_INA_Pin);
+  /* USER CODE BEGIN EXTI1_IRQn 1 */
+
+  /* USER CODE END EXTI1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line2 interrupt.
+  */
+void EXTI2_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI2_IRQn 0 */
+
+  /* USER CODE END EXTI2_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(WAR_INA_Pin);
+  /* USER CODE BEGIN EXTI2_IRQn 1 */
+
+  /* USER CODE END EXTI2_IRQn 1 */
+}
+
+/**
   * @brief This function handles EXTI line3 interrupt.
   */
 void EXTI3_IRQHandler(void)
@@ -227,17 +284,17 @@ void EXTI4_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles HSEM global interrupt.
+  * @brief This function handles USART1 global interrupt.
   */
-void HSEM_IRQHandler(void)
+void USART1_IRQHandler(void)
 {
-  /* USER CODE BEGIN HSEM_IRQn 0 */
+  /* USER CODE BEGIN USART1_IRQn 0 */
 
-  /* USER CODE END HSEM_IRQn 0 */
-  HAL_HSEM_IRQHandler();
-  /* USER CODE BEGIN HSEM_IRQn 1 */
+  /* USER CODE END USART1_IRQn 0 */
+  HAL_UART_IRQHandler(&huart1);
+  /* USER CODE BEGIN USART1_IRQn 1 */
 
-  /* USER CODE END HSEM_IRQn 1 */
+  /* USER CODE END USART1_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

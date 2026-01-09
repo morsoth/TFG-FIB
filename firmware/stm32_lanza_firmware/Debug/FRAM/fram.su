@@ -1,0 +1,16 @@
+../FRAM/fram.c:10:17:crc16_ccitt_false	32	static
+../FRAM/fram.c:21:16:metaIsValid	24	static
+../FRAM/fram.c:29:16:frameIsValid	24	static
+../FRAM/fram.c:35:23:seqIsNewer	16	static
+../FRAM/fram.c:39:26:metaClear	24	static
+../FRAM/fram.c:45:26:metaWriteSafe	32	static
+../FRAM/fram.c:56:26:dataWriteSafe	72	static
+../FRAM/fram.c:70:24:dataSlotAddr	16	static
+../FRAM/fram.c:74:19:FRAM_SelfTest	40	static
+../FRAM/fram.c:92:19:FRAM_Init	56	static
+../FRAM/fram.c:147:19:FRAM_SaveData	32	static
+../FRAM/fram.c:173:19:FRAM_GetSlot	72	static
+../FRAM/fram.c:190:19:FRAM_WriteData	32	static
+../FRAM/fram.c:196:19:FRAM_WriteDeviceInfo	24	static
+../FRAM/fram.c:202:19:FRAM_Reset	64	static
+../FRAM/fram.c:232:19:FRAM_EraseAll	56	static

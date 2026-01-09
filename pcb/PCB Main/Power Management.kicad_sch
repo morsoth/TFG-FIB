@@ -2555,17 +2555,6 @@
 		)
 		(uuid "75907159-28ae-4041-9e02-83bc61321851")
 	)
-	(text "Configurar MPPT"
-		(exclude_from_sim no)
-		(at 62.23 97.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify bottom)
-		)
-		(uuid "785ffc0a-7f01-4188-9d6f-d1150fe57f1f")
-	)
 	(text "3.3V BUS SWITCHING"
 		(exclude_from_sim no)
 		(at 167.64 71.12 0)
@@ -2653,7 +2642,7 @@
 		)
 		(uuid "2106e516-19de-4190-aa0b-1ee5058dc77e")
 	)
-	(text_box "C5: CSRC\nC6: CBOOST\nC7: CBUCK\nC8: CHV\nC9: CBATT\n\nL1: LBOOST\nL2: LBUCK"
+	(text_box "C5: CSRC\nC6: CBUCK\nC7: CBOOST\nC8: CHV\nC9: CBATT\n\nL1: LBOOST\nL2: LBUCK"
 		(exclude_from_sim no)
 		(at 139.7 27.94 0)
 		(size 15.24 17.78)
@@ -3350,7 +3339,7 @@
 	)
 	(wire
 		(pts
-			(xy 233.68 86.36) (xy 236.22 86.36)
+			(xy 251.46 44.45) (xy 254 44.45)
 		)
 		(stroke
 			(width 0)
@@ -3430,7 +3419,7 @@
 	)
 	(wire
 		(pts
-			(xy 233.68 88.9) (xy 236.22 88.9)
+			(xy 251.46 46.99) (xy 254 46.99)
 		)
 		(stroke
 			(width 0)
@@ -3470,7 +3459,7 @@
 	)
 	(wire
 		(pts
-			(xy 233.68 91.44) (xy 236.22 91.44)
+			(xy 251.46 49.53) (xy 254 49.53)
 		)
 		(stroke
 			(width 0)
@@ -4466,7 +4455,7 @@
 	)
 	(global_label "S1_AEM"
 		(shape bidirectional)
-		(at 236.22 88.9 0)
+		(at 254 46.99 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4476,7 +4465,7 @@
 		)
 		(uuid "b12160a7-97f8-4073-8555-e95844bf216f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 247.3921 88.9 0)
+			(at 265.1721 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4554,7 +4543,7 @@
 	)
 	(global_label "S2_AEM"
 		(shape bidirectional)
-		(at 236.22 86.36 0)
+		(at 254 44.45 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4564,7 +4553,7 @@
 		)
 		(uuid "e3a56f73-1f09-4dfd-989b-2006a5011ed9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 247.3921 86.36 0)
+			(at 265.1721 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4576,7 +4565,7 @@
 	)
 	(global_label "S0_AEM"
 		(shape bidirectional)
-		(at 236.22 91.44 0)
+		(at 254 49.53 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4586,7 +4575,7 @@
 		)
 		(uuid "f39317c8-ad1a-4873-9deb-d61cf40134ed")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 247.3921 91.44 0)
+			(at 265.1721 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8564,7 +8553,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
-		(at 228.6 88.9 0)
+		(at 246.38 46.99 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8574,7 +8563,7 @@
 		(fields_autoplaced yes)
 		(uuid "b1afe876-25c9-4f66-aa86-b1819779d4d9")
 		(property "Reference" "CN10"
-			(at 228.6 80.01 0)
+			(at 246.38 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8582,7 +8571,7 @@
 			)
 		)
 		(property "Value" "Conn_01x03"
-			(at 228.6 82.55 0)
+			(at 246.38 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8590,7 +8579,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
-			(at 228.6 88.9 0)
+			(at 246.38 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8599,7 +8588,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 88.9 0)
+			(at 246.38 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8608,7 +8597,7 @@
 			)
 		)
 		(property "Description" "01x03 2.54mm Pin Header Vertical"
-			(at 228.6 88.9 0)
+			(at 246.38 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8617,7 +8606,7 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
-			(at 228.6 88.9 0)
+			(at 246.38 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8626,7 +8615,7 @@
 			)
 		)
 		(property "Package" "PTH"
-			(at 228.6 88.9 0)
+			(at 246.38 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)

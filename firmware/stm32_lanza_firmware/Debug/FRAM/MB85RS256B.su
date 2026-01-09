@@ -1,0 +1,10 @@
+../FRAM/MB85RS256B.c:10:20:csLow	16	static
+../FRAM/MB85RS256B.c:14:20:csHigh	16	static
+../FRAM/MB85RS256B.c:18:26:spiTransmit	24	static
+../FRAM/MB85RS256B.c:22:26:spiReceive	24	static
+../FRAM/MB85RS256B.c:26:26:writeEnable	24	static
+../FRAM/MB85RS256B.c:34:26:writeDisable	24	static
+../FRAM/MB85RS256B.c:42:26:readId	24	static
+../FRAM/MB85RS256B.c:53:19:MB85RS256B_Init	16	static
+../FRAM/MB85RS256B.c:64:19:MB85RS256B_Read	32	static
+../FRAM/MB85RS256B.c:87:19:MB85RS256B_Write	32	static

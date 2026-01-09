@@ -30333,7 +30333,7 @@
 		)
 	)
 	(gr_text "islas cristales - OK\nplano 3.3V aislado de antena - OK\nvias debajo pads GND micros - OK\nantena como zona, no pista - OK\ncambiar pila holder - OK\nponer comentarios silkscreen - OK\n\noptimizar pistas"
-		(at 108.7615 51.321 0)
+		(at 154.178 51.435 0)
 		(layer "Cmts.User")
 		(uuid "e2308d30-5f5b-4316-a8aa-b7021fa68951")
 		(effects

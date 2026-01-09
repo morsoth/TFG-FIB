@@ -11,7 +11,7 @@
 #include "stm32wbxx_hal.h"
 
 // Definitions
-#define SEN0308_POLL_TIMEOUT_MS	10 //
+#define SEN0308_POLL_TIMEOUT_MS	50 //
 
 // Struct
 typedef struct {

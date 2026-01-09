@@ -1,0 +1,354 @@
+(1) Escritura y lectura del mismo slot cada 1s.
+(2) Cada 10 escrituras hacer Reset de la FRAM.
+(3) Comprobación de que todos los bytes de DATA son 0.
+
+- Observamos efectivamente que cada 10 escrituras/lecturas se efectua el reset de la FRAM, reinicializando la metadata, por lo que vuelve a empezar desde la primera dirección.
+- Observamos que no salta la comprovación (3).
+- Observamos que tras un reset externo no se pierde el contexto y sigue por donde lo dejó.
+
+---------------------------------------------------------
+
+Write Slot: 0 (0x0020)
+Write Count: 1
+Write Meta B
+Read Slot: 0 (0x0020)
+Read Valid: 1
+
+Write Slot: 1 (0x0040)
+Write Count: 2
+Write Meta A
+Read Slot: 1 (0x0040)
+Read Valid: 1
+
+Write Slot: 2 (0x0060)
+Write Count: 3
+Write Meta B
+Read Slot: 2 (0x0060)
+Read Valid: 1
+
+Write Slot: 3 (0x0080)
+Write Count: 4
+Write Meta A
+Read Slot: 3 (0x0080)
+Read Valid: 1
+
+Write Slot: 4 (0x00A0)
+Write Count: 5
+Write Meta B
+Read Slot: 4 (0x00A0)
+Read Valid: 1
+
+Write Slot: 5 (0x00C0)
+Write Count: 6
+Write Meta A
+Read Slot: 5 (0x00C0)
+Read Valid: 1
+
+Write Slot: 6 (0x00E0)
+Write Count: 7
+Write Meta B
+Read Slot: 6 (0x00E0)
+Read Valid: 1
+
+Write Slot: 7 (0x0100)
+Write Count: 8
+Write Meta A
+Read Slot: 7 (0x0100)
+Read Valid: 1
+
+Write Slot: 8 (0x0120)
+Write Count: 9
+Write Meta B
+Read Slot: 8 (0x0120)
+Read Valid: 1
+
+Write Slot: 9 (0x0140)
+Write Count: 10
+Write Meta A
+Read Slot: 9 (0x0140)
+Read Valid: 1
+
+Reset FRAM
+
+Write Slot: 0 (0x0020)
+Write Count: 1
+Write Meta B
+Read Slot: 0 (0x0020)
+Read Valid: 1
+
+Write Slot: 1 (0x0040)
+Write Count: 2
+Write Meta A
+Read Slot: 1 (0x0040)
+Read Valid: 1
+
+Write Slot: 2 (0x0060)
+Write Count: 3
+Write Meta B
+Read Slot: 2 (0x0060)
+Read Valid: 1
+
+Write Slot: 3 (0x0080)
+Write Count: 4
+Write Meta A
+Read Slot: 3 (0x0080)
+Read Valid: 1
+
+Write Slot: 4 (0x00A0)
+Write Count: 5
+Write Meta B
+Read Slot: 4 (0x00A0)
+Read Valid: 1
+
+Write Slot: 5 (0x00C0)
+Write Count: 6
+Write Meta A
+Read Slot: 5 (0x00C0)
+Read Valid: 1
+
+Write Slot: 6 (0x00E0)
+Write Count: 7
+Write Meta B
+Read Slot: 6 (0x00E0)
+Read Valid: 1
+
+Write Slot: 7 (0x0100)
+Write Count: 8
+Write Meta A
+Read Slot: 7 (0x0100)
+Read Valid: 1
+
+Write Slot: 8 (0x0120)
+Write Count: 9
+Write Meta B
+Read Slot: 8 (0x0120)
+Read Valid: 1
+
+Write Slot: 9 (0x0140)
+Write Count: 10
+Write Meta A
+Read Slot: 9 (0x0140)
+Read Valid: 1
+
+Reset FRAM
+
+Write Slot: 0 (0x0020)
+Write Count: 1
+Write Meta B
+Read Slot: 0 (0x0020)
+Read Valid: 1
+
+Write Slot: 1 (0x0040)
+Write Count: 2
+Write Meta A
+Read Slot: 1 (0x0040)
+Read Valid: 1
+
+Write Slot: 2 (0x0060)
+Write Count: 3
+Write Meta B
+Read Slot: 2 (0x0060)
+Read Valid: 1
+
+Write Slot: 3 (0x0080)
+Write Count: 4
+Write Meta A
+Read Slot: 3 (0x0080)
+Read Valid: 1
+
+Write Slot: 4 (0x00A0)
+Write Count: 5
+Write Meta B
+Read Slot: 4 (0x00A0)
+Read Valid: 1
+
+Write Slot: 5 (0x00C0)
+Write Count: 6
+Write Meta A
+Read Slot: 5 (0x00C0)
+Read Valid: 1
+
+Write Slot: 6 (0x00E0)
+Write Count: 7
+Write Meta B
+Read Slot: 6 (0x00E0)
+Read Valid: 1
+
+Write Slot: 7 (0x0100)
+Write Count: 8
+Write Meta A
+Read Slot: 7 (0x0100)
+Read Valid: 1
+
+Write Slot: 8 (0x0120)
+Write Count: 9
+Write Meta B
+Read Slot: 8 (0x0120)
+Read Valid: 1
+
+Write Slot: 9 (0x0140)
+Write Count: 10
+Write Meta A
+Read Slot: 9 (0x0140)
+Read Valid: 1
+
+Reset FRAM
+
+Write Slot: 0 (0x0020)
+Write Count: 1
+Write Meta B
+Read Slot: 0 (0x0020)
+Read Valid: 1
+
+Write Slot: 1 (0x0040)
+Write Count: 2
+Write Meta A
+Read Slot: 1 (0x0040)
+Read Valid: 1
+
+Write Slot: 2 (0x0060)
+Write Count: 3
+Write Meta B
+Read Slot: 2 (0x0060)
+Read Valid: 1
+
+Write Slot: 3 (0x0080)
+Write Count: 4
+Write Meta A
+Read Slot: 3 (0x0080)
+Read Valid: 1
+
+<Reset externo>
+
+Both meta valid
+FRAM inicializada correctamente
+
+Write Slot: 4 (0x00A0)
+Write Count: 5
+Write Meta B
+Read Slot: 4 (0x00A0)
+Read Valid: 1
+
+Write Slot: 5 (0x00C0)
+Write Count: 6
+Write Meta A
+Read Slot: 5 (0x00C0)
+Read Valid: 1
+
+Write Slot: 6 (0x00E0)
+Write Count: 7
+Write Meta B
+Read Slot: 6 (0x00E0)
+Read Valid: 1
+
+Write Slot: 7 (0x0100)
+Write Count: 8
+Write Meta A
+Read Slot: 7 (0x0100)
+Read Valid: 1
+
+Write Slot: 8 (0x0120)
+Write Count: 9
+Write Meta B
+Read Slot: 8 (0x0120)
+Read Valid: 1
+
+Write Slot: 9 (0x0140)
+Write Count: 10
+Write Meta A
+Read Slot: 9 (0x0140)
+Read Valid: 1
+
+Reset FRAM
+
+Write Slot: 0 (0x0020)
+Write Count: 1
+Write Meta B
+Read Slot: 0 (0x0020)
+Read Valid: 1
+
+Write Slot: 1 (0x0040)
+Write Count: 2
+Write Meta A
+Read Slot: 1 (0x0040)
+Read Valid: 1
+
+Write Slot: 2 (0x0060)
+Write Count: 3
+Write Meta B
+Read Slot: 2 (0x0060)
+Read Valid: 1
+
+Write Slot: 3 (0x0080)
+Write Count: 4
+Write Meta A
+Read Slot: 3 (0x0080)
+Read Valid: 1
+
+Write Slot: 4 (0x00A0)
+Write Count: 5
+Write Meta B
+Read Slot: 4 (0x00A0)
+Read Valid: 1
+
+Write Slot: 5 (0x00C0)
+Write Count: 6
+Write Meta A
+Read Slot: 5 (0x00C0)
+Read Valid: 1
+
+Write Slot: 6 (0x00E0)
+Write Count: 7
+Write Meta B
+Read Slot: 6 (0x00E0)
+Read Valid: 1
+
+Write Slot: 7 (0x0100)
+Write Count: 8
+Write Meta A
+Read Slot: 7 (0x0100)
+Read Valid: 1
+
+Write Slot: 8 (0x0120)
+Write Count: 9
+Write Meta B
+Read Slot: 8 (0x0120)
+Read Valid: 1
+
+Write Slot: 9 (0x0140)
+Write Count: 10
+Write Meta A
+Read Slot: 9 (0x0140)
+Read Valid: 1
+
+Reset FRAM
+
+Write Slot: 0 (0x0020)
+Write Count: 1
+Write Meta B
+Read Slot: 0 (0x0020)
+Read Valid: 1
+
+Write Slot: 1 (0x0040)
+Write Count: 2
+Write Meta A
+Read Slot: 1 (0x0040)
+Read Valid: 1
+
+Write Slot: 2 (0x0060)
+Write Count: 3
+Write Meta B
+Read Slot: 2 (0x0060)
+Read Valid: 1
+
+Write Slot: 3 (0x0080)
+Write Count: 4
+Write Meta A
+Read Slot: 3 (0x0080)
+Read Valid: 1
+
+Write Slot: 4 (0x00A0)
+Write Count: 5
+Write Meta B
+Read Slot: 4 (0x00A0)
+Read Valid: 1

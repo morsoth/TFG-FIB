@@ -44,8 +44,6 @@ ADC_HandleTypeDef hadc1;
 
 I2C_HandleTypeDef hi2c3;
 
-IPCC_HandleTypeDef hipcc;
-
 RTC_HandleTypeDef hrtc;
 
 SPI_HandleTypeDef hspi2;
@@ -65,10 +63,13 @@ static void MX_RTC_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_SPI2_Init(void);
-static void MX_IPCC_Init(void);
-static void MX_RF_Init(void);
 /* USER CODE BEGIN PFP */
+void ADC1_Init() {
+	HAL_ADC_DeInit(&hadc1);
+	HAL_ADC_Init(&hadc1);
 
+	MX_ADC1_Init();
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -107,9 +108,6 @@ int main(void)
   /* Configure the peripherals common clocks */
   PeriphCommonClock_Config();
 
-  /* IPCC initialisation */
-  MX_IPCC_Init();
-
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -121,7 +119,6 @@ int main(void)
   MX_ADC1_Init();
   MX_I2C3_Init();
   MX_SPI2_Init();
-  MX_RF_Init();
   /* USER CODE BEGIN 2 */
   setup();
   /* USER CODE END 2 */
@@ -210,8 +207,7 @@ void PeriphCommonClock_Config(void)
 
   /** Initializes the peripherals clock
   */
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SMPS|RCC_PERIPHCLK_RFWAKEUP;
-  PeriphClkInitStruct.RFWakeUpClockSelection = RCC_RFWKPCLKSOURCE_HSE_DIV1024;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SMPS;
   PeriphClkInitStruct.SmpsClockSelection = RCC_SMPSCLKSOURCE_HSI;
   PeriphClkInitStruct.SmpsDivSelection = RCC_SMPSCLKDIV_RANGE0;
 
@@ -331,53 +327,6 @@ static void MX_I2C3_Init(void)
 }
 
 /**
-  * @brief IPCC Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_IPCC_Init(void)
-{
-
-  /* USER CODE BEGIN IPCC_Init 0 */
-
-  /* USER CODE END IPCC_Init 0 */
-
-  /* USER CODE BEGIN IPCC_Init 1 */
-
-  /* USER CODE END IPCC_Init 1 */
-  hipcc.Instance = IPCC;
-  if (HAL_IPCC_Init(&hipcc) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN IPCC_Init 2 */
-
-  /* USER CODE END IPCC_Init 2 */
-
-}
-
-/**
-  * @brief RF Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_RF_Init(void)
-{
-
-  /* USER CODE BEGIN RF_Init 0 */
-
-  /* USER CODE END RF_Init 0 */
-
-  /* USER CODE BEGIN RF_Init 1 */
-
-  /* USER CODE END RF_Init 1 */
-  /* USER CODE BEGIN RF_Init 2 */
-
-  /* USER CODE END RF_Init 2 */
-
-}
-
-/**
   * @brief RTC Initialization Function
   * @param None
   * @retval None
@@ -433,6 +382,13 @@ static void MX_RTC_Init(void)
   sDate.Year = 0x0;
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Enable the WakeUp
+  */
+  if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 1200, RTC_WAKEUPCLOCK_CK_SPRE_16BITS) != HAL_OK)
   {
     Error_Handler();
   }
@@ -584,7 +540,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : DFR0198_Pin */
   GPIO_InitStruct.Pin = DFR0198_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(DFR0198_GPIO_Port, &GPIO_InitStruct);
 
@@ -596,6 +552,15 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(WP_FRAM_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+
   HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 

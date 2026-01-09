@@ -1,0 +1,150 @@
+(1) Escritura y lectura del mismo slot cada 1s.
+
+- Vemos que cuando se llena la FRAM (count = 1023) simplemente se sobreescriben los datos.
+
+-----------------------------------------------
+
+Write Slot: 297 (0x2540)
+Write Count: 1015
+Write Meta A
+Read Slot: 297 (0x2540)
+Read Valid: 1
+
+Write Slot: 298 (0x2560)
+Write Count: 1016
+Write Meta B
+Read Slot: 298 (0x2560)
+Read Valid: 1
+
+Write Slot: 299 (0x2580)
+Write Count: 1017
+Write Meta A
+Read Slot: 299 (0x2580)
+Read Valid: 1
+
+Write Slot: 300 (0x25A0)
+Write Count: 1018
+Write Meta B
+Read Slot: 300 (0x25A0)
+Read Valid: 1
+
+Write Slot: 301 (0x25C0)
+Write Count: 1019
+Write Meta A
+Read Slot: 301 (0x25C0)
+Read Valid: 1
+
+Write Slot: 302 (0x25E0)
+Write Count: 1020
+Write Meta B
+Read Slot: 302 (0x25E0)
+Read Valid: 1
+
+Write Slot: 303 (0x2600)
+Write Count: 1021
+Write Meta A
+Read Slot: 303 (0x2600)
+Read Valid: 1
+
+Write Slot: 304 (0x2620)
+Write Count: 1022
+Write Meta B
+Read Slot: 304 (0x2620)
+Read Valid: 1
+
+Write Slot: 305 (0x2640)
+Write Count: 1023
+Write Meta A
+Read Slot: 305 (0x2640)
+Read Valid: 1
+
+Write Slot: 306 (0x2660)
+Write Count: 1023
+Write Meta B
+Read Slot: 306 (0x2660)
+Read Valid: 1
+
+Write Slot: 307 (0x2680)
+Write Count: 1023
+Write Meta A
+Read Slot: 307 (0x2680)
+Read Valid: 1
+
+Write Slot: 308 (0x26A0)
+Write Count: 1023
+Write Meta B
+Read Slot: 308 (0x26A0)
+Read Valid: 1
+
+Write Slot: 309 (0x26C0)
+Write Count: 1023
+Write Meta A
+Read Slot: 309 (0x26C0)
+Read Valid: 1
+
+Write Slot: 310 (0x26E0)
+Write Count: 1023
+Write Meta B
+Read Slot: 310 (0x26E0)
+Read Valid: 1
+
+Write Slot: 311 (0x2700)
+Write Count: 1023
+Write Meta A
+Read Slot: 311 (0x2700)
+Read Valid: 1
+
+Write Slot: 312 (0x2720)
+Write Count: 1023
+Write Meta B
+Read Slot: 312 (0x2720)
+Read Valid: 1
+
+Write Slot: 313 (0x2740)
+Write Count: 1023
+Write Meta A
+Read Slot: 313 (0x2740)
+Read Valid: 1
+
+Write Slot: 314 (0x2760)
+Write Count: 1023
+Write Meta B
+Read Slot: 314 (0x2760)
+Read Valid: 1
+
+Write Slot: 315 (0x2780)
+Write Count: 1023
+Write Meta A
+Read Slot: 315 (0x2780)
+Read Valid: 1
+
+Write Slot: 316 (0x27A0)
+Write Count: 1023
+Write Meta B
+Read Slot: 316 (0x27A0)
+Read Valid: 1
+
+Write Slot: 317 (0x27C0)
+Write Count: 1023
+Write Meta A
+Read Slot: 317 (0x27C0)
+Read Valid: 1
+
+Write Slot: 318 (0x27E0)
+Write Count: 1023
+Write Meta B
+Read Slot: 318 (0x27E0)
+Read Valid: 1
+
+Write Slot: 319 (0x2800)
+Write Count: 1023
+Write Meta A
+Read Slot: 319 (0x2800)
+Read Valid: 1
+
+Write Slot: 320 (0x2820)
+Write Count: 1023
+Write Meta B
+Read Slot: 320 (0x2820)
+Read Valid: 1
+

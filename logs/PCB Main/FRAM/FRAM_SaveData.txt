@@ -1,0 +1,129 @@
+(1) Se inicializa la FRAM
+(2) Se escribe en el slot correspondiente y se lee ese mismo slot para comproprobar que sea valido.
+
+- Observamos que efectivamente todos los parametros funcionan como deberían.
+
+------------------------------------------------
+
+Both meta valid
+FRAM inicializada correctamente
+
+Write Slot: 0 (0x0020)
+Write Count: 1
+Write Meta B
+Read Slot: 0 (0x0020)
+Read Valid: 1
+
+Write Slot: 1 (0x0040)
+Write Count: 2
+Write Meta A
+Read Slot: 1 (0x0040)
+Read Valid: 1
+
+Write Slot: 2 (0x0060)
+Write Count: 3
+Write Meta B
+Read Slot: 2 (0x0060)
+Read Valid: 1
+
+Write Slot: 3 (0x0080)
+Write Count: 4
+Write Meta A
+Read Slot: 3 (0x0080)
+Read Valid: 1
+
+Write Slot: 4 (0x00A0)
+Write Count: 5
+Write Meta B
+Read Slot: 4 (0x00A0)
+Read Valid: 1
+
+Write Slot: 5 (0x00C0)
+Write Count: 6
+Write Meta A
+Read Slot: 5 (0x00C0)
+Read Valid: 1
+
+Write Slot: 6 (0x00E0)
+Write Count: 7
+Write Meta B
+Read Slot: 6 (0x00E0)
+Read Valid: 1
+
+Write Slot: 7 (0x0100)
+Write Count: 8
+Write Meta A
+Read Slot: 7 (0x0100)
+Read Valid: 1
+
+Write Slot: 8 (0x0120)
+Write Count: 9
+Write Meta B
+Read Slot: 8 (0x0120)
+Read Valid: 1
+
+Write Slot: 9 (0x0140)
+Write Count: 10
+Write Meta A
+Read Slot: 9 (0x0140)
+Read Valid: 1
+
+Write Slot: 10 (0x0160)
+Write Count: 11
+Write Meta B
+Read Slot: 10 (0x0160)
+Read Valid: 1
+
+Write Slot: 11 (0x0180)
+Write Count: 12
+Write Meta A
+Read Slot: 11 (0x0180)
+Read Valid: 1
+
+Write Slot: 12 (0x01A0)
+Write Count: 13
+Write Meta B
+Read Slot: 12 (0x01A0)
+Read Valid: 1
+
+Write Slot: 13 (0x01C0)
+Write Count: 14
+Write Meta A
+Read Slot: 13 (0x01C0)
+Read Valid: 1
+
+Write Slot: 14 (0x01E0)
+Write Count: 15
+Write Meta B
+Read Slot: 14 (0x01E0)
+Read Valid: 1
+
+Write Slot: 15 (0x0200)
+Write Count: 16
+Write Meta A
+Read Slot: 15 (0x0200)
+Read Valid: 1
+
+Write Slot: 16 (0x0220)
+Write Count: 17
+Write Meta B
+Read Slot: 16 (0x0220)
+Read Valid: 1
+
+Write Slot: 17 (0x0240)
+Write Count: 18
+Write Meta A
+Read Slot: 17 (0x0240)
+Read Valid: 1
+
+Write Slot: 18 (0x0260)
+Write Count: 19
+Write Meta B
+Read Slot: 18 (0x0260)
+Read Valid: 1
+
+Write Slot: 19 (0x0280)
+Write Count: 20
+Write Meta A
+Read Slot: 19 (0x0280)
+Read Valid: 1

@@ -1,0 +1,342 @@
+\setcounter{chapter}{7}
+
+\chapter{Presupuesto}
+
+\section{Identificación de costes}
+En proyectos de esta naturaleza, es fundamental elaborar un presupuesto detallado para estimar los costes asociados. A continuación, se presenta un presupuesto que incluye los costes estimados en recursos humanos, \textit{hardware} y \textit{software}, así como otros gastos generales previstos durante el desarrollo. Además, se han considerado posibles imprevistos en el cálculo del presupuesto.
+
+\subsection{Recursos humanos}
+Los costes en recursos humanos hacen referencia a los sueldos de los trabajadores del proyecto, dependiendo de su rol en este. Como en este proyecto participarán ingenieros de diferentes especialidades, me he centrado en los roles que desempeñaré yo mismo. \\
+
+En la Tabla \ref{tabla:sueldos-rol} se muestran el salario por hora de cada rol que tendré y el coste real que asume la empresa de este salario después de sumarle la tributación a la Seguridad Social (calculada como $1.33\;\times\;sueldo$).
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \rowcolor{LightSteelBlue1}
+        \textbf{Rol} & \textbf{Salario por hora (€/h)} & \textbf{Salario por hora + SS (€/h)} \\
+        \hline
+        Ingeniero de Requisitos [IdR] & 25,20 & 33,52 \\
+        \hline
+        Ingeniero de Desarrollo [IdD] & 18,80 & 25,00 \\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Tabla con el sueldo estimado de cada rol. Elaboración propia.}}
+    \label{tabla:sueldos-rol}
+\end{table}
+
+En la Tabla \ref{tabla:costes-tareas} se detallan las tareas que realizaré, junto con las horas de dedicación estimadas para cada una, el rol que desempeñaré y el coste total.
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{l l c c c}
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{ID} & \textbf{Tarea} & \textbf{Horas} & \textbf{Roles} & \textbf{Coste (€)} \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Gestión del Proyecto} & \textbf{65} & & \textbf{2.178,80} \\
+        GP1 & Alcance & 10 & IdR & 335,20 \\
+        GP2 & Planificación & 10 & IdR & 335,20 \\
+        GP3 & Gestión económica y sostenibilidad & 10 & IdR & 335,20 \\
+        GP4 & Documento final & 15 & IdR & 502,80 \\
+        GP5 & Reuniones & 20 & IdR & 670,40 \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+         & \textbf{Estudio Previo} & \textbf{80} & & \textbf{2.000,00} \\
+        EP1 & Estudio y selección de componentes & 30 & IdD & 750,00 \\
+        EP2 & Diseño de la arquitectura del sistema & 20 & IdD & 500,00 \\
+        EP3 & Primeras pruebas con placas de evaluación & 30 & IdD & 750,00 \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Desarrollo Hardware} & \textbf{190} & & \textbf{4.750,00} \\
+        HW1 & Selección final de componentes & 25 & IdD & 625,00 \\
+        HW2 & Prototipo con placa fresada & 30 & IdD & 750,00 \\
+        HW3 & Diseño esquemático PCB principal & 45 & IdD & 1.125,00 \\
+        HW4 & Diseño layout PCB principal & 55 & IdD & 1.375,00 \\
+        HW5 & Fabricación y montaje & 35 & IdD & 875,00 \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Desarrollo Firmware} & \textbf{165} & & \textbf{4.125,00} \\
+        FW1 & Drivers & 60 & IdD & 1.500,00 \\
+        FW2 & Flujo de programa principal & 35 & IdD & 875,00 \\
+        FW3 & Estructura de memoria y formato de registro & 45 & IdD & 1.125,00 \\
+        FW4 & Comunicación inalámbrica & 25 & IdD & 625,00 \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Pruebas y Validación} & \textbf{110} & & \textbf{2.750,00} \\
+        PV1 & Verificación eléctrica y funcional de la PCB & 30 & IdD & 750,00 \\
+        PV2 & Pruebas de los sensores en entornos controlados & 45 & IdD & 1.125,00 \\
+        PV3 & Pruebas del sistema completo en entornos controlados & 35 & IdD & 875,00 \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Documentación} & \textbf{110} & & \textbf{3.218,60} \\
+        DOC1 & Redactar el TFG & 110 & IdR, IdD & 3.218,60 \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{TOTAL} &  & \textbf{720} &  & \textbf{19.022,40} \\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Tabla con los costes estimados por tarea. Elaboración propia.}}
+    \label{tabla:costes-tareas}
+\end{table}
+
+\subsection{\textit{Hardware}}
+Para el desarrollo del prototipo se han utilizado herramientas habituales de laboratorio electrónico para el diseño, montaje y verificación de circuitos. Dado que estas herramientas no se adquieren exclusivamente para este proyecto, sino que se reutilizan en otros desarrollos, su coste se imputa mediante amortización. \\
+
+Para calcular la amortización, se ha utilizado la siguiente fórmula: \\
+\[
+    \mathrm{Amortizacion} = \frac{\mathrm{Coste}~ - ~\mathrm{Valor~residual}}{\mathrm{Vida~util}}
+\] \\
+
+En nuestro caso, consideraremos un tiempo medio de vida útil de aproximadamente 8 años para cada herramienta de \textit{hardware} y que el valor residual es nulo, lo que simplifica la fórmula a: \\
+\[
+    \mathrm{Amortizacion} = \frac{\mathrm{Coste}}{8}
+\]
+
+En la Tabla \ref{tabla:hardware} se muestra el coste estimado de cada herramienta junto con su amortización anual. Para el presupuesto del proyecto se imputará la parte proporcional correspondiente a 4 meses de trabajo (4/12).
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \rowcolor{LightSteelBlue1}
+        \textbf{Hardware} & \textbf{Coste (€)} & \textbf{Amortización (€/año)} \\
+        \hline
+        Multímetro & \textasciitilde 60 & 7,50 \\
+        \hline
+        Osciloscopio & \textasciitilde 400 & 50,00 \\
+        \hline
+        Fuente de alimentación & \textasciitilde 60 & 7,50 \\
+        \hline
+        Estación de soldadura & \textasciitilde 70 & 8,75 \\
+        \hline
+        Ordenador + periféricos & \textasciitilde 1.000 & 125,00 \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{TOTAL} & & \textbf{198,75} \\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Tabla con los costes estimados del hardware empleado. Elaboración propia.}}
+    \label{tabla:hardware}
+\end{table}
+
+Además del equipamiento amortizable, el prototipo requiere materiales y servicios directamente imputables al proyecto (compra de componentes, fabricación de PCB, etc.). El detalle técnico completo se incluye en la Sección \ref{seccion:bom}; en esta sección únicamente se presenta el resumen económico.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        \rowcolor{LightSteelBlue1}
+        \textbf{Materiales y servicios del prototipo} & \textbf{Coste (€)} \\
+        \hline
+        Componentes & 206,73 \\
+        \hline
+        PCB & 115,20 \\
+        \hline
+        Envíos e impuestos & 56,88 \\
+        \hline
+        Consumibles (estaño, flux, cables, protoboards...) & 34,68 \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{TOTAL} & \textbf{413,49} \\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Resumen de costes de materiales y servicios del prototipo. Elaboración propia.}}
+    \label{tabla:materiales}
+\end{table}
+
+\subsection{\textit{Software}}
+Los programas utilizados para el desarrollo de este proyecto son todos gratuitos, por lo que no suponen un coste adicional.
+
+\subsection{Gastos generales}
+En este proyecto también existen gastos generales, como electricidad y transporte. Para aproximar el coste de estos gastos, utilizaremos datos generales de precios y tomaremos como periodo de uso el tiempo estimado de desarrollo del proyecto, que es de aproximadamente cuatro meses. \\
+
+El cálculo del consumo eléctrico se estima en función del uso semanal de cada dispositivo y su consumo energético. Para calcular el consumo utilizaremos la siguiente fórmula: \\
+
+\[
+    \mathrm{Consumo~semanal~(kWh)} = \frac{\mathrm{Consumo~(W)}\times\mathrm{Uso~semanal~(h)}}{1000}
+\]
+
+En la Tabla \ref{tabla:consumo-electr} se presenta un resumen del consumo eléctrico estimado para los principales dispositivos utilizados en el proyecto.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \rowcolor{LightSteelBlue1}
+        \textbf{Dispositivo} & \textbf{Consumo (W)} & \textbf{Uso semanal (h)} & \textbf{Consumo semanal (kWh)} \\
+        \hline
+        Osciloscopio & 50 & 3 & 0,15 \\
+        \hline
+        Fuente de alimentación & 100 & 3 & 0,30 \\
+        \hline
+        Estación de soldadura & 50 & 3 & 0,15 \\
+        \hline
+        Ordenador & 200 & 15 & 3,00 \\
+        \hline
+        Luz & 150 & 20 & 3,00 \\
+        \hline
+        Otros & 50 & 2 & 0,10 \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{TOTAL} & & & \textbf{6,70} \\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Tabla con los consumos eléctricos esperados. Elaboración propia.}}
+    \label{tabla:consumo-electr}
+\end{table}
+
+Para estimar el coste eléctrico se utiliza un precio medio de 0,185 €/kWh. En cuanto al transporte, para los trayectos entre la oficina y casa utilizaré el transporte público. \\
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \rowcolor{LightSteelBlue1}
+        \textbf{Gastos} & \textbf{Coste al mes (€/mes)} & \textbf{Coste 4 meses (€)} \\
+        \hline
+        Electricidad & 5,36 & 21,44 \\
+        \hline
+        T-jove & 14,67 & 58,68 \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{TOTAL} & & \textbf{80,12} \\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Tabla con los costes estimados para los gastos generales. Elaboración propia.}}
+    \label{tabla:gastos-generales}
+\end{table}
+
+\section{Estimación de costes}
+Para completar la estimación del presupuesto, es necesario incluir el coste de contingencia, es decir, un porcentaje destinado a cubrir posibles desviaciones e imprevistos. En este caso, dada la naturaleza del proyecto, se ha fijado dicho porcentaje en un 15\%, lo que da un total de \textbf{2.937,34 €}. \\
+
+En la Tabla \ref{tabla:imprevistos} se presentan diversos imprevistos junto con su posible coste adicional para el proyecto. Para estimar el coste relativo, multiplicamos el coste total por la probabilidad de que dicho imprevisto ocurra.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \rowcolor{LightSteelBlue1}
+        \textbf{Imprevistos} & \textbf{Probabilidad (\%)} & \textbf{Coste (€)} & \textbf{Coste relativo (€)} \\
+        \hline
+        Problemas con componentes o PCB & 25 & \textasciitilde 80,00 & 20,00 \\
+        \hline
+        Envíos urgentes & 20 & \textasciitilde 60,00 & 12,00 \\
+        \hline
+        Horas extra & 50 & \textasciitilde 2.000 & 1.000,00 \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{TOTAL} & & & \textbf{1.032,00} \\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Tabla con los costes estimados para cada imprevisto. Elaboración propia.}}
+    \label{tabla:imprevistos}
+\end{table}
+
+En la Tabla \ref{tabla:presupuesto} vemos un resumen del presupuesto completo estimado para este proyecto.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        \rowcolor{LightSteelBlue1}
+         & \textbf{Coste (€)} \\
+        \hline
+        Recursos humanos & 19.022,40 \\
+        \hline
+        \textit{Hardware} & 479,74 \\
+        \hline
+        \textit{Software} & 0,00 \\
+        \hline
+        Gastos generales & 80,12 \\
+        \hline
+        Contingencias (15\%) & 2.937,34 \\
+        \hline
+        Imprevistos & 1.032,00 \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{TOTAL} & \textbf{23.551,60} \\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Tabla con los costes estimados del proyecto. Elaboración propia.}}
+    \label{tabla:presupuesto}
+\end{table}
+
+\section{Control de gestión}
+Para finalizar, vamos a definir una serie de métricas para visualizar posibles desviaciones en el presupuesto. \\
+
+\[
+    \mathrm{Desviacion~presupuestaria~(\%)} = \frac{\mathrm{Gasto~real}~ - ~\mathrm{Presupuesto~estimado}}{\mathrm{Presupuesto~estimado}}\times100
+\] \\
+
+\[
+    \mathrm{Desviacion~de~horas~(\%)} = \frac{\mathrm{Horas~reales}~ - ~\mathrm{Horas~estimadas}}{\mathrm{Horas~estimadas}}\times100
+\]
+
+\chapter{Informe de sostenibilidad}
+
+\section{Autoevaluación}
+A lo largo de la carrera, hemos tenido varias asignaturas que han puesto énfasis en la sostenibilidad desde distintos enfoques. Esto me ha ayudado a entender la importancia de considerar el impacto ambiental, económico y social en cualquier proyecto. \\
+
+En el aspecto ambiental, recuerdo una asignatura en la que vimos el problema de los residuos electrónicos y cómo muchos acaban en países con menos recursos, formando enormes “cementerios tecnológicos”. Esto me hizo reflexionar sobre la necesidad de diseñar productos con un ciclo de vida más sostenible, reduciendo el desperdicio y fomentando el reciclaje. \\
+
+En cuanto a la parte económica, aprendimos sobre macroeconomía y cómo hacer presupuestos básicos en empresas. Aunque no me dedique directamente a la gestión financiera, estos conocimientos son útiles para entender la viabilidad de un proyecto, controlar gastos y optimizar recursos. Saber estimar costes y planificar la amortización de materiales es clave para que cualquier iniciativa sea sostenible a largo plazo. \\
+
+El ámbito social es, quizás, el que menos hemos trabajado en la carrera. Hemos desarrollado proyectos pensando en mejorar procesos industriales o tecnológicos, pero sin profundizar demasiado en su impacto social. Sin embargo, me doy cuenta de que un proyecto realmente sostenible no solo debe ser viable económicamente y respetuoso con el medio ambiente, sino que también tiene que aportar algo positivo a la sociedad. \\
+
+En definitiva, estas tres dimensiones están muy conectadas y son esenciales en cualquier desarrollo tecnológico. Haber adquirido esta visión a lo largo de la carrera me será útil en el futuro para diseñar soluciones más equilibradas y responsables. \\
+
+\section{Dimensión Económica}
+\textbf{Referente a PPP: ¿Has estimado el coste de la realización del proyecto (recursos humanos
+y materiales)?}
+
+Aunque no es mi responsabilidad directa dentro de la empresa calcular los costes y evaluar la viabilidad económica del proyecto, he llevado a cabo un análisis de los sueldos del personal necesario, el coste de los materiales y su amortización a lo largo de su vida útil. \\
+
+\textbf{Referente a la Vida Útil: ¿Cómo se resuelve actualmente el problema que quieres abordar
+(estado del arte)? ¿En qué mejorará económicamente tu solución a las existentes?} 
+
+Al dirigirnos a un público más específico, los agricultores del sector vitivinícola, podemos adaptar mejor los requerimientos del proyecto, reduciendo así los costes en comparación con otras soluciones más generales ya existentes en el mercado. \\
+
+\section{Dimensión Ambiental}
+\textbf{Referente a PPP: ¿Has estimado el impacto ambiental que tendrá la realización del
+proyecto? ¿Te has planteado minimizar el impacto, por ejemplo, reutilizando recursos?}
+
+El proyecto tendrá un impacto ambiental muy positivo una vez implementado, ya que contribuirá a optimizar el uso de recursos naturales en la agricultura. Sin embargo, durante su desarrollo habrá impactos negativos inevitables presentes en todos los proyectos de esta índole, como el consumo de energía o el uso de combustible para desplazamientos. Por otra parte, en este tipo de proyectos, la reutilización de recursos no creo que sea una estrategia particularmente aplicable. \\
+
+\textbf{Referente a la Vida Útil: ¿Cómo se resuelve actualmente el problema que quieres abordar
+(estado del arte)? ¿En qué mejorará ambientalmente tu solución a las existentes?}
+
+Al ofrecer una mayor información sobre el estado de las viñas y del terreno a los viticultores, estos podrán tomar mejores decisiones referentes a estas, mejorando así el impacto ambiental que tendrán sobre el medio ambiente. \\
+
+\section{Dimensión Social}
+\textbf{Referente a PPP: ¿Qué crees que te va a aportar a nivel personal la realización de este proyecto?}
+
+Este proyecto me permitirá adquirir experiencia en la comunicación con clientes y la interpretación de sus requisitos, lo que fortalecerá mis habilidades en la gestión de proyectos. Además, me proporcionará conocimientos técnicos en el sector industrial y en sistemas integrados. También tendré la oportunidad de aprender a pilotar drones, algo que siempre he querido hacer. \\
+
+\textbf{Referente a la Vida Útil: ¿Cómo se resuelve actualmente el problema que quieres abordar
+(estado del arte)? ¿En qué mejorará socialmente (calidad de vida) tu solución a las existentes?}
+
+La identificación de problemas en los cultivos en la actualidad requiere una gran cantidad de trabajo manual, lo que implica un esfuerzo físico considerable por parte de los agricultores. Este proyecto facilitará la detección temprana de enfermedades en las viñas, permitiendo intervenir sólo en las áreas afectadas y reduciendo el trabajo necesario. Asimismo, el monitoreo del terreno permitirá optimizar el uso del agua, mejorando la eficiencia y reduciendo la carga de trabajo de los agricultores. \\
+
+\textbf{Referente a la Vida Útil: ¿Existe una necesidad real del proyecto?}
+
+Sí, el proyecto ha sido encargado por una asociación agrícola externa, lo que demuestra que existe una demanda concreta en el sector. \\

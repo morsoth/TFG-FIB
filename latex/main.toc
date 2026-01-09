@@ -1,0 +1,125 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Contexto}{8}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introducción}{8}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Definición de conceptos}{8}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Identificación del problema}{9}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Actores implicados}{10}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Justificación}{11}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Alcance}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Objetivos}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Sub-objetivos}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Requerimientos}{14}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Requerimientos funcionales}{14}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Requerimientos no funcionales}{14}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Posibles obstáculos i riesgos}{15}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Competencias técnicas}{15}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Metodología y rigor}{16}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Herramientas}{17}{section.4.1}%
+\contentsline {chapter}{\numberline {5}Descripción de las tareas}{18}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introducción}{18}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Tareas}{18}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Gestión del Proyecto}{18}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Estudio Previo}{19}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Desarrollo Hardware}{19}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Desarrollo Firmware}{19}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Pruebas y Validación}{20}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}Documentación}{20}{subsection.5.2.6}%
+\contentsline {section}{\numberline {5.3}Recursos}{20}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Recursos humanos}{20}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Recursos materiales}{21}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Recursos digitales}{21}{subsection.5.3.3}%
+\contentsline {chapter}{\numberline {6}Estimaciones y Gantt}{23}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Gestión de riesgos: Planes alternativos y obstáculos}{25}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Presupuesto}{26}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Identificación de costes}{26}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Recursos humanos}{26}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}\textit {Hardware}}{27}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}\textit {Software}}{28}{subsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.1.4}Gastos generales}{28}{subsection.8.1.4}%
+\contentsline {section}{\numberline {8.2}Estimación de costes}{29}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Control de gestión}{30}{section.8.3}%
+\contentsline {chapter}{\numberline {9}Informe de sostenibilidad}{31}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Autoevaluación}{31}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Dimensión Económica}{31}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Dimensión Ambiental}{32}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Dimensión Social}{32}{section.9.4}%
+\contentsline {chapter}{\numberline {10}Diseño del sistema}{34}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Arquitectura del sistema}{34}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Decisiones de diseño}{35}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Periodo de muestreo}{35}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Almacenamiento local robusto y simple}{35}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.3}Tolerancia a datos inválidos}{35}{subsection.10.2.3}%
+\contentsline {subsection}{\numberline {10.2.4}Referencia temporal en cada muestra}{35}{subsection.10.2.4}%
+\contentsline {subsection}{\numberline {10.2.5}Tensión de trabajo}{36}{subsection.10.2.5}%
+\contentsline {subsection}{\numberline {10.2.6}Modularidad del sistema}{36}{subsection.10.2.6}%
+\contentsline {subsection}{\numberline {10.2.7}Protocolo de comunicación inalámbrica}{36}{subsection.10.2.7}%
+\contentsline {chapter}{\numberline {11}Diseño hardware}{37}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Selección de componentes}{37}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}Gestión de potencia (PMIC)}{37}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}Monitoreo de potencia}{38}{subsection.11.1.2}%
+\contentsline {subsection}{\numberline {11.1.3}Almacenamiento}{39}{subsection.11.1.3}%
+\contentsline {subsection}{\numberline {11.1.4}Sensor de irradiancia}{40}{subsection.11.1.4}%
+\contentsline {subsection}{\numberline {11.1.5}Sensor de temperatura y humedad del aire}{41}{subsection.11.1.5}%
+\contentsline {subsection}{\numberline {11.1.6}Sensor de temperatura del terreno}{42}{subsection.11.1.6}%
+\contentsline {subsection}{\numberline {11.1.7}Sensor de humedad del terreno}{42}{subsection.11.1.7}%
+\contentsline {subsection}{\numberline {11.1.8}Microcontrolador}{43}{subsection.11.1.8}%
+\contentsline {section}{\numberline {11.2}Arquitectura del \textit {hardware}}{45}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}Interfaces y protocolos}{46}{subsection.11.2.1}%
+\contentsline {section}{\numberline {11.3}Prueba de concepto}{47}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Esquemáticos}{50}{section.11.4}%
+\contentsline {subsection}{\numberline {11.4.1}Potencia y alimentación}{50}{subsection.11.4.1}%
+\contentsline {subsubsection}{AEM10941}{50}{section*.34}%
+\contentsline {subsubsection}{INA3221}{54}{section*.39}%
+\contentsline {subsubsection}{Bus de 3.3 V}{56}{section*.43}%
+\contentsline {subsubsection}{Alimentación de sensores}{57}{section*.45}%
+\contentsline {subsection}{\numberline {11.4.2}MCU}{58}{subsection.11.4.2}%
+\contentsline {subsubsection}{STM32WB55RG}{58}{section*.48}%
+\contentsline {subsubsection}{Osciladores}{61}{section*.54}%
+\contentsline {subsubsection}{RF}{62}{section*.56}%
+\contentsline {subsubsection}{FRAM}{63}{section*.59}%
+\contentsline {subsubsection}{LEDs}{63}{section*.61}%
+\contentsline {subsection}{\numberline {11.4.3}Conexiones externas}{64}{subsection.11.4.3}%
+\contentsline {subsubsection}{SWD}{64}{section*.63}%
+\contentsline {subsubsection}{Baterias y paneles solares}{65}{section*.66}%
+\contentsline {subsubsection}{Sensores}{66}{section*.68}%
+\contentsline {subsubsection}{Otros conectores}{66}{section*.70}%
+\contentsline {section}{\numberline {11.5}Diseño PCB}{67}{section.11.5}%
+\contentsline {subsection}{\numberline {11.5.1}Apilado fisico (\textit {stack-up})}{67}{subsection.11.5.1}%
+\contentsline {subsection}{\numberline {11.5.2}Requerimientos de JLCPCB}{68}{subsection.11.5.2}%
+\contentsline {subsection}{\numberline {11.5.3}Condensadores de desacoplo}{69}{subsection.11.5.3}%
+\contentsline {subsection}{\numberline {11.5.4}Islas para los cristales}{70}{subsection.11.5.4}%
+\contentsline {subsection}{\numberline {11.5.5}RF}{71}{subsection.11.5.5}%
+\contentsline {subsection}{\numberline {11.5.6}Resultado final}{74}{subsection.11.5.6}%
+\contentsline {section}{\numberline {11.6}Fabricación y montaje}{77}{section.11.6}%
+\contentsline {subsection}{\numberline {11.6.1}Proceso de elección de componentes de JLCPCB}{77}{subsection.11.6.1}%
+\contentsline {subsection}{\numberline {11.6.2}BOM}{78}{subsection.11.6.2}%
+\contentsline {subsection}{\numberline {11.6.3}Proceso de ensamblaje}{79}{subsection.11.6.3}%
+\contentsline {section}{\numberline {11.7}Integración en la lanza}{79}{section.11.7}%
+\contentsline {chapter}{\numberline {12}Desarrollo software}{80}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Entorno y herramientas}{80}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Arquitectura del \textit {firmware}}{80}{section.12.2}%
+\contentsline {section}{\numberline {12.3}\textit {Drivers}}{81}{section.12.3}%
+\contentsline {subsection}{\numberline {12.3.1}INA3221}{81}{subsection.12.3.1}%
+\contentsline {subsection}{\numberline {12.3.2}MB85RS256B}{82}{subsection.12.3.2}%
+\contentsline {subsection}{\numberline {12.3.3}TSL2591}{83}{subsection.12.3.3}%
+\contentsline {subsection}{\numberline {12.3.4}SHT3x}{84}{subsection.12.3.4}%
+\contentsline {subsection}{\numberline {12.3.5}DS18B20}{85}{subsection.12.3.5}%
+\contentsline {subsection}{\numberline {12.3.6}SEN0308}{86}{subsection.12.3.6}%
+\contentsline {section}{\numberline {12.4}Gestión de la energía}{87}{section.12.4}%
+\contentsline {section}{\numberline {12.5}Gestión de los datos}{88}{section.12.5}%
+\contentsline {subsubsection}{Cabecera}{89}{section*.92}%
+\contentsline {subsubsection}{Datos}{90}{section*.94}%
+\contentsline {chapter}{\numberline {13}Validación y pruebas}{91}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Pruebas de memoria}{91}{section.13.1}%
+\contentsline {subsubsection}{Escritura y lectura básicas}{91}{section*.95}%
+\contentsline {subsubsection}{Prueba de \textit {overflow}}{92}{section*.96}%
+\contentsline {subsubsection}{Prueba de \textit {reset} lógico de FRAM y recuperación tras reinicio}{93}{section*.97}%
+\contentsline {subsubsection}{Prueba de borrado completo}{93}{section*.98}%
+\contentsline {section}{\numberline {13.2}Pruebas de autonomía}{94}{section.13.2}%
+\contentsline {subsubsection}{Resultados}{95}{section*.99}%
+\contentsline {section}{\numberline {13.3}Pruebas de sensores}{96}{section.13.3}%
+\contentsline {subsubsection}{Consistencia de temperatura y humedad durante 24 h}{96}{section*.101}%
+\contentsline {subsubsection}{Pruebas de humedad relativa ante cambios bruscos}{97}{section*.103}%
+\contentsline {subsubsection}{Pruebas de humedad en terreno}{97}{section*.105}%
+\contentsline {section}{\numberline {13.4}Pruebas de conexión inalámbrica}{98}{section.13.4}%
+\contentsline {chapter}{\numberline {14}Conclusiones y trabajo futuro}{99}{chapter.14}%

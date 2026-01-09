@@ -1,0 +1,163 @@
+\chapter{Contexto}
+
+\section{Introducción}
+El proyecto \textbf{\textit{"Diseño, desarrollo y programación de una lanza meteorológica"}} se realiza como parte de mi \textbf{Trabajo Final de Grado} en la Facultad de Informática de Barcelona (FIB) \cite{fib} de la Universidad Politécnica de Cataluña (UPC) \cite{upc}. \\
+
+En un contexto de creciente digitalización de la agricultura, las nuevas tecnologías permiten mejorar la productividad y sostenibilidad de los cultivos. La viticultura, un sector clave en la economía española, enfrenta desafíos como la optimización del uso del agua, la detección temprana de plagas y enfermedades, y la mejora de la eficiencia en la recolección de datos del terreno. \\
+
+Este trabajo se enmarca dentro de un proyecto más amplio orientado a construir un pipeline de monitorización para el sector vitivinícola mediante drones autónomos que capturan imágenes multiespectrales de los viñedos. Dichas imágenes se transfieren a un servidor para su procesamiento con técnicas de visión por computador e inteligencia artificial, con el objetivo de anticipar problemas y optimizar intervenciones. La lanza meteorológica propuesta en este TFG actúa como subsistema de soporte, aportando datos ambientales y del suelo para complementar la información multiespectral y, con ello, mejorar la calidad de las inferencias de la IA. \\
+
+El proyecto se desarrolla en colaboración con la empresa \textbf{Domo21} \cite{domo21}, especializada en soluciones tecnológicas aplicadas, y se alinea con iniciativas de digitalización impulsadas por organismos públicos y privados orientadas a incrementar la competitividad del sector agroalimentario en Cataluña.
+
+\section{Definición de conceptos}
+Para enmarcar correctamente el desarrollo del proyecto, es necesario definir ciertos conceptos fundamentales.
+
+\begin{itemize}
+    \item \textbf{\textit{Layout}:} Diseño físico de la PCB que define la colocación de componentes y la geometría de pistas, planos y vías en sus distintas capas. A diferencia del esquemático, el \textit{layout} determina el comportamiento real en términos de integridad de señal, ruido y fabricabilidad.
+    
+    \item \textbf{Ruteado:} Proceso de trazado de pistas en el \textit{layout} para interconectar eléctricamente los nodos del esquemático.
+    
+    \item \textbf{Plano:} Zona extensa de cobre asignada a una red eléctrica (habitualmente GND o alimentación). Se emplea para reducir impedancia, mejorar el retorno de corriente, disminuir el ruido y proporcionar una referencia eléctrica estable.
+
+    \item \textbf{Vía:} Taladro metalizado que conecta eléctricamente distintas capas de una PCB. Se utiliza para cambiar una señal de capa durante el ruteado o para unir planos.
+    
+    \item \textbf{\textit{Stack-up}:} Estructura de apilado de capas de una PCB: capas de cobre, dieléctricos, espesores y materiales. Condiciona el comportamiento eléctrico de la placa, especialmente en líneas de alta frecuencia, el retorno de corriente y el cálculo de impedancias.
+    
+    \item \textbf{Impedancia:} Relación entre tensión y corriente en una línea de transmisión, determinada por la geometría de la pista y el \textit{stack-up}. En señales de alta frecuencia es un parámetro crítico, ya que desadaptaciones provocan reflexiones y pérdidas.
+    
+    \item \textbf{DRC (\textit{Design Rule Check}):} Conjunto de reglas de verificación automática que comprueba que el \textit{layout} cumple las restricciones mínimas de fabricación y ensamblaje. Se utiliza para detectar errores antes de fabricar la PCB.
+    
+    \item \textbf{\textit{Bring-up}:} Fase inicial de puesta en marcha de una PCB recién fabricada/ensamblada, en la que se verifican aspectos básicos como alimentación, consumo, programación, reloj y comunicaciones fundamentales, antes de realizar pruebas funcionales completas.
+\end{itemize}
+
+\section{Identificación del problema}
+Si bien las imágenes multiespectrales obtenidas por drones ofrecen una visión espacialmente rica del viñedo, por sí solas pueden resultar insuficientes para entrenar y validar modelos de IA con el nivel de precisión y robustez que demanda la operación en campo. Entre las limitaciones más habituales se encuentran:
+\begin{itemize}
+    \item \textbf{Falta de variables de contexto:} Los modelos espectrales pueden confundir efectos de iluminación, atmósfera o microclima con señales fisiológicas de la planta si no se dispone de mediciones locales (temperatura y humedad del aire, viento, irradiancia, etc.) que permitan normalizar y contextualizar los datos.
+    \item \textbf{Resolución temporal limitada:} Los vuelos de dron aportan «fotografías» puntuales. Sin sensorización continua, es difícil capturar dinámicas diarias (picos de estrés térmico o hídrico, etc.) relevantes para el diagnóstico.
+    \item \textbf{Escasez de \textit{ground truth} de suelo:} La salud del cultivo depende en gran medida del estado hídrico y térmico del suelo. Sin medidas \textit{in situ} (humedad y temperatura del suelo), ciertos patrones espectrales pueden interpretarse de forma ambigua.
+\end{itemize}
+
+En consecuencia, se identifica la necesidad de incorporar datos ambientales y de suelo que actúen como variables de entrada y/o control para los modelos de IA entrenados con imágenes multiespectrales, que posibiliten la validación y calibración de sus inferencias —reduciendo falsos positivos y negativos— y que aporten continuidad temporal entre campañas de vuelo, mejorando la trazabilidad de los procesos y la capacidad de anticipación ante problemas en el cultivo.
+
+La lanza meteorológica propuesta aborda esta brecha proporcionando mediciones locales, persistentes y sincronizadas con las adquisiciones aéreas, incrementando así la robustez del sistema global de monitorización.
+
+\section{Actores implicados} \label{seccion:actores}
+El éxito del proyecto se apoya en la colaboración entre distintos perfiles y entidades:
+
+\begin{itemize}
+    \item \textbf{[PZ] Pau Zaragoza (Yo):} Desempeñaré dos roles principales dentro del proyecto. Por un lado, actuaré como responsable de diseño y definición del sistema, estableciendo la arquitectura global, seleccionando los componentes, diseñando el esquemático y la PCB, y definiendo los criterios de integración y validación del prototipo. Por otro lado, asumiré el papel de desarrollador, implementando el \textit{firmware} necesario, realizando la integración de subsistemas y ejecutando las pruebas pertinentes. Además, seré responsable de la redacción del TFG, documentando el proceso, los resultados obtenidos y las conclusiones del trabajo.
+    \item \textbf{[AB] Antonio Benito:} Tutor académico y director del proyecto, encargado de proporcionar orientación técnica y metodológica. Supervisará el desarrollo, revisará los avances y aportará sugerencias para garantizar la calidad y viabilidad del trabajo.
+    \item \textbf{[CM] Carlos Morata:} Codirector del trabajo y jefe del departamento dentro de Sicma21.
+    \item \textbf{[AV] Álex Veiga:} Apoyará en la parte técnica del desarrollo, brindando asesoramiento y asistencia en la implementación de soluciones.
+    \item \textbf{[D21] Domo21:} \cite{domo21} Facilita el entorno de desarrollo y validación en un contexto real de aplicación y promueve la transferencia de resultados hacia el proyecto de monitorización con drones.
+    \item \textbf{[UPC] UPC:} \cite{upc} Proporciona el marco académico, metodológico y acceso a recursos de investigación y a la maquinaria especializada del departamento ESAII.
+\end{itemize}
+
+\chapter{Justificación}
+La decisión de desarrollar una solución a medida se basa en la necesidad de contar con un sistema plenamente alineado con los objetivos y condicionantes del proyecto. Diseñar el dispositivo desde cero permite ajustar el \textit{hardware}, la selección de sensores y el tratamiento de datos a los requisitos reales del viñedo y a la integración con los demás componentes del entorno (dron, procesamiento de imágenes multiespectrales e inteligencia artificial), evitando compromisos y limitaciones propios de productos genéricos. \\
+
+En el mercado existen sistemas comerciales con funcionalidades parciales o de propósito general que, además de un coste elevado, suelen exigir adaptaciones complejas para su integración efectiva en arquitecturas ya definidas. En este contexto, desarrollar un prototipo propio ofrece ventajas claras: control total sobre la arquitectura \textit{hardware-software}, mayor capacidad de integración con los módulos del proyecto (adquisición en campo, sincronización con vuelos de dron, preprocesado y transmisión) y reducción de dependencias de terceros que puedan condicionar la evolución futura. \\
+
+Un elemento clave de esta propuesta es la posibilidad de elegir qué sensores y variables recolectar, priorizando aquellas que demuestren mayor relevancia para el rendimiento de los modelos de IA. Este enfoque iterativo (medir, evaluar importancia, ajustar) permite optimizar el conjunto de variables —por ejemplo, seleccionando métricas ambientales o edáficas que mejor expliquen variaciones observadas en los índices espectrales— y, al mismo tiempo, reducir complejidad y consumo energético cuando ciertas mediciones no aporten valor significativo. \\
+
+La flexibilidad también es un argumento central: la solución se concibe como modular y reconfigurable para adaptarse a diferentes clientes, parcelas y condiciones agroclimáticas. Esta adaptabilidad abarca desde la configuración de sensores y su frecuencia de muestreo hasta el formato de datos, los protocolos de comunicación y las estrategias de alimentación energética, de modo que el sistema pueda ajustarse a los requisitos de cada explotación y escalar en función de nuevas necesidades. \\
+
+Finalmente, el desarrollo propio contribuye a la sostenibilidad técnica y económica del proyecto: facilita el mantenimiento, la trazabilidad de componentes, la transparencia del diseño y la gobernanza de los datos (incluyendo su calidad y metadatos), al tiempo que reduce el coste total de propiedad frente a la adquisición y adaptación de equipos genéricos de mayor precio. En conjunto, estos factores justifican la construcción de un prototipo específico como la vía más eficiente para garantizar la integración con el entorno del proyecto, maximizar la utilidad de los datos para la IA y ofrecer una solución realmente ajustada a las particularidades del sector y de cada viñedo.
+
+\chapter{Alcance}
+El presente trabajo se centra en pensar, diseñar y desarrollar el \textbf{primer prototipo} de una lanza meteorológica orientada a complementar la toma de datos en viñedos dentro del proyecto principal. El alcance incluye la definición de variables a medir, la selección de sensores, el diseño de las PCBs, el ensamblado y soldadura de componentes y la ejecución de pruebas en entornos controlados.
+
+\section{Objetivos}
+El principal objetivo del proyecto es pensar, diseñar y desarrollar todo el sistema electrónico de la lanza meteorológica capaz de adquirir, almacenar y transmitir datos ambientales y de suelo relevantes para su posterior explotación dentro del proyecto.
+
+\section{Sub-objetivos}
+\begin{itemize}
+    \item \textbf{PCB principal:} diseño del controlador, gestión de alimentación y puertos de expansión/IO para sensores.
+    \item \textbf{Firmware base:} adquisición fiable, metadatos útiles y almacenamiento local; además de la opción de comunicación inalámbrica.
+    \item \textbf{Gestión energética:} definición de modos de bajo consumo y protección básica; preparación para batería y paneles solares.
+    \item \textbf{Integración mecánica mínima:} fijaciones y protección provisionales suficientes para realizar las pruebas previstas.
+    \item \textbf{Pruebas y validación básica:} protocolo de ensayo en entorno experimental y registro de resultados.
+    \item \textbf{Documentación:} esquemáticos, \textit{layouts}, BOM, guía de montaje y notas técnicas del \textit{firmware}.
+\end{itemize}
+
+\section{Requerimientos}
+
+\subsection{Requerimientos funcionales}
+Los datos ambientales que se pretenden recolectar en este prototipo son:
+\begin{itemize}
+    \item \textbf{Temperatura y humedad del aire}.
+    \item \textbf{Humedad y temperatura del suelo}.
+    \item \textbf{Irradiancia solar}.
+\end{itemize}
+
+En un futuro, se tiene pensado ampliar y/o modificar los datos recolectados en función de su utilidad a la hora de entrenar a la IA, pero como es un prototipo, empezaremos por estos que son los básicos. \\
+
+La lanza deberá ademas cumplir con otros requerimientos funcionales tales como:
+\begin{itemize}
+    \item \textbf{Almacenamiento local:} La lanza deberá poder almacenar los datos tomados por los sensores localmente durante como mínimo 2 semanas, hasta el envío de estos al servidor.
+    \item \textbf{Registro de metadatos:} La lanza deberá guardar junto a los datos tomados, metadatos como la fecha y hora para el posterior análisis.
+    \item \textbf{Autonomía de operación:} La lanza deberá ser capaz de operar de forma continua sin intervención humana. Para ello se empleará el uso de paneles solares y baterías para proporcionar al sistema la energía necesaria para su correcto funcionamiento.
+    \item \textbf{Comunicación inalámbrica:} La lanza deberá poder comunicarse mediante radiofrecuencia con algún tipo de receptor para enviar los datos tomados.
+\end{itemize}
+
+\subsection{Requerimientos no funcionales}
+Entre los requerimientos no funcionales del proyecto destacan:
+\begin{itemize}
+    \item \textbf{Fiabilidad y precisión:} Los sensores deben ofrecer mediciones precisas para evitar errores en la toma de decisiones.
+    \item \textbf{Eficiencia energética:} La lanza deberá ser capaz de manejar la energía de forma eficiente para prolongar al máximo las baterías y asegurar un funcionamiento continuo y correcto.
+    \item \textbf{Fácil mantenimiento:} Tanto los componentes como los circuitos deberán ser de fácil mantenimiento y fáciles de encontrar en el mercado en caso de necesitar cambiar algún componente.
+    \item \textbf{Escalabilidad y flexibilidad:} El proyecto deberá contemplar y facilitar la modificación y adición de sensores a la lanza.
+\end{itemize}
+
+\section{Posibles obstáculos i riesgos}
+Algunos de los principales desafíos que pueden surgir durante el desarrollo del proyecto incluyen:
+\begin{itemize}
+    \item \textbf{Calibración de sensores:} riesgo de sesgos o derivas que comprometan la calidad de los datos. Requiere definir procedimientos de verificación frente a referencias y registrar factores de calibración como metadatos.
+    \item \textbf{Errores de diseño de las PCBs:} Es posible que incluso tras revisar multiples veces tu diseño a la hora de la verdad hayas cometido algun error en tu PCB. Es por eso que se utilizarán metodos rápidos de verificación de placas como placas de cobre fresadas y se intentará realizar todos los circuitos con tiempo para tener margen de error.
+    \item \textbf{Suministro de componentes y plazos:} posibles roturas de stock o largos tiempos de entrega. Conviene prever equivalentes compatibles y cerrar compras críticas en fases tempranas.
+    \item \textbf{Riesgos de calendario académico:} acotación del alcance y priorización de hitos para asegurar la entrega del TFG incluso ante incidencias técnicas.
+\end{itemize}
+
+\section{Competencias técnicas}
+Considerando la naturaleza del proyecto y las tareas que se desarrollarán, las siguientes competencias técnicas se consideran las más adecuadas y directamente relacionadas con el trabajo a realizar:
+
+\begin{itemize}
+    \item \textbf{CEC1.1:} Diseñar un sistema basado en microprocesador o microcontrolador. \textcolor{DodgerBlue3}{En profundidad.}
+    \item \textbf{CEC1.2:} Diseñar y/o configurar un circuito integrado utilizando las herramientas de software adecuadas. \textcolor{DodgerBlue3}{En profundidad.}
+    \item \textbf{CEC2.1:} Analizar, evaluar, seleccionar y configurar plataformas hardware para el desarrollo y la ejecución de aplicaciones y servicios informáticos. \textcolor{DodgerBlue3}{En profundidad.}
+    \item \textbf{CEC2.2:} Programar considerando la arquitectura hardware, tanto en ensamblador como en alto nivel. \textcolor{DodgerBlue3}{Bastante.}
+    \item \textbf{CEC2.3:} Desarrollar y analizar software para sistemas basados en microprocesadores y sus interfaces con usuarios y otros dispositivos. \textcolor{DodgerBlue3}{Bastante.}
+    \item \textbf{CEC2.4:} Diseñar e implementar software de sistema y de comunicaciones. \textcolor{DodgerBlue3}{Bastante.}
+    \item \textbf{CEC3.1:} Analizar, evaluar y seleccionar las plataformas hardware y software más adecuadas para el soporte de aplicaciones embebidas y de tiempo real. \textcolor{DodgerBlue3}{Bastante.}
+\end{itemize}
+
+
+\chapter{Metodología y rigor}
+El enfoque metodológico utilizado para el desarrollo de este proyecto se basa en el método Kanban, un sistema ágil de gestión de proyectos que permite un seguimiento visual y flexible de las tareas a medida que avanzan en el proceso de trabajo. Este enfoque se caracteriza por su capacidad para adaptar el flujo de trabajo de manera continua, promoviendo la eficiencia, la mejora continua y la visibilidad de todas las etapas del proyecto. \\
+
+Este enfoque divide el proyecto en etapas o grupos los cuales tienen tareas asignadas que se colocan en columnas de un tablero dependiendo del estado de la tarea. En este caso utilizaremos estas cuatro columnas para distribuir las tareas:
+\begin{itemize}
+    \item \textbf{To Do:} En esta columna se almacenarán todas las tareas que aún no han comenzado.
+    \item \textbf{In Progress:} Aquí se trasladarán las tareas que están siendo trabajadas activamente.
+    \item \textbf{Blocked:} En esta columna se incluirán aquellas tareas que no pueden avanzar debido a algún problema o impedimento.
+    \item \textbf{Done:} Una vez que una tarea ha sido finalizada, se moverá a esta columna.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{imgs/kanban.png}
+    \caption{\textit{Ejemplo de tablero Kanban. Wikipedia.} \cite{kanban}}
+    \label{fig:kanban}
+\end{figure}
+
+A medida que el proyecto avance, reordenaremos y priorizaremos algunas tareas según su importancia y urgencia. Las tareas más críticas o aquellas que dependen de otras se completarán primero para garantizar un flujo de trabajo eficiente y sin retrasos.
+
+\section{Herramientas}
+Para llevar a cabo y coordinar correctamente el proyecto utilizaremos principalmente estas herramientas:
+\begin{itemize}
+    \item \textbf{Correo electrónico:} Para la comunicación constante con el director del TFG, el equipo de la empresa y los clientes.
+    \item \textbf{Github:} \cite{github} Para la gestión y control de versiones del código y documentos asociados al proyecto.
+    \item \textbf{Google Meet:} Para realizar reuniones periódicas y mantener una comunicación fluida entre todos los involucrados en el proyecto.
+    \item \textbf{Trello:} \cite{trello} Para gestionar y seguir el progreso de las tareas del proyecto mediante un tablero Kanban.
+\end{itemize}

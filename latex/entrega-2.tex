@@ -1,0 +1,165 @@
+\setcounter{chapter}{4}
+
+\chapter{Descripción de las tareas}
+
+\section{Introducción}
+La realización de este proyecto se realizó en gran medida en horas laborales dentro de la empresa Domo21. La parte de GEP se realizó en el Q2-2024/25. El proyecto en sí empezó el día 15 de septiembre de 2025 y la defensa del trabajo es el 20 de enero de 2026. Eso nos da unos 4 meses y algo para la realización del trabajo. El total de horas estimadas para completar el proyecto es de unas \textbf{720 horas}. Dentro de este periodo encontramos la fase de desarrollo, la cual ocupará la mayor parte del tiempo.
+
+\section{Tareas}
+
+\subsection{Gestión del Proyecto}
+\begin{itemize}
+    \item \textbf{GP1 $\Rightarrow$ Alcance (10 h):} Redacción de la primera entrega de la asignatura de Gestión de Proyectos, que incluirá el contexto del proyecto, su justificación, el alcance del mismo y la metodología a emplear.
+    \item \textbf{GP2 $\Rightarrow$ Planificación (10 h):} Redacción de la Entrega 2 de la asignatura de GEP, donde se exponen las tareas a hacer y su planificación, el diagrama de Gantt y la gestión de los riesgos que puedan aparecer. \textcolor{Red3}{Dependencias: GP1}
+    \item \textbf{GP3 $\Rightarrow$ Gestión económica y sostenibilidad (10 h):} Redacción de la Entrega 3 de la asignatura de GEP, donde se comenta el presupuesto del proyecto y el informe de sostenibilidad. \textcolor{Red3}{Dependencias: GP2}
+    \item \textbf{GP4 $\Rightarrow$ Documento final (15 h):} Recopilación, revisión y corrección de las tres entregas anteriores y la posterior redacción de la Entrega final de GEP. \textcolor{Red3}{Dependencias: GP3}
+    \item \textbf{GP5 $\Rightarrow$ Reuniones (20 h):} Realización de reuniones periódicas con el director del TFG y la empresa para supervisar el avance y tomar decisiones estratégicas.
+\end{itemize}
+
+\subsection{Estudio Previo}
+\begin{itemize}
+    \item \textbf{EP1 $\Rightarrow$ Estudio y selección de componentes (18 h):} Investigación y comparación de alternativas para cada bloque del sistema: microcontrolador, sensores ambientales, regulación de alimentación, etc. Se valoran criterios de precisión, interfaz utilizada, consumo, disponibilidad, coste y facilidad de integración.
+    \item \textbf{EP2 $\Rightarrow$ Diseño de la arquitectura del sistema (12 h):} Definición de la arquitectura general del prototipo: diagrama de bloques, buses de comunicación, estrategia de muestreo, gestión de energía y enfoque de almacenamiento y transmisión de datos orientado a las pruebas.
+    \item \textbf{EP3 $\Rightarrow$ Primeras pruebas con placas de evaluación (20 h):} Pruebas iniciales con placas de evaluación para asegurar que los sensores y el microcontrolador se entienden correctamente. Se revisan lecturas, configuración y estabilidad básica, detectando posibles problemas antes del diseño definitivo. \textcolor{Red3}{Dependencias: EP1, EP2}
+\end{itemize}
+
+\subsection{Desarrollo Hardware}
+\begin{itemize}
+    \item \textbf{HW1 $\Rightarrow$ Selección final de componentes (16 h):} Elección definitiva de los componentes a utilizar, con elaboración de una BOM preliminar y comprobación de compatibilidades eléctricas y mecánicas. \textcolor{Red3}{Dependencias: EP1}
+    \item \textbf{HW2 $\Rightarrow$ Prototipo con placa fresada (16 h):} Integración preliminar de los componentes principales en un prototipo de cobre fresado para validar conexiones a bajo coste. \textcolor{Red3}{Dependencias: HW1, EP3}
+    \item \textbf{HW3 $\Rightarrow$ Diseño esquemático PCB principal (22 h):} Desarrollo del esquemático completo de la placa principal: alimentación, MCU, buses, conectores para sensores, conector de programación/depuración, protecciones y puntos de test. \textcolor{Red3}{Dependencias: HW2}
+    \item \textbf{HW4 $\Rightarrow$ Diseño layout PCB principal (26 h):} Diseño físico y enrutado de la placa: colocación, reglas de diseño, planos de masa, ubicación de componentes y conectores. \textcolor{Red3}{Dependencias: HW3}
+    \item \textbf{HW5 $\Rightarrow$ Fabricación y montaje (10 h):} Preparación y envío de la documentación de fabricación (Gerbers, BOM...) a una empresa especializada, seguimiento del proceso y resolución de incidencias. Recepción de la PCB, inspección visual y finalización del montaje mediante soldadura manual de los componentes no ensamblados por el proveedor. Verificación básica de continuidad y revisión de posibles errores de montaje antes de iniciar las pruebas funcionales. \textcolor{Red3}{Dependencias: HW4}
+\end{itemize}
+
+\subsection{Desarrollo Firmware}
+\begin{itemize}
+    \item \textbf{FW1 $\Rightarrow$ Drivers (24 h):} Implementación de drivers para los componentes seleccionados y sus interfaces (I2C, SPI, UART...). Incluye inicialización, configuración, lectura de medidas, conversión a unidades físicas y gestión básica de errores. \textcolor{Red3}{Dependencias: EP3, HW5}
+    \item \textbf{FW2 $\Rightarrow$ Flujo de programa principal (16 h):} Desarrollo del flujo principal del sistema: arranque, inicialización de periféricos, temporización del muestreo y estructura general de ejecución. \textcolor{Red3}{Dependencias: FW1}
+    \item \textbf{FW3 $\Rightarrow$ Estructura de memoria y formato de registro (18 h):} Diseño de cómo se almacenan los datos en memoria: organización del espacio, estructura de bloques y registros, metadatos asociados y mecanismos de integridad. Incluye el tratamiento de casos límite como memoria llena, datos inválidos y recuperación tras reinicios. \textcolor{Red3}{Dependencias: FW1}
+    \item \textbf{FW4 $\Rightarrow$ Comunicación inalábrica (12 h):} Implementación de una interfaz BLE básica para enviar datos. Esta tarea se plantea como funcionalidad no prioritaria y puede limitarse a un perfil mínimo según el tiempo disponible. \textcolor{Red3}{Dependencias: FW2, FW3}
+\end{itemize}
+
+\subsection{Pruebas y Validación}
+\begin{itemize}
+    \item \textbf{PV1 $\Rightarrow$ Verificación eléctrica y funcional de la PCB (14 h):} Puesta en marcha de la placa: comprobación de tensiones, reguladores y consumo, verificación del acceso de programación/depuración y pruebas básicas de comunicación con los periféricos. Si aparecen problemas, se aplican correcciones de montaje (rework) o ajustes de firmware para dejar una base estable. \textcolor{Red3}{Dependencias: HW5}
+    \item \textbf{PV2 $\Rightarrow$ Pruebas de los sensores en entornos controlados (18 h):} Validación de cada sensor en un entorno controlado para observar su respuesta a cambios (por ejemplo temperatura/humedad/iluminación) y confirmar que el comportamiento es coherente con lo esperado. \textcolor{Red3}{Dependencias: PV1, FW2, FW3}
+    \item \textbf{PV3 $\Rightarrow$ Pruebas del sistema completo en entornos controlados (12 h):} Pruebas del sistema integrado durante periodos prolongados para observar estabilidad, continuidad de adquisición y gestión de datos. \textcolor{Red3}{Dependencias: PV2}
+\end{itemize}
+
+\subsection{Documentación}
+\begin{itemize}
+    \item \textbf{DOC1 $\Rightarrow$ Redactar el TFG (90 h):} Elaboración de la memoria del Trabajo de Fin de Grado.
+\end{itemize}
+
+\section{Recursos}
+Seguidamente se describen los recursos necesarios, tanto humanos como materiales y digitales, para el correcto desarrollo del proyecto.
+
+\subsection{Recursos humanos}
+Los recursos humanos necesarios para el desarrollo del proyecto coinciden con los actores descritos en la Sección \ref{seccion:actores}. En este sentido, el trabajo se ha realizado principalmente por el estudiante, con el apoyo y supervisión del tutor académico, y teniendo como referencia los requisitos y el contexto de aplicación aportados por la entidad destinataria del prototipo.
+
+\subsection{Recursos materiales}
+\begin{itemize}
+    \item \textbf{[PC] Ordenador:} Agrupa todos los ordenadores que se utilizarán durante el proyecto.
+    \item \textbf{[MUL] Multímetro:} Herramienta esencial para la verificación de conexiones eléctricas así como medir voltajes, corrientes o resistencias.
+    \item \textbf{[OSC] Osciloscopio:} Herramienta utilizada apra la observación gráfica de señales eléctricas en circuitos, muy útil para ver protocolos de comunicación.
+    \item \textbf{[FA] Fuente de alimentación:} Dispositivo que proporciona un voltaje y corriente constantes para la alimentación de circuitos electrónicos. Permite simular condiciones de funcionamiento real sin necesidad de baterías.
+    \item \textbf{[SOL] Estación de soldadura:} Conjunto de herramientas utilizadas para ensamblar circuitos electrónicos. Incluye principalmente soldador, pistola de calor, pinzas, estaño y \textit{flux}.
+    \item \textbf{[FRE] Fresadora:} Máquina de mecanizado utilizada para fabricar prototipos rápidos de PCBs mediante el fresado de placas de cobre.
+\end{itemize}
+
+\subsection{Recursos digitales}
+\begin{itemize}
+    \item \textbf{[KCD] KiCad:} Herramienta para el diseño de circuitos electrónicos y PCBs. \\ \url{https://www.kicad.org/}
+    \item \textbf{[IDE] STM32CubeIDE:} IDE para escribir código. \\ \url{https://www.st.com/en/development-tools/stm32cubeide.html}
+    \item \textbf{[TER] Tera Term:} Terminal para debugar el firmware. \\ \url{https://teratermproject.github.io/index-en.html}
+    \item \textbf{[ONS] OnShape:} erramienta online para diseñar y modelar objetos 3D. \\ \url{https://www.onshape.com/}
+    \item \textbf{[GIT] GitHub:} Herramienta online para alojar y modificar repositorios utilizando el control de versiones de \textit{Git}. \\ \url{https://github.com/}
+    \item \textbf{[TRL] Trello:} Herramienta online para gestionar proyectos con el método \textit{Kanban}. \\ \url{https://trello.com/}
+    \item \textbf{[OVL] OverLeaf:} Herramienta online basada en LaTeX utilizada para la redacción de todos los documentos. \\ \url{https://www.onshape.com/}
+    \item \textbf{[DRW] Draw.io:} Herramienta online para hacer diagramas. \\ \url{https://www.drawio.com/}
+    \item \textbf{[GNT] GanttProject:} Herramienta para crear diagramas de \textit{Gantt}. \\ \url{https://www.ganttproject.biz/}
+    \item \textbf{[GMT] Google Meet:} Herramienta online para realizar videollamadas.
+\end{itemize}
+
+\chapter{Estimaciones y Gantt}
+En la Tabla \ref{tabla:resumen-tareas} se muestra un resumen de las tareas que realizaré, así como de sus dependencias y los recursos relacionados con cada tarea.
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{tabular}{l l c l l}
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{ID} & \textbf{Nombre} & \textbf{Horas} & \textbf{Dependencias} & \textbf{Recursos}\\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Gestión del Proyecto} & \textbf{65} & & \\
+        GP1 & Alcance & 10 & - & PZ, AB, CM, PC, OVL \\
+        GP2 & Planificación & 10 & GP1 & PZ, AB, CM, PC, OVL, GNT \\
+        GP3 & Gestión económica y sostenibilidad & 10 & GP2 & PZ, AB, CM, PC, OVL \\
+        GP4 & Documento final & 15 & GP3 & PZ, AB, CM, PC, OVL \\
+        GP5 & Reuniones & 20 & - & PZ, AB, CM, D21, PC, GMT \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+         & \textbf{Estudio Previo} & \textbf{80} & & \\
+        EP1 & Estudio y selección de componentes & 30 & - & PZ, AB, PC \\
+        EP2 & Diseño de la arquitectura del sistema & 20 & - & PZ, PC \\
+        EP3 & Primeras pruebas con placas de evaluación & 30 & EP1, EP2 & PZ, PC \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Desarrollo Hardware} & \textbf{190} & & \\
+        HW1 & Selección final de componentes & 25 & EP1 & PZ, PC \\
+        HW2 & Prototipo con placa fresada & 30 & HW1, EP3 & PZ, AV, PC, KCD, FRE \\
+        HW3 & Diseño esquemático PCB principal & 45 & HW2 & PZ, AV, PC, KCD \\
+        HW4 & Diseño layout PCB principal & 55 & HW3 & PZ, AV, PC, KCD \\
+        HW5 & Fabricación y montaje & 35 & HW4 & PZ, AV, PC, SOL, MUL \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Desarrollo Firmware} & \textbf{165} & & \\
+        FW1 & Drivers & 60 & EP3, HW5 & PZ, PC, IDE, TER \\
+        FW2 & Flujo de programa principal & 35 & FW1 & PZ, PC, IDE, TER \\
+        FW3 & Estructura de memoria y formato de registro & 45 & FW1 & PZ, PC, IDE, TER \\
+        FW4 & Comunicación inalámbrica & 25 & FW2, FW3 & PZ, PC, IDE, TER \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Pruebas y Validación} & \textbf{110} & & \\
+        PV1 & Verificación eléctrica y funcional de la PCB & 30 & HW5 & PZ, PC, MUL, FA, OSC \\
+        PV2 & Pruebas de los sensores en entornos controlados & 45 & PV1, FW2, FW3 & PZ, PC, MUL \\
+        PV3 & Pruebas del sistema completo en entornos controlados & 35 & PV2 & PZ, PC, MUL \\
+        \hline
+        \rowcolor{LightSteelBlue1}
+          & \textbf{Documentación} & \textbf{110} & & \\
+        DOC1 & Redactar el TFG & 110 & - & PZ, AB, CM, PC, OVL, DRW \\
+        \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{Total} & & \textbf{720} & &\\
+        \hline
+    \end{tabular}
+    \normalsize
+    \caption{\textit{Tabla resumen de las tareas. Elaboración propia.}}
+    \label{tabla:resumen-tareas}
+\end{table}
+
+\begin{landscape}
+En la Figura \ref{fig:gantt}, se representa la planificación de las tareas mediante un diagrama de \textit{Gantt}. En él, se muestra el espacio de tiempo de cada tarea, así como las dependencias entre ellas.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imgs/gantt.png}
+    \caption{\textit{Diagrama de Gantt de las tareas propuestas. Elaboración propia.}}
+    \label{fig:gantt}
+\end{figure}
+\end{landscape}
+
+\chapter{Gestión de riesgos: Planes alternativos y obstáculos}
+Es fundamental que estemos preparados para afrontar cualquier imprevisto y, en el peor de los casos, dediquemos más tiempo a una tarea para solucionar los problemas que puedan aparecer. A continuación, se detallan algunos de los posibles contratiempos que podrían afectar el progreso del proyecto. \\
+
+Uno de los principales riesgos asociados a este proyecto es la posible demora en la fabricación de las placas de circuito impreso (PCBs). Dado que la fabricación y el envío se realizarán en China, estamos expuestos a imprevistos como retrasos en la producción, problemas logísticos o incluso paros laborales. Si esto llegara a suceder, nuestro primer paso será ponernos en contacto inmediato con el proveedor para obtener información detallada sobre la situación. En caso de que el retraso sea significativo, exploraremos la posibilidad de recurrir a otros proveedores para evitar mayores demoras. \\
+
+Una vez recibidas las PCBs, también existe el riesgo de que surjan problemas relacionados con su diseño. Esto podría incluir fallos en el trazado de los circuitos, errores en las conexiones o incompatibilidades con otros componentes del sistema. Tales problemas podrían retrasar considerablemente el ensamblaje de la estación meteorológica. Para minimizar este riesgo, nos aseguraremos de que el diseño de la PCB sea completamente correcto antes de proceder con la fabricación final. Además, realizaremos pruebas preliminares con placas fresadas para verificar su funcionamiento. En caso de que el problema sea debido a un error de fábrica, nos veremos obligados a reclamar al proveedor para que nos envíe nuevamente las PCBs correctas, lo que podría llevar algún tiempo adicional. \\
+
+Otro contratiempo común es la aparición de errores en el código (\textit{bugs}) o de casos no contemplados durante el desarrollo del \textit{firmware}. Por ejemplo, situaciones como memoria llena, lecturas puntuales inválidas, reinicios inesperados o fallos intermitentes de comunicación pueden provocar comportamientos erráticos que no siempre aparecen en las primeras pruebas. Aunque suelen ser problemas solucionables, pueden consumir tiempo si no se detectan pronto y de forma sistemática.

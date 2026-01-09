@@ -1,0 +1,50 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage[spanish]{babel}
+\usepackage{fullpage}
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage[x11names]{xcolor}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+
+\usepackage{hyperref}
+
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{justification=centering}
+\captionsetup[table]{name=Tabla}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\renewcommand{\rmdefault}{lmss}
+
+\newcommand{\numeroEntrega}{Final}
+\newcommand{\tituloTFG}{Diseño, desarrollo y programación de una lanza meteorológica}
+\newcommand{\autorTFG}{Pau Zaragoza Gallardo}
+\newcommand{\fechaEntrega}{13 de enero de 2026}
+\newcommand{\director}{Antonio Benito Martínez}
+
+\begin{document}
+
+\input{portada}
+
+\input{resumen.tex}
+
+\tableofcontents
+
+\input{entrega-1.tex}
+
+\input{entrega-2.tex}
+
+\input{entrega-3.tex}
+
+\input{memoria.tex}
+
+\input{references.tex}
+
+\end{document}

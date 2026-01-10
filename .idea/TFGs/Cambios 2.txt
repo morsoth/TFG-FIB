@@ -5,8 +5,6 @@ redactar apartado Arquitectura del software?
 
 
 
-cambiar descripcion actores implicados: codirector, domo21...
-
 añadir parrafo AEM10941 (seleccion de componentes) explicando como funciona el diagrama de
 estados Vovch, Vchrdy, Vovdis...
 
@@ -22,3 +20,42 @@ hacer gantt (actualizar recurso digital)
 revisar horas tareas
 
 revisar presupuesto
+
+
+
+
+el diseño del hardware ha optado en un priemr momento por desarrollar una primera maqueta basada
+en placas de evaluacion que suministran la funcionalidad completa.
+
+11.3. Tal como hemos hablado en el apartado 1.1 ...
+
+Figura 17: primera pruba de concepto con placas de evaluacion, cableado y protoboards.
+
+- Una vez verificado el correcto funcionamiento del núcleo del sistema, el siguiente paso fue desarrollar
+un primer prototipo de PCB fabricado mediante fresado de cobre, utilizando las facilidades de esaii ...
+
+Figura 21: Segunda prueba de concepto
+
+11.4.2 decir que me "copio" de los esquematicos + poner url web desde dodne se descarga esquematico
+
+11.4.3 Conectores
+
+11.5.2 Requerimientos del fabriacante
+
+primero requerimientos y despues cuales he usado yo
+
+hasta esquematicos + scripts diseñador
+layout y firmware completo desarrollador
+
+Figura : Stencil utilizado para extender la pasta de soldadura sobre los pads de los circuitos integrados.
+
+11.7 
+
+
+
+TRabajo futuro: integrar todo esto con el proyecto del dron y la empresa + mejoras
+seria interesante caracterizar el tipo de suelo a aprtir de sensores: salubridad, conductividad,
+tipo de minerales...
+
+Conclusiones: todo lo desarrollado es de utilidad para la empresa y para mi, y validadas por la empresa
+como pruebas iniciales

@@ -8,7 +8,7 @@ En proyectos de esta naturaleza, es fundamental elaborar un presupuesto detallad
 \subsection{Recursos humanos}
 Los costes en recursos humanos hacen referencia a los sueldos de los trabajadores del proyecto, dependiendo de su rol en este. Como en este proyecto participarán ingenieros de diferentes especialidades, me he centrado en los roles que desempeñaré yo mismo. \\
 
-En la Tabla \ref{tabla:sueldos-rol} se muestran el salario por hora de cada rol que tendré y el coste real que asume la empresa de este salario después de sumarle la tributación a la Seguridad Social (calculada como $1.33\;\times\;sueldo$).
+En la Tabla \ref{tabla:sueldos-rol} se muestran el salario por hora de cada rol que tendré y el coste real que asume la empresa de este salario después de sumarle la tributación a la Seguridad Social (calculada como $1.33\times\mathrm{sueldo}$).
 
 \begin{table}[H]
     \centering
@@ -17,9 +17,9 @@ En la Tabla \ref{tabla:sueldos-rol} se muestran el salario por hora de cada rol 
         \rowcolor{LightSteelBlue1}
         \textbf{Rol} & \textbf{Salario por hora (€/h)} & \textbf{Salario por hora + SS (€/h)} \\
         \hline
-        Ingeniero de Requisitos [IdR] & 25,20 & 33,52 \\
+        Ingeniero de Diseño [IdDi] & 25,20 & 33,52 \\
         \hline
-        Ingeniero de Desarrollo [IdD] & 18,80 & 25,00 \\
+        Ingeniero de Desarrollo [IdDe] & 18,80 & 25,00 \\
         \hline
     \end{tabular}
     \normalsize
@@ -40,46 +40,46 @@ En la Tabla \ref{tabla:costes-tareas} se detallan las tareas que realizaré, jun
         \hline
         \rowcolor{LightSteelBlue1}
           & \textbf{Gestión del Proyecto} & \textbf{65} & & \textbf{2.178,80} \\
-        GP1 & Alcance & 10 & IdR & 335,20 \\
-        GP2 & Planificación & 10 & IdR & 335,20 \\
-        GP3 & Gestión económica y sostenibilidad & 10 & IdR & 335,20 \\
-        GP4 & Documento final & 15 & IdR & 502,80 \\
-        GP5 & Reuniones & 20 & IdR & 670,40 \\
+        GP1 & Alcance & 10 & IdDi & 335,20 \\
+        GP2 & Planificación & 10 & IdDi & 335,20 \\
+        GP3 & Gestión económica y sostenibilidad & 10 & IdDi & 335,20 \\
+        GP4 & Documento final & 15 & IdDi & 502,80 \\
+        GP5 & Reuniones & 20 & IdDi & 670,40 \\
         \hline
         \rowcolor{LightSteelBlue1}
-         & \textbf{Estudio Previo} & \textbf{80} & & \textbf{2.000,00} \\
-        EP1 & Estudio y selección de componentes & 30 & IdD & 750,00 \\
-        EP2 & Diseño de la arquitectura del sistema & 20 & IdD & 500,00 \\
-        EP3 & Primeras pruebas con placas de evaluación & 30 & IdD & 750,00 \\
+         & \textbf{Estudio Previo} & \textbf{80} & & \textbf{2.681,60} \\
+        EP1 & Estudio y selección de componentes & 30 & IdDi & 1.005,60 \\
+        EP2 & Diseño de la arquitectura del sistema & 20 & IdDi & 670,40 \\
+        EP3 & Primeras pruebas con placas de evaluación & 30 & IdDi & 1.005,60 \\
         \hline
         \rowcolor{LightSteelBlue1}
-          & \textbf{Desarrollo Hardware} & \textbf{190} & & \textbf{4.750,00} \\
-        HW1 & Selección final de componentes & 25 & IdD & 625,00 \\
-        HW2 & Prototipo con placa fresada & 30 & IdD & 750,00 \\
-        HW3 & Diseño esquemático PCB principal & 45 & IdD & 1.125,00 \\
-        HW4 & Diseño layout PCB principal & 55 & IdD & 1.375,00 \\
-        HW5 & Fabricación y montaje & 35 & IdD & 875,00 \\
+          & \textbf{Desarrollo Hardware} & \textbf{190} & & \textbf{5.602,00} \\
+        HW1 & Selección final de componentes & 25 & IdDi & 838,00 \\
+        HW2 & Prototipo con placa fresada & 30 & IdDi & 1.005,60 \\
+        HW3 & Diseño esquemático PCB principal & 45 & IdDi & 1.508,40 \\
+        HW4 & Diseño layout PCB principal & 55 & IdDe & 1.375,00 \\
+        HW5 & Fabricación y montaje & 35 & IdDe & 875,00 \\
         \hline
         \rowcolor{LightSteelBlue1}
-          & \textbf{Desarrollo Firmware} & \textbf{165} & & \textbf{4.125,00} \\
-        FW1 & Drivers & 60 & IdD & 1.500,00 \\
-        FW2 & Flujo de programa principal & 35 & IdD & 875,00 \\
-        FW3 & Estructura de memoria y formato de registro & 45 & IdD & 1.125,00 \\
-        FW4 & Comunicación inalámbrica & 25 & IdD & 625,00 \\
+          & \textbf{Desarrollo Firmware} & \textbf{165} & & \textbf{4.636,20} \\
+        FW1 & Drivers & 60 & IdDi & 2.011,20 \\
+        FW2 & Flujo de programa principal & 35 & IdDe & 875,00 \\
+        FW3 & Estructura de memoria y formato de registro & 45 & IdDe & 1.125,00 \\
+        FW4 & Comunicación inalámbrica & 25 & IdDe & 625,00 \\
         \hline
         \rowcolor{LightSteelBlue1}
           & \textbf{Pruebas y Validación} & \textbf{110} & & \textbf{2.750,00} \\
-        PV1 & Verificación eléctrica y funcional de la PCB & 30 & IdD & 750,00 \\
-        PV2 & Pruebas de los sensores en entornos controlados & 45 & IdD & 1.125,00 \\
-        PV3 & Pruebas del sistema completo en entornos controlados & 35 & IdD & 875,00 \\
+        PV1 & Verificación eléctrica y funcional de la PCB & 30 & IdDe & 750,00 \\
+        PV2 & Pruebas de los sensores en entornos controlados & 45 & IdDe & 1.125,00 \\
+        PV3 & Pruebas del sistema completo en entornos controlados & 35 & IdDe & 875,00 \\
         \hline
         \rowcolor{LightSteelBlue1}
           & \textbf{Documentación} & \textbf{110} & & \textbf{3.218,60} \\
-        DOC1 & Redactar el TFG & 110 & IdR, IdD & 3.218,60 \\
+        DOC1 & Redactar el TFG & 110 & IdDi, IdDe & 3.218,60 \\
         \hline
         \hline
         \rowcolor{LightSteelBlue3}
-        \textbf{TOTAL} &  & \textbf{720} &  & \textbf{19.022,40} \\
+        \textbf{TOTAL} &  & \textbf{720} &  & \textbf{21.067,20} \\
         \hline
     \end{tabular}
     \normalsize
@@ -92,15 +92,13 @@ Para el desarrollo del prototipo se han utilizado herramientas habituales de lab
 
 Para calcular la amortización, se ha utilizado la siguiente fórmula: \\
 \[
-    \mathrm{Amortizacion} = \frac{\mathrm{Coste}~ - ~\mathrm{Valor~residual}}{\mathrm{Vida~util}}
+    \mathrm{Amortización} = \frac{\mathrm{Coste}~ - ~\mathrm{Valor~residual}}{\mathrm{Vida~útil}}
 \] \\
 
 En nuestro caso, consideraremos un tiempo medio de vida útil de aproximadamente 8 años para cada herramienta de \textit{hardware} y que el valor residual es nulo, lo que simplifica la fórmula a: \\
 \[
-    \mathrm{Amortizacion} = \frac{\mathrm{Coste}}{8}
+    \mathrm{Amortización} = \frac{\mathrm{Coste}}{8}
 \]
-
-En la Tabla \ref{tabla:hardware} se muestra el coste estimado de cada herramienta junto con su amortización anual. Para el presupuesto del proyecto se imputará la parte proporcional correspondiente a 4 meses de trabajo (4/12).
 
 \begin{table}[H]
     \centering
@@ -123,13 +121,17 @@ En la Tabla \ref{tabla:hardware} se muestra el coste estimado de cada herramient
         \rowcolor{LightSteelBlue3}
         \textbf{TOTAL} & & \textbf{198,75} \\
         \hline
+        \hline
+        \rowcolor{LightSteelBlue3}
+        \textbf{TOTAL imputado (4 meses)} & & \textbf{66,25} \\
+        \hline
     \end{tabular}
     \normalsize
-    \caption{\textit{Tabla con los costes estimados del hardware empleado. Elaboración propia.}}
+    \caption{\textit{Tabla con los costes estimados del hardware empleado y amortización imputada al proyecto. Elaboración propia.}}
     \label{tabla:hardware}
 \end{table}
 
-Además del equipamiento amortizable, el prototipo requiere materiales y servicios directamente imputables al proyecto (compra de componentes, fabricación de PCB, etc.). El detalle técnico completo se incluye en la Sección \ref{seccion:bom}; en esta sección únicamente se presenta el resumen económico.
+Además del equipamiento amortizable, el prototipo requiere materiales y servicios directamente imputables al proyecto (compra de componentes, fabricación de PCB, etc.). El detalle técnico completo de los componentes utilizados se incluye en la Sección \ref{seccion:bom}; en esta sección únicamente se presenta el resumen económico.
 
 \begin{table}[H]
     \centering
@@ -162,11 +164,11 @@ Los programas utilizados para el desarrollo de este proyecto son todos gratuitos
 \subsection{Gastos generales}
 En este proyecto también existen gastos generales, como electricidad y transporte. Para aproximar el coste de estos gastos, utilizaremos datos generales de precios y tomaremos como periodo de uso el tiempo estimado de desarrollo del proyecto, que es de aproximadamente cuatro meses. \\
 
-El cálculo del consumo eléctrico se estima en función del uso semanal de cada dispositivo y su consumo energético. Para calcular el consumo utilizaremos la siguiente fórmula: \\
+El cálculo del consumo eléctrico se estima en función del uso semanal de cada dispositivo y su consumo energético. Para calcular el consumo utilizaremos la siguiente fórmula:
 
 \[
     \mathrm{Consumo~semanal~(kWh)} = \frac{\mathrm{Consumo~(W)}\times\mathrm{Uso~semanal~(h)}}{1000}
-\]
+\] \\
 
 En la Tabla \ref{tabla:consumo-electr} se presenta un resumen del consumo eléctrico estimado para los principales dispositivos utilizados en el proyecto.
 
@@ -223,7 +225,7 @@ Para estimar el coste eléctrico se utiliza un precio medio de 0,185 €/kWh. En
 \end{table}
 
 \section{Estimación de costes}
-Para completar la estimación del presupuesto, es necesario incluir el coste de contingencia, es decir, un porcentaje destinado a cubrir posibles desviaciones e imprevistos. En este caso, dada la naturaleza del proyecto, se ha fijado dicho porcentaje en un 15\%, lo que da un total de \textbf{2.937,34 €}. \\
+Para completar la estimación del presupuesto, es necesario incluir el coste de contingencia, es decir, un porcentaje destinado a cubrir posibles desviaciones e imprevistos. En este caso, dada la naturaleza del proyecto, se ha fijado dicho porcentaje en un 15\%, lo que da un total de \textbf{3.244,06 €}. \\
 
 En la Tabla \ref{tabla:imprevistos} se presentan diversos imprevistos junto con su posible coste adicional para el proyecto. Para estimar el coste relativo, multiplicamos el coste total por la probabilidad de que dicho imprevisto ocurra.
 
@@ -259,7 +261,7 @@ En la Tabla \ref{tabla:presupuesto} vemos un resumen del presupuesto completo es
         \rowcolor{LightSteelBlue1}
          & \textbf{Coste (€)} \\
         \hline
-        Recursos humanos & 19.022,40 \\
+        Recursos humanos & 21.067,20 \\
         \hline
         \textit{Hardware} & 479,74 \\
         \hline
@@ -267,13 +269,13 @@ En la Tabla \ref{tabla:presupuesto} vemos un resumen del presupuesto completo es
         \hline
         Gastos generales & 80,12 \\
         \hline
-        Contingencias (15\%) & 2.937,34 \\
+        Contingencias (15\%) & 3.244,06 \\
         \hline
         Imprevistos & 1.032,00 \\
         \hline
         \hline
         \rowcolor{LightSteelBlue3}
-        \textbf{TOTAL} & \textbf{23.551,60} \\
+        \textbf{TOTAL} & \textbf{25.903,12} \\
         \hline
     \end{tabular}
     \normalsize
@@ -281,15 +283,16 @@ En la Tabla \ref{tabla:presupuesto} vemos un resumen del presupuesto completo es
     \label{tabla:presupuesto}
 \end{table}
 
+
 \section{Control de gestión}
 Para finalizar, vamos a definir una serie de métricas para visualizar posibles desviaciones en el presupuesto. \\
 
 \[
-    \mathrm{Desviacion~presupuestaria~(\%)} = \frac{\mathrm{Gasto~real}~ - ~\mathrm{Presupuesto~estimado}}{\mathrm{Presupuesto~estimado}}\times100
+    \mathrm{Desviación~presupuestaria~(\%)} = \frac{\mathrm{Gasto~real}~ - ~\mathrm{Presupuesto~estimado}}{\mathrm{Presupuesto~estimado}}\times100
 \] \\
 
 \[
-    \mathrm{Desviacion~de~horas~(\%)} = \frac{\mathrm{Horas~reales}~ - ~\mathrm{Horas~estimadas}}{\mathrm{Horas~estimadas}}\times100
+    \mathrm{Desviación~de~horas~(\%)} = \frac{\mathrm{Horas~reales}~ - ~\mathrm{Horas~estimadas}}{\mathrm{Horas~estimadas}}\times100
 \]
 
 \chapter{Informe de sostenibilidad}
@@ -325,7 +328,7 @@ El proyecto tendrá un impacto ambiental muy positivo una vez implementado, ya q
 \textbf{Referente a la Vida Útil: ¿Cómo se resuelve actualmente el problema que quieres abordar
 (estado del arte)? ¿En qué mejorará ambientalmente tu solución a las existentes?}
 
-Al ofrecer una mayor información sobre el estado de las viñas y del terreno a los viticultores, estos podrán tomar mejores decisiones referentes a estas, mejorando así el impacto ambiental que tendrán sobre el medio ambiente. \\
+Al ofrecer una mayor información sobre el estado de las viñas y del terreno a los viticultores, estos podrán tomar mejores decisiones referentes a estas, mejorando así el impacto que tendrán sobre el medio ambiente. \\
 
 \section{Dimensión Social}
 \textbf{Referente a PPP: ¿Qué crees que te va a aportar a nivel personal la realización de este proyecto?}

@@ -1,0 +1,74 @@
+Seleccion de componentes
+	PMIC
+		justificar la eleccion del aem10941 como pmic.
+		explicar su funcionamiento:
+		puerto para un SRC en nuestro caso paneles solares
+		puerto para una bateria (o supercapacitor) principal y otro para una secundaria (no la utilizaremos)
+		explicacion de sus dos canales de salida HVOUT y LVOUT (nosotros como todo esta a 3.3 V usaremos solo el HVOUT)
+		explicar pines de status y su diagrama de estados (notese que uso una bateria li-ion por lo que el CFG[2:0] = 111
+		
+	Monitoreo de potencia
+		explicar que escogemos el ina3221. tiene 3 canales: uno para los PV, otro para la bateria y otro para el consumo del sistema mcu+sensores+otros componentes.
+		decir tmb que tiene pines de alerta (ceñirse a lo que ya esta escrito)
+
+	Almacenamiento
+		explicacion de porque hemos escogido una fram. comparacion con otras alternativas.
+		apuntar que no existen frams de mucho tamaño y el porque.
+		el modelo que escogemos es el MB85RS256B de 256kbits (32kB)
+
+	Sensor irradiancia
+		explicar que para medir la irradiancia se necesita un pyranometro, pero que son muy caros para este prototipo. es por eso que se ha optado por utilizar un sensor de luz visible + IR y hacer la conversion experimental a irradiancia (W/m2).
+		usamos el tsl2591 que mide luz visible + IR. de este sacamos los luxes (esta pensado apra eso, explicar que son los luxes) y de los luxes aproximamos la irradiancia.
+
+	Sensor temp y hum del aire
+		unificamos la medicion de temp y hum del aire. usamos el sht31 (usamos ese porque en comparacion con los demas de su familia es el mejor a nivel de precio sin sacrificar mucha resolucion; hacer comparativa)
+		este sensor tiene ademas funciones de autosecado (heater) en casos extremos de rocio sobre el sensor o humedades/temeraturas muy extremas
+
+	Sensor temp del terreno
+		para el suelo si que separamos sensores de temp y hum porque no hay ninguno conjunto de buena calidad y a precio asequible.
+		para la temp del terreno usamos el dfr0198 (ds18b20). este usa un sensor de temperatura corriente pero lo encapsula con tal de que sea impermeable y por ende utilizable en la tierra.
+		explicar detalles del sensor
+
+	Sensor hum del terreno
+		para el sensor de hum del suelo usamos el sen0308. explicar que es capacitivo (comparacion con otros tipos) y porque es mejor este tipo.
+
+	MCU
+		por ultimo justificar eleccion de MCU. uso el stm32wb55rg.
+		explicar brevemente ventajas de la gama stm32
+		principales motivos de eleccion del MCU concreto: modos de muy bajos consumo, ble integrado, suficientes pines para todos los perifericos, potencia de calculo (otras ventajas que se te ocurran)
+		explicar la separacion de cores m4 y m0+. explicar que hace cada uno y que el stack de ble esta en el m0+
+		
+
+Arquitectura del hardware
+	<diagrama de bloques>
+	explicacion del diagrama
+
+	Flujo de datos y protocolos
+
+Plataforma de testeo
+
+Esquemáticos
+	Potencia y alimentación
+		Control de potencia
+		Monitoreo de potencia
+		3.3 V bus switching
+		Sensor supply switch
+
+	MCU
+		Alimentación del microcontrolador
+			explicación de capacitores de desacoplo (img)
+		Osciladores
+		LEDs
+		FRAM
+		RF
+
+	Conexiones externas
+		SWD
+		Baterias y paneles solares
+		Sensores
+		UART
+	BOM
+
+Diseño PCB
+
+Fabricación y montaje

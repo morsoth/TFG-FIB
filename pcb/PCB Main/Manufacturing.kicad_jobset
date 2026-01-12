@@ -235,7 +235,7 @@
         "hpgl_plot_origin": "A3",
         "min_pen_width": 847,
         "output_dir": "",
-        "page_size": "auto",
+        "page_size": "A4",
         "pdf_hierarchical_links": true,
         "pdf_metadata": true,
         "pdf_property_popups": true,

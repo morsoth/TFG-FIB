@@ -115,9 +115,8 @@ void setup() {
 	if (HAL_RTC_SetDate(&hrtc, &date, RTC_FORMAT_BIN) != HAL_OK) Error_Handler();
 
 	InitFRAM();
-	//DumpFRAM();
 	FRAM_Reset(&mem);
-	printf("Ciclo,Hum Aire ()\r\n");
+	printf("Ciclo,Hum Suelo (),Temp Suelo (C)\r\n");
 
 	InitINA3221();
 	InitTSL2591();
@@ -125,7 +124,7 @@ void setup() {
 	InitDFR0198();
 	InitSEN0308();
 
-	RTC_Wakeup_Config(2);
+	RTC_Wakeup_Config(10);
 
 	HAL_Delay(500);
 }
@@ -171,7 +170,7 @@ void loop() {
 			printf("Air: %.3f ºC, %u %%\r\n", rx.airTemp_C, rx.airHumidity_perc);
 			printf("Soil: %.3f ºC, %u %%\r\n", rx.soilTemp_C, rx.soilMoisture_perc);*/
 
-			printf("%u,%u\r\n", cycle++, rx.airHumidity_perc);
+			printf("%u,%u,%.3f\r\n", cycle++, rx.soilMoisture_perc, rx.soilTemp_C);
 		}
 		else printf("Slot not valid\r\n");
 	}
@@ -273,7 +272,7 @@ void InitTSL2591() {
 	tsl.integrationTime = TSL2591_INTEGRATION_200MS;
 
 	if (TSL2591_Init(&tsl) == HAL_OK);// printf("TSL2591 inicializado correctamente\r\n");
-	else printf("TSL2591 no inicializado\r\n");
+	//else printf("TSL2591 no inicializado\r\n");
 }
 
 void InitSHT3X() {
@@ -282,7 +281,7 @@ void InitSHT3X() {
 	sht.repeatability = SHT3X_REPEAT_MED;
 
 	if (SHT3X_Init(&sht) == HAL_OK);// printf("SHT3x inicializado correctamente\r\n");
-	else printf("SHT3x no inicializado\r\n");
+	//else printf("SHT3x no inicializado\r\n");
 
 	SHT3X_Heater(&sht, SHT3X_HEATER_OFF);
 }
@@ -293,7 +292,7 @@ void InitDFR0198()  {
 	dfr.resolution = DS18B20_RES_12_BIT;
 
 	if (DS18B20_Init(&dfr) == HAL_OK);// printf("DFR0198 inicializado correctamente\r\n");
-	else printf("DFR0198 no inicializado\r\n");
+	//else printf("DFR0198 no inicializado\r\n");
 }
 
 void InitSEN0308() {
@@ -303,7 +302,7 @@ void InitSEN0308() {
 	sen.airRaw = 3620;
 	sen.waterRaw = 520;
 	if (SEN0308_Init(&sen) == HAL_OK);// printf("SEN0308 inicializado correctamente\r\n");
-	else printf("SEN0308 no inicializado\r\n");
+	//else printf("SEN0308 no inicializado\r\n");
 }
 
 // READ ---------------------------------------------------------------------
@@ -368,7 +367,7 @@ void ReadTSL2591() {
 	}
 	// Error while reading the sensor
 	else {
-		printf("Error while reading TSL2591\r\n\r\n");
+		//printf("Error while reading TSL2591\r\n\r\n");
 	}
 }
 

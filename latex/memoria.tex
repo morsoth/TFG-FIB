@@ -20,7 +20,7 @@ En este apartado se recogen las decisiones de alto nivel que definen el comporta
 El periodo de muestreo se ha fijado en 20 minutos debido a que ofrece un equilibrio razonable entre resolución temporal y autonomía del sistema. En una lanza meteorológica no es necesario muestrear continuamente, pero tampoco interesa espaciar demasiado las medidas si luego se quiere analizar la evolución diaria o detectar cambios relativamente rápidos. Con 20 minutos se obtiene una serie temporal suficientemente densa para el estudio posterior, manteniendo el tiempo activo bajo control y permitiendo que la mayor parte del tiempo el nodo permanezca en bajo consumo.
 
 \subsection{Almacenamiento local robusto y simple}
-Una decisión clave del diseño es que los datos se almacenen localmente, de forma que la recolección no dependa de tener conectividad en el momento de medir. El objetivo mínimo es poder conservar al menos dos semanas de histórico; con una muestra cada 20 minutos esto supone: $2\times7\times24\times3=1008$ muestras en 14 días. Para cumplirlo se emplea una memoria no volátil de 32 kB (256 kbits) organizada en slots de tamaño fijo de 32 bytes. Un slot se reserva para cabecera y metadatos del sistema (identificación, puntero de escritura, número de slots ocupados, etc.), mientras que los 1023 slots restantes se dedican a almacenar muestras.
+Una decisión clave del diseño es que los datos se almacenen localmente, de forma que la recolección no dependa de tener conectividad en el momento de medir. El objetivo mínimo es poder conservar al menos dos semanas de histórico; con una muestra cada 20 minutos esto supone: $2~\mathrm{semanas}\times7~\mathrm{días}\times24~\mathrm{horas}\times3~\mathrm{muestras/h}=1008~\mathrm{muestras}$ en 14 días. Para cumplirlo se emplea una memoria no volátil de 32 kB (256 kbits) organizada en slots de tamaño fijo de 32 bytes. Un slot se reserva para cabecera y metadatos del sistema (identificación, puntero de escritura, número de slots ocupados, etc.), mientras que los 1023 slots restantes se dedican a almacenar muestras.
 
 \subsection{Tolerancia a datos inválidos}
 El sistema se ha planteado para que la aparición de datos inválidos en una muestra no implique perder el resto de información de ese instante. En condiciones reales es posible que algún sensor devuelva lecturas erróneas o no responda puntualmente; por ello, cada adquisición registra los datos válidos y marca explícitamente los que no lo sean mediante un vector de validez asociado a la muestra. Esta decisión mejora la robustez del registro y facilita el análisis posterior, ya que permite filtrar únicamente los valores inválidos sin romper la continuidad temporal de la serie.
@@ -32,7 +32,7 @@ Cada registro incluye una referencia temporal (fecha y hora), lo cual es esencia
 Para simplificar la integración y asegurar compatibilidad entre bloques, el diseño se orienta a que la electrónica del sistema funcione a 3.3 V siempre que sea posible. Mantener un único bus de alimentación reduce conversiones de nivel, facilita la selección de sensores y periféricos y evita complejidad innecesaria. Las excepciones naturales a esta regla son los elementos de potencia como batería y paneles fotovoltaicos, que operan a tensiones distintas y se tratan dentro del subsistema de alimentación.
 
 \subsection{Modularidad del sistema}
-El diseño se plantea de forma modular permitiendo ampliar el sistema añadiendo sensores y, si alguno falla o no se adapta bien al despliegue, sustituirlo por otro equivalente sin rediseñar todo el conjunto. Para ello se define un nodo central que concentra el control y al que se conectan los sensores y accesorios (batería, panel fotovoltaico...), de manera que las variaciones se limiten a los módulos afectados.
+El diseño se plantea de forma modular permitiendo ampliar el sistema añadiendo sensores y, si alguno falla o no se adapta bien al despliegue, sustituirlo por otro equivalente sin rediseñar todo el conjunto. Para ello se define un nodo central que concentra el control y al que se conectan los diferentes componentes y sensores, de manera que las variaciones se limiten a los módulos afectados.
 
 \subsection{Protocolo de comunicación inalámbrica}
 Como canal inalámbrico se propone usar \textit{Bluetooth Low Energy} (BLE) por su bajo consumo y por la facilidad de interacción con dispositivos externos comunes, lo que encaja con el objetivo de realizar un volcado de datos en campo hacia un dron o un portátil. La comunicación se entiende como una función de extracción de información puntual (\textit{dump}), no como transmisión continua. \\
@@ -42,9 +42,10 @@ Dentro del alcance del proyecto, la conectividad BLE se considera una funcionali
 \chapter{Diseño hardware}
 
 \section{Selección de componentes}
+Para la selección de los componentes se tuvo especialmente en cuenta la disponibilidad de placas de evaluación de estos, para facilitar la realización de pruebas de concepto y validación temprana del sistema (véase la Sección \ref{seccion:primer_test}).
 
 \subsection{Gestión de potencia (PMIC)}
-Para el subsistema de alimentación se ha seleccionado el \textbf{AEM10941} de e-peas, un PMIC orientado a \textit{energy harvesting}. Este tipo de circuito permite alimentar el sistema a partir de una fuente o \textit{source} (en este caso paneles fotovoltaicos) y gestionar simultáneamente la carga de una batería de almacenamiento, maximizando la captación de energía y garantizando una salida regulada estable.
+Para el subsistema de alimentación se ha seleccionado el \textbf{AEM10941} de e-peas \cite{aem_datasheet}, un PMIC orientado a \textit{energy harvesting}. Este tipo de circuito permite alimentar el sistema a partir de una fuente o \textit{source} (en este caso paneles fotovoltaicos) y gestionar simultáneamente la carga de una batería de almacenamiento, maximizando la captación de energía y garantizando una salida regulada estable.
 
 \begin{figure}[H]
     \centering
@@ -76,7 +77,7 @@ El circuito ofrece dos salidas reguladas, \texttt{HVOUT} (\textit{High Voltage O
 Una ventaja adicional del AEM10941 es la presencia de pines de \textit{status} que indican el modo de funcionamiento: disponibilidad de energía de entrada, estado de carga, habilitación de salidas y condiciones de alimentación insuficiente. Estas señales permiten que la MCU adapte su comportamiento y entre en bajo consumo cuando el sistema se encuentra en un estado energético crítico.
 
 \subsection{Monitoreo de potencia}
-Para monitorizar el estado energético del sistema se ha optado por el \textbf{INA3221} de Texas Instruments, un chip integrado que incorpora tres canales independientes para mediciones de tensión y corriente mediante resistencias \textit{shunt}. El uso de tres canales permite monitorear simultáneamente los puntos clave del sistema: un canal dedicado a los paneles fotovoltaicos (entrada de energía), otro canal dedicado a la batería (estado de almacenamiento) y un tercer canal dedicado al consumo del sistema (MCU + sensores + periféricos), medido sobre el bus principal de alimentación. Con esta información se puede estimar la potencia instantánea y caracterizar el consumo medio en condiciones reales.
+Para monitorizar el estado energético del sistema se ha optado por el \textbf{INA3221} de Texas Instruments \cite{ina_datasheet}, un chip integrado que incorpora tres canales independientes para mediciones de tensión y corriente mediante resistencias \textit{shunt}. El uso de tres canales permite monitorear simultáneamente los puntos clave del sistema: un canal dedicado a los paneles fotovoltaicos (entrada de energía), otro canal dedicado a la batería (estado de almacenamiento) y un tercer canal dedicado al consumo del sistema (MCU + sensores + periféricos), medido sobre el bus principal de alimentación. Con esta información se puede estimar la potencia instantánea y caracterizar el consumo medio en condiciones reales.
 
 \begin{figure}[H]
     \centering
@@ -95,7 +96,7 @@ Para monitorizar el estado energético del sistema se ha optado por el \textbf{I
 Además, el INA3221 dispone de pines de alerta configurables que pueden usarse para notificar a la MCU si una magnitud supera un umbral. Esto resulta muy útil para proteger el sistema ante situaciones como un consumo próximo al máximo que el PMIC puede suministrar o desviaciones de tensión que indiquen un estado de batería baja o una condición anómala.
 
 \subsection{Almacenamiento}
-Para el almacenamiento local de datos se ha escogido una memoria no volátil de tipo \textbf{FRAM} (\textit{Ferroelectric} RAM), concretamente el modelo \textbf{MB85RS256B} de 256 kbits (32 kB).
+Para el almacenamiento local de datos se ha escogido una memoria no volátil de tipo \textbf{FRAM} (\textit{Ferroelectric} RAM), concretamente el modelo \textbf{MB85RS256B} de 256 kbits (32 kB) \cite{fram_datasheet}.
 
 \begin{figure}[H]
     \centering
@@ -155,17 +156,17 @@ La irradiancia solar (W/m²) se mide idealmente con un piranómetro; no obstante
     \label{fig:tsl2591}
 \end{figure}
 
-Se ha seleccionado el sensor \textbf{TSL2591}, capaz de medir luz visible e infrarroja. A partir de ambas componentes se estima la iluminancia en \textit{lux}. Los \textit{lux} representan el flujo luminoso por unidad de área ponderado por la sensibilidad del ojo humano; por tanto, no equivalen directamente a irradiancia física (W/m²). Sin embargo, mediante calibración en condiciones representativas es posible ajustar una relación empírica para aproximar irradiancia a partir de lux. Esta solución sacrifica precisión absoluta frente a un piranómetro, pero permite capturar tendencias y niveles aproximados con un coste mucho menor.
+Se ha seleccionado el sensor \textbf{TSL2591} \cite{tsl_datasheet}, capaz de medir luz visible e infrarroja. A partir de ambas componentes se estima la iluminancia en \textit{lux}. Los \textit{lux} representan el flujo luminoso por unidad de área ponderado por la sensibilidad del ojo humano; por tanto, no equivalen directamente a irradiancia física (W/m²). Sin embargo, mediante calibración en condiciones representativas es posible ajustar una relación empírica para aproximar irradiancia a partir de \textit{lux}. Esta solución sacrifica precisión absoluta frente a un piranómetro, pero permite capturar tendencias y niveles aproximados con un coste mucho menor.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{imgs/grafica_lux.png}
-    \caption{\textit{Ponderación espectral fotópica V($\lambda$) utilizada para el cálculo de iluminancia (lux) en función de la sensibilidad del ojo humano. EVOLUX.} \cite{lux-vs-wm2}}
+    \caption{\textit{Ponderación espectral utilizada para el cálculo de iluminancia (lux) en función de la sensibilidad del ojo humano. EVOLUX.} \cite{lux-vs-wm2}}
     \label{fig:grafica_lux}
 \end{figure}
 
 \subsection{Sensor de temperatura y humedad del aire}
-La temperatura y la humedad relativa del aire se miden con un único sensor para reducir complejidad y consumo. Se ha seleccionado el chip \textbf{SHT31}, que ofrece un equilibrio adecuado entre coste, estabilidad y prestaciones dentro de su familia.
+La temperatura y la humedad relativa del aire se miden con un único sensor para reducir complejidad y consumo. Se ha seleccionado el chip \textbf{SHT31} \cite{sht_datasheet}, que ofrece un equilibrio adecuado entre coste, estabilidad y prestaciones dentro de su familia.
 
 \begin{figure}[H]
     \centering
@@ -184,7 +185,7 @@ La temperatura y la humedad relativa del aire se miden con un único sensor para
 El SHT31, adicionalmente, incorpora un calentador interno (\textit{heater}) que puede activarse puntualmente en condiciones de humedad elevada o presencia de rocío. Esta función ayuda a mitigar problemas de condensación sobre el sensor y mejora la recuperación en situaciones ambientales extremas.
 
 \subsection{Sensor de temperatura del terreno}
-Para el suelo se emplean sensores separados de temperatura y humedad, ya que los sensores combinados asequibles suelen tener limitaciones en precisión, estabilidad o encapsulado. La temperatura del terreno se mide con un \textbf{DS18B20} en su versión impermeable: el módulo \textbf{DFR0198}. Este encapsulado permite el uso directo sobre el terreno sin degradación por humedad y simplifica el despliegue al venir protegido mecánicamente.
+Para el suelo se emplean sensores separados de temperatura y humedad, ya que los sensores combinados asequibles suelen tener limitaciones en precisión, estabilidad o encapsulado. La temperatura del terreno se mide con un \textbf{DS18B20} \cite{dfr_datasheet} en su versión impermeable: el módulo \textbf{DFR0198}. Este encapsulado permite el uso directo sobre el terreno sin degradación por humedad y simplifica el despliegue al venir protegido mecánicamente.
 
 \begin{figure}[H]
     \centering
@@ -201,7 +202,7 @@ Para el suelo se emplean sensores separados de temperatura y humedad, ya que los
 \end{figure}
 
 \subsection{Sensor de humedad del terreno}
-Para medir la humedad del terreno se ha elegido el \textbf{SEN0308}, un sensor de tipo capacitivo. Se ha preferido este tipo frente a los sensores resistivos más comunes, porque en la práctica estos últimos suelen dar más problemas cuando se dejan enterrados durante mucho tiempo. 
+Para medir la humedad del terreno se ha elegido el \textbf{SEN0308} \cite{sen_datasheet}, un sensor de tipo capacitivo. Se ha preferido este tipo frente a los sensores resistivos más comunes, porque en la práctica estos últimos suelen dar más problemas cuando se dejan enterrados durante mucho tiempo. 
 
 \begin{figure}[H]
     \centering
@@ -222,7 +223,7 @@ Un sensor resistivo mide la humedad haciendo pasar una señal eléctrica entre d
 El SEN0308, en cambio, al ser capacitivo no depende de que el suelo conduzca corriente de la misma manera, sino que detecta cambios eléctricos asociados al contenido de agua y, por eso, suele ser más estable para despliegues prolongados y con poco mantenimiento. Aun así, su lectura no depende únicamente de la humedad: factores como la salinidad y la composición del suelo también influyen en la medida. Por ello conviene realizar una calibración básica en el entorno real para interpretar la señal de manera consistente.
 
 \subsection{Microcontrolador}
-Por último, como MCU se ha seleccionado el \textbf{STM32WB55RG} de STMicroelectronics \cite{stm32wb55rg}. Este microcontrolador pertenece a la familia \textit{STM32}, muy extendida en sistemas embebidos por su buen equilibrio entre prestaciones, consumo y ecosistema de desarrollo. Entre las ventajas generales de la gama \textit{STM32} destacan la amplia documentación y notas de aplicación, la disponibilidad de placas de evaluación, como la \textbf{NUCLEO-WB55RG} \cite{nucleo-wb55rg}, y el soporte de herramientas profesionales como STM32CubeMX y STM32CubeIDE, que simplifican la configuración de periféricos y aceleran el desarrollo del \textit{firmware}.
+Por último, como MCU se ha seleccionado el \textbf{STM32WB55RG} de STMicroelectronics \cite{stm32_datasheet} \cite{stm32wb55rg}. Este microcontrolador pertenece a la familia STM32, muy extendida en sistemas embebidos por su buen equilibrio entre prestaciones, consumo y ecosistema de desarrollo. Entre las ventajas generales de la gama \textit{STM32} destacan la amplia documentación y notas de aplicación, la disponibilidad de placas de evaluación, como la \textbf{NUCLEO-WB55RG} \cite{nucleo-wb55rg}, y el soporte de herramientas profesionales como STM32CubeMX y STM32CubeIDE, que simplifican la configuración de periféricos y aceleran el desarrollo del \textit{firmware}.
 
 \begin{figure}[H]
     \centering
@@ -234,7 +235,7 @@ Por último, como MCU se ha seleccionado el \textbf{STM32WB55RG} de STMicroelect
         \centering
         \includegraphics[width=0.75\linewidth]{imgs/comp/nucleo_wb55rg.png}
     \end{minipage}
-    \caption{\textit{Chip STM32WB55RG en formato QFN y placa de desarrollo NUCLEO-WB55RG. STMicroelectronics.}}
+    \caption{\textit{Chip STM32WB55RG en formato QFN y placa de evaluación y desarrollo NUCLEO-WB55RG. STMicroelectronics.}}
     \label{fig:stm32}
 \end{figure}
 
@@ -292,7 +293,7 @@ Para tareas de desarrollo y validación se incluye una interfaz \textbf{UART} ha
 
 Además de los buses principales, aparecen señales digitales auxiliares como \textit{Alert} y \textit{Status}, conectadas a entradas de interrupción (\textbf{EXTI}) de la MCU. Estas líneas permiten notificar eventos relevantes sin necesidad de sondeo continuo, reduciendo el consumo y simplificando la lógica de control.
 
-\section{Prueba de concepto}
+\section{Prueba de concepto} \label{seccion:primer_test}
 
 Antes de abordar el diseño de la PCB final se realizó una fase de verificación incremental del sistema mediante una prueba de concepto. El objetivo de esta etapa fue reducir riesgos de integración y validar el funcionamiento de los componentes principales en condiciones controladas, asegurando que tanto la alimentación como la adquisición de datos y la comunicación inalámbrica eran viables con los componentes seleccionados. \\
 
@@ -301,11 +302,11 @@ La primera aproximación consistió en adquirir placas de evaluación de los ele
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{imgs/photo/circuit_1.jpg}
-    \caption{\textit{Primera prueba e concepto con placas de evaluación del core del sistema. Elaboración propia.}}
+    \caption{\textit{Primera prueba de concepto del core del sistema con placas de evaluación, cableado tipo jumper y protoboards. Elaboración propia.}}
     \label{fig:circuit_1}
 \end{figure}
 
-Una vez verificado el correcto funcionamiento del núcleo del sistema, el siguiente paso fue desarrollar un primer prototipo de PCB fabricado mediante fresado de cobre. Este método de prototipado consiste en coger una placa aislante recubierta de cobre y emplear una fresadora CNC para eliminar mecánicamente el cobre de la superficie, dejando definidas las pistas, \textit{pads} y contornos del circuito. A diferencia de una PCB industrial (fabricada por procesos fotoquímicos), el fresado permite iteraciones rápidas en laboratorio, pero impone restricciones geométricas y de fabricación que condicionan el diseño.
+Una vez verificado el correcto funcionamiento del núcleo del sistema, el siguiente paso fue desarrollar un primer prototipo de PCB fabricado mediante fresado de cobre, utilizando las facilidades del departamento de ESAII de la UPC. Este método de prototipado consiste en coger una placa aislante recubierta de cobre y emplear una fresadora CNC para eliminar mecánicamente el cobre de la superficie, dejando definidas las pistas, \textit{pads} y contornos del circuito. A diferencia de una PCB industrial (fabricada por procesos fotoquímicos), el fresado permite iteraciones rápidas en laboratorio, pero impone restricciones geométricas y de fabricación que condicionan el diseño.
 
 \begin{figure}[H]
     \centering
@@ -321,11 +322,11 @@ Una vez verificado el correcto funcionamiento del núcleo del sistema, el siguie
     \label{fig:fresadora}
 \end{figure}
 
-En este proyecto en concreto, la PCB fresada se limitó a una de dos capas (\textit{top} y \textit{bottom}) y de dimensiones más conservadoras que las típicas en una fabricación profesional, se trabajó con anchos de pista y separaciones mínimas del orden de 0.5 mm, y con taladros mínimos alrededor de 0.3 mm. Durante esta fase aparecieron algunos errores de diseño como problemas con la unión de planos GND.
+En este proyecto en concreto, la PCB fresada se limitó a una de dos capas (\textit{top} y \textit{bottom}) y de dimensiones más conservadoras que las típicas en una fabricación profesional, se trabajó con anchos de pista y separaciones mínimas del orden de 0.5 mm, y con taladros mínimos alrededor de 0.85 mm. Durante esta fase aparecieron algunos errores de diseño como problemas con la unión de planos GND.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{imgs/photo/circuit_2.jpg}
+    \includegraphics[width=0.75\linewidth]{imgs/photo/circuit_2.jpg}
     \caption{\textit{PCB de cobre fresado del prototipo. Elaboración propia.}}
     \label{fig:circuit_2}
 \end{figure}
@@ -355,12 +356,14 @@ Tras estabilizar el funcionamiento del prototipo y confirmar el comportamiento d
 
 Con el conjunto de pruebas satisfactorio, se dio por validada la arquitectura y se procedió al diseño e integración de la PCB final, ya con un nivel de confianza mayor y con criterios de diseño refinados a partir de los aprendizajes obtenidos en la plataforma de testeo.
 
+\newpage
+
 \section{Esquemáticos}
 
 \subsection{Potencia y alimentación}
 
 \subsubsection{AEM10941}
-La Figura \ref{fig:aem_block_diagram} muestra el diagrama de bloques de referencia que nos proporciona el datasheet del fabricante, a partir del cual se ha desarrollado el esquemático del circuito del AEM10941. En ella vemos los pines principales: \texttt{SRC}, \texttt{BATT} y \texttt{HVOUT}, que indican la entrada de los paneles solares, la batería y la salida de 3.3 V regulada, respectivamente.
+La Figura \ref{fig:aem_block_diagram} muestra el diagrama de bloques de referencia que nos proporciona el \textit{datasheet} del fabricante, a partir del cual se ha desarrollado el esquemático del circuito del AEM10941. En ella vemos los pines principales: \texttt{SRC}, \texttt{BATT} y \texttt{HVOUT}, que indican la entrada de los paneles solares, la batería y la salida de 3.3 V regulada, respectivamente.
 
 \begin{figure}[H]
     \centering
@@ -371,12 +374,12 @@ La Figura \ref{fig:aem_block_diagram} muestra el diagrama de bloques de referenc
 
 En nuestro sistema solo se utiliza la salida \texttt{HVOUT} y no \texttt{LVOUT} por lo que lo pines de \textit{enable} de los LDOs se fijan a \texttt{ENVH = HIGH} y \texttt{ENVL = LOW} (el voltaje lógico de \texttt{HIGH} es \texttt{VBUCK}). Además la salida \texttt{LVOUT} se deja flotando. \\
 
-La configuración de la batería y los voltajes de salida de los LDOs se establecen mediante los pines de \texttt{CFG[2:0]}, fijados a \texttt{} en binario, lo que selecciona el perfil de carga correspondiente a una batería Li-ion. En la Figura \ref{fig:aem_cfg} se observa la tabla de posibles configuraciones. Como no se emplea un modo de configuración personalizado, los pines \texttt{SET\_OVDIS}, \texttt{SET\_CHRDY}, \texttt{SET\_OVCH} y \texttt{FB\_HV} no se utilizan y se dejan flotando.
+La configuración de la batería y los voltajes de salida de los LDOs se establecen mediante los pines de \texttt{CFG[2:0]}, fijados a \texttt{111} en binario, lo que selecciona el perfil de carga correspondiente a una batería Li-ion. En la Figura \ref{fig:aem_cfg} se observa la tabla de posibles configuraciones. Como no se emplea un modo de configuración personalizado, los pines \texttt{SET\_OVDIS}, \texttt{SET\_CHRDY}, \texttt{SET\_OVCH} y \texttt{FB\_HV} no se utilizan y se dejan flotando.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\linewidth]{imgs/aem_cfg.png}
-    \caption{\textit{Tabla de modos de batería y voltages de salida de los LDOs del AEM10941. e-peas.}}
+    \caption{\textit{Tabla de modos de batería y voltajes de salida de los LDOs del AEM10941. e-peas.}}
     \label{fig:aem_cfg}
 \end{figure}
 
@@ -393,7 +396,7 @@ Otro punto punto a tener en cuenta es el pin \texttt{BATT}, que no debe quedar n
 
 Los demás condensadores e inductores son los que recomienda el fabricante por defecto. Las señales \texttt{STATUS[2:0]} se conectan directamente al microcontrolador. \\
 
-En la Figura \ref{fig:sch_aem} se expone el esquemático final del subsistema de control de potencia.
+En la Figura \ref{fig:sch_aem} se expone el esquemático final del subsistema de gestión de potencia.
 
 \begin{figure}[H]
     \centering
@@ -402,14 +405,12 @@ En la Figura \ref{fig:sch_aem} se expone el esquemático final del subsistema de
     \label{fig:sch_aem}
 \end{figure}
 
-\newpage
-
 \subsubsection{INA3221}
 La Figura \ref{fig:ina_block_diagram} muestra el diagrama de conexiones recomendado por el fabricante del INA3221. \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{imgs/ina_block_diagram.png}
+    \includegraphics[width=0.75\linewidth]{imgs/ina_block_diagram.png}
     \caption{\textit{Diagrama de bloques funcional de referencia del INA3221. Texas Instruments.}}
     \label{fig:ina_block_diagram}
 \end{figure}
@@ -426,7 +427,7 @@ La selección del valor de la resistencia de \textit{shunt} se realiza a partir 
     P_\mathrm{shunt}=I_\mathrm{max}^2 \cdot R_\mathrm{shunt}=0.15^2 \cdot 0.22=0.00495~\mathrm{W}
 \]
 
-Esta configuración ofrece una precisión aceptable a cambio de una caída de tensión muy pequeña. La disipación de calor también es mínima. En cuanto a la resolución, el INA3221 presenta una cuantización típica de $40\;\mu V/bit$ en el registro de tensión de los canales. Por tanto, la resolución de corriente equivalente quedaría:
+Esta configuración ofrece una precisión aceptable a cambio de una caída de tensión muy pequeña. La disipación de calor también es mínima. En cuanto a la resolución, el INA3221 presenta una cuantización típica de $40~\mathrm{\mu V/bit}$ en el registro de tensión de los canales. Por tanto, la resolución de corriente equivalente quedaría:
 
 \[
     I_\mathrm{LSB}=\frac{40~\mathrm{\mu V/bit}}{R_\mathrm{shunt}}=\frac{40 \cdot 10^{-6}}{0.22}=0.182~\mathrm{mA/bit}
@@ -496,10 +497,12 @@ Se cumplen además estos puntos:
     \item El bus de 3.3 V entra al source del MOSFET después de pasar por el INA3221.
 \end{itemize}
 
+\newpage
+
 \subsection{MCU}
 
 \subsubsection{STM32WB55RG}
-Para reducir el riesgo de errores en una parte crítica del diseño, el esquema se ha construido tomando como referencia la placa NUCLEO-WB55RG, replicando las recomendaciones del fabricante. Esta aproximación permite apoyarse en una topología ya validada y minimiza incertidumbres típicas del primer diseño de placa. Las Figuras \ref{fig:sch_stm32} y \ref{fig:sch_mcu_supply} muestran el esquemático final de la MCU.
+Para reducir el riesgo de errores en una parte crítica del diseño, el esquema se ha construido tomando como referencia la placa NUCLEO-WB55RG y replicando los esquemáticos del fabricante \cite{stm32_sch}, siempre que era posible. Esta aproximación permite apoyarse en una topología ya validada y minimiza incertidumbres típicas del primer diseño de placa. Las Figuras \ref{fig:sch_stm32} y \ref{fig:sch_mcu_supply} muestran el esquemático final de la MCU.
 
 \begin{figure}[H]
     \centering
@@ -527,7 +530,7 @@ Para cada pin de alimentación se ha colocado un condensador de 100 nF lo más p
         \centering
         \includegraphics[width=1\linewidth]{imgs/stm32_smps.png}
     \end{minipage}
-    \caption{\textit{Recomendaciones de conexión de alimentación y SMPS del STM32WB55RG.}}
+    \caption{\textit{Recomendaciones de conexión de alimentación y SMPS del STM32WB55RG. STMicroelectronics.}}
     \label{fig:stm32_supply}
 \end{figure}
 
@@ -536,110 +539,108 @@ La Figura \ref{fig:stm32_rst_boot} muestra el circuito para las conexiones de lo
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{imgs/stm32_rst_boot.png}
-    \caption{\textit{Circuito recomendado para los pines \texttt{NRST} y \texttt{BOOT0} en el STM32WB55RG.}}
+    \caption{\textit{Circuito recomendado para los pines \texttt{NRST} y \texttt{BOOT0} en el STM32WB55RG. STMicroelectronics.}}
     \label{fig:stm32_rst_boot}
 \end{figure}
 
 En la Tabla \ref{tabla:pinout} se muestra el \textit{pinout} utilizado del STM32WB55RG para este proyecto \cite{stm32_pinout}.
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|m{0.25\linewidth}|m{0.25\linewidth}|m{0.25\linewidth}|}
-        \hline
-        \rowcolor{LightSteelBlue1}
-        \textbf{Pin STM32} & \textbf{Etiqueta} & \textbf{Función} \\
-        \hline
-        VDD & VDD & Alimentación \\
-        \hline
-        VDDA & VDDA & Alimentación \\
-        \hline
-        VDDRF & VDDRF & Alimentación \\
-        \hline
-        VDDSMPS & VDDSMPS & Alimentación \\
-        \hline
-        VDDUSB & VDDUSB & Alimentación \\
-        \hline
-        VBAT & VBAT & Alimentación \\
-        \hline
-        VSS & GND & Tierra \\
-        \hline
-        VSSRF & GND & Tierra \\
-        \hline
-        VSSSMPS & GND & Tierra \\
-        \hline
-        \hline
-        NRST & NRST & Reset \\
-        \hline
-        VLXSMPS & VLXSMPS & Alimentación \\
-        \hline
-        VFBSMPS & VFBSMPS & Alimentación \\
-        \hline
-        VREF & VDDA & Referencia de voltaje \\
-        \hline
-        RF1 & RF1 & RF \\
-        \hline
-        OSC\_IN & HSE\_IN & OSC\_IN \\
-        \hline
-        OSC\_OUT & HSE\_OUT & OSC\_OUT \\
-        \hline
-        PC14 & LSE\_IN & OSC32\_IN \\
-        \hline
-        PC15 & LSE\_OUT & OSC32\_OUT \\
-        \hline
-        PH3 & BOOT0 & Boot \\
-        \hline
-        \hline
-        PA0 & PV\_INA & GPIO\_EXTI0 \\
-        \hline
-        PA1 & CRI\_INA & GPIO\_EXTI1 \\
-        \hline
-        PA2 & WAR\_INA & GPIO\_EXTI2 \\
-        \hline
-        PA3 & S0\_AEM & GPIO\_EXTI3 \\
-        \hline
-        PA4 & S1\_AEM & GPIO\_EXTI4 \\
-        \hline
-        PA5 & S2\_AEM & GPIO\_Input \\
-        \hline
-        PA6 & GATE\_SENS & GPIO\_Output \\
-        \hline
-        PA7 & DFR0198 & GPIO\_Output \\
-        \hline
-        PA8 & SEN0308 & ADC1\_IN15 \\
-        \hline
-        PA10 & USER\_LED & GPIO\_Output \\
-        \hline
-        PA11 & CS\_FRAM & GPIO\_Output \\
-        \hline
-        PA13 & SWDIO & SWD \\
-        \hline
-        PA14 & SWCLK & SWD \\
-        \hline
-        \hline
-        PB3 & SWO & SWD \\
-        \hline
-        PB6 & USART\_RX & USART1\_TX \\
-        \hline
-        PB7 & USART\_TX & USART1\_RX \\
-        \hline
-        PB13 & SCK & SPI2\_SCK \\
-        \hline
-        PB14 & MISO & SPI2\_MISO \\
-        \hline
-        PB15 & MOSI & SPI2\_MOSI \\
-        \hline
-        \hline
-        PC0 & SCL & I2C3\_SCL \\
-        \hline
-        PC1 & SDA & I2C3\_SDA \\
-        \hline
-        PC12 & WP\_FRAM & GPIO\_Output \\
-        \hline
-    \end{tabular}
-    \normalsize
+\small
+\begin{longtable}{|m{0.25\linewidth}|m{0.25\linewidth}|m{0.25\linewidth}|}
+    \hline
+    \rowcolor{LightSteelBlue1}
+    \textbf{Pin STM32} & \textbf{Etiqueta} & \textbf{Función} \\
+    \hline
+    VDD & VDD & Alimentación \\
+    \hline
+    VDDA & VDDA & Alimentación \\
+    \hline
+    VDDRF & VDDRF & Alimentación \\
+    \hline
+    VDDSMPS & VDDSMPS & Alimentación \\
+    \hline
+    VDDUSB & VDDUSB & Alimentación \\
+    \hline
+    VBAT & VBAT & Alimentación \\
+    \hline
+    VSS & GND & Tierra \\
+    \hline
+    VSSRF & GND & Tierra \\
+    \hline
+    VSSSMPS & GND & Tierra \\
+    \hline
+    \hline
+    NRST & NRST & Reset \\
+    \hline
+    VLXSMPS & VLXSMPS & Alimentación \\
+    \hline
+    VFBSMPS & VFBSMPS & Alimentación \\
+    \hline
+    VREF & VDDA & Referencia de voltaje \\
+    \hline
+    RF1 & RF1 & RF \\
+    \hline
+    OSC\_IN & HSE\_IN & OSC\_IN \\
+    \hline
+    OSC\_OUT & HSE\_OUT & OSC\_OUT \\
+    \hline
+    PC14 & LSE\_IN & OSC32\_IN \\
+    \hline
+    PC15 & LSE\_OUT & OSC32\_OUT \\
+    \hline
+    PH3 & BOOT0 & Boot \\
+    \hline
+    \hline
+    PA0 & PV\_INA & GPIO\_EXTI0 \\
+    \hline
+    PA1 & CRI\_INA & GPIO\_EXTI1 \\
+    \hline
+    PA2 & WAR\_INA & GPIO\_EXTI2 \\
+    \hline
+    PA3 & S0\_AEM & GPIO\_EXTI3 \\
+    \hline
+    PA4 & S1\_AEM & GPIO\_EXTI4 \\
+    \hline
+    PA5 & S2\_AEM & GPIO\_Input \\
+    \hline
+    PA6 & GATE\_SENS & GPIO\_Output \\
+    \hline
+    PA7 & DFR0198 & GPIO\_Output \\
+    \hline
+    PA8 & SEN0308 & ADC1\_IN15 \\
+    \hline
+    PA10 & USER\_LED & GPIO\_Output \\
+    \hline
+    PA11 & CS\_FRAM & GPIO\_Output \\
+    \hline
+    PA13 & SWDIO & SWD \\
+    \hline
+    PA14 & SWCLK & SWD \\
+    \hline
+    \hline
+    PB3 & SWO & SWD \\
+    \hline
+    PB6 & USART\_RX & USART1\_TX \\
+    \hline
+    PB7 & USART\_TX & USART1\_RX \\
+    \hline
+    PB13 & SCK & SPI2\_SCK \\
+    \hline
+    PB14 & MISO & SPI2\_MISO \\
+    \hline
+    PB15 & MOSI & SPI2\_MOSI \\
+    \hline
+    \hline
+    PC0 & SCL & I2C3\_SCL \\
+    \hline
+    PC1 & SDA & I2C3\_SDA \\
+    \hline
+    PC12 & WP\_FRAM & GPIO\_Output \\
+    \hline
     \caption{\textit{Tabla con el pinout utilizado del STM32, su etiqueta y su función. Elaboración propia.}}
     \label{tabla:pinout}
-\end{table}
+\end{longtable}
+\normalsize
 
 \subsubsection{Osciladores}
 El STM32WB55RG permite incorporar dos cristales externos: un oscilador de 32 MHz (HSE) y un oscilador de 32.768 kHz (LSE). El HSE es relevante para el funcionamiento fiable del subsistema RF, mientras que el LSE se recomienda para el RTC por ofrecer mayor precisión que los osciladores internos. Por este motivo se han incorporado ambos en el diseño final. \\
@@ -670,7 +671,7 @@ Se fija $C_\mathrm{S}=3~\mathrm{pF}$. En el caso del HSE, no se montan condensad
 \end{figure}
 
 \subsubsection{RF}
-Es la parte más sensible del diseño, por lo que se ha seguido estrictamente la documentación de referencia y notas de aplicación de STMicroelectronics \cite{an5129} \cite{an6335}. \\
+Es la parte más sensible del diseño, por lo que se ha seguido estrictamente la documentación de referencia y notas de aplicación de STMicroelectronics \cite{an5129} \cite{an6335} \cite{an5165}. \\
 
 Se utiliza el módulo MLPF-WB55-01E3 (recomendado para STM32WB), junto con una red adicional tipo “H” formada por dos condensadores de 1.2 pF y un inductor de 3.6 nH para adaptar la señal entre el pin RF1 del microcontrolador y la antena. Siguiendo la referencia de la NUCLEO-WB55RG, el primer condensador de la red se omite, manteniendo la topología validada por el fabricante.
 
@@ -681,7 +682,7 @@ Se utiliza el módulo MLPF-WB55-01E3 (recomendado para STM32WB), junto con una r
     \label{fig:stm32_rf}
 \end{figure}
 
-Además, se implementan pistas RF con impedancia controlada. La \textit{Application Note AN6335} \cite{an6335} indica que el tramo entre el STM32 y el MLPF debe aproximarse a 62 $\Omega$ (62R), mientras que el tramo desde el filtro hacia la antena debe ser de 50 $\Omega$ (50R). Estas impedancias serán claves para el dimensionado de las pistas y la selección del stack-up de la PCB.
+Además, se implementan pistas RF con impedancia controlada. La \textit{Application Note AN6335} \cite{an6335} indica que el tramo entre el STM32 y el MLPF debe aproximarse a 62 $\Omega$ (62R), mientras que el tramo desde el filtro hacia la antena debe ser de 50 $\Omega$ (50R). Estas impedancias serán claves para el dimensionado de las pistas y la selección del \textit{stack-up} de la PCB.
 
 \begin{figure}[H]
     \centering
@@ -701,7 +702,7 @@ La memoria FRAM se conecta mediante bus SPI común. Adicionalmente incorpora dos
 \end{figure}
 
 \subsubsection{LEDs}
-Se integran dos LEDs en el sistema: uno de POWER, que indica la presencia de alimentación, y otro de USER, controlado por un pin del STM32. El LED de usuario se conecta con el cátodo a GND, de modo que se enciende al fijar el pin a HIGH, y el valor de la resistencia se dimensiona para un consumo aproximado de 1 mA, suficiente para visibilidad sin penalizar el consumo energético. \\
+Se integran dos LEDs en el sistema: uno de POWER, que indica la presencia de alimentación, y otro de USER, controlado por un pin del STM32. El LED de usuario se conecta con el cátodo a GND, de modo que se enciende al fijar el pin a HIGH, y el valor de la resistencia se dimensiona para un consumo aproximado de 1 mA, suficiente para que sean visibles sin penalizar el consumo energético. \\
 
 El cálculo se realiza con la expresión:
 
@@ -718,7 +719,7 @@ Donde $V_\mathrm{DD}=3.3~\mathrm{V}$ y $V_\mathrm{F}$ es la caída de tensión d
     \label{fig:sch_leds}
 \end{figure}
 
-\subsection{Conexiones externas}
+\subsection{Conectores}
 
 \subsubsection{SWD}
 Para la programación del STM32WB55RG se ha optado por la interfaz SWD (Serial Wire Debug), utilizando un programador ST-LINK/V2. El ST-LINK estándar emplea un conector de 20 pines (ver Figura \ref{fig:stlink_swd}), pero para este proyecto dicho conector resulta excesivamente grande para la PCB y, además, la mayoría de sus pines son redundantes o corresponden a GND.
@@ -737,7 +738,7 @@ Para la programación del STM32WB55RG se ha optado por la interfaz SWD (Serial W
     \label{fig:stlink_swd}
 \end{figure}
 
-Por este motivo, se ha reducido la conexión a las señales mínimas necesarias para programación y depuración: \texttt{Vref}, \texttt{SWDIO}, \texttt{SWCLK}, \texttt{GND}, \texttt{NRST} y, de forma opcional, \texttt{SWO}. Adicionalmente se enruta una opción de alimentación hacia el jumper del bus de 3.3 V descrito en la sección “Bus de 3.3 V” (Sección \ref{seccion:bus_3V3}), de forma que durante pruebas en laboratorio sea posible alimentar el sistema desde una fuente externa o, si el programador lo permite, desde el propio ST-LINK. En cualquier caso, Vref se utiliza como referencia de niveles lógicos para asegurar compatibilidad eléctrica durante la programación.
+Por este motivo, se ha reducido la conexión a las señales mínimas necesarias para programación y depuración: \texttt{Vref}, \texttt{SWDIO}, \texttt{SWCLK}, \texttt{GND}, \texttt{NRST} y, de forma opcional, \texttt{SWO}. Adicionalmente se enruta una opción de alimentación hacia el jumper del bus de 3.3 V descrito en la sección “Bus de 3.3 V” (Sección \ref{seccion:bus_3V3}), de forma que durante pruebas en laboratorio sea posible alimentar el sistema desde una fuente externa o, si el programador lo permite, desde el propio ST-LINK. En cualquier caso, \texttt{Vref} se utiliza únicamente como referencia de tensión, no para alimentación.
  
 \begin{figure}[H]
     \centering
@@ -747,7 +748,7 @@ Por este motivo, se ha reducido la conexión a las señales mínimas necesarias 
 \end{figure}
 
 \subsubsection{Baterias y paneles solares}
-La Figura \ref{fig:sch_supply_conn} muestra los conectores asociados a la batería y a los paneles solares y sus conexiones. Se han añadido condensadores de desacoplo de 100 nF en las entradas de alimentación por defecto.
+La Figura \ref{fig:sch_supply_conn} muestra los conectores asociados a las baterías y paneles solares y sus conexiones. Se han añadido condensadores de desacoplo de 100 nF en las entradas de alimentación por defecto.
 
 \begin{figure}[H]
     \centering
@@ -786,11 +787,21 @@ Adicionalmente, se han incorporado jumpers para desacoplar y depurar ciertas con
 \end{figure}
 
 \section{Diseño PCB}
-Una vez finalizados los esquemáticos se pasó al desarrollo del layout de la PCB. Para esta etapa se tuvieron muy en cuenta las referencias de la placa NUCLEO-WB55RG. Como reglas de diseño base se utilizó un ancho de pista por defecto para señales de 0.2 mm, y para las vías un diámetro de 0.6 mm con taladro de 0.3 mm. En las pistas de potencia se aumentó el ancho hasta un máximo de 0.8 mm. \\
+Una vez finalizados los esquemáticos se pasó al desarrollo del \textit{layout} de la PCB. Para esta etapa se tuvieron muy en cuenta las referencias de la placa NUCLEO-WB55RG, especialmente en lo relativo a la colocación del microcontrolador, el subsistema RF y las recomendaciones generales de desacoplo. \\
 
-La disposición de componentes se realizó agrupando, en la medida de lo posible, los elementos de cada subsistema, lo que facilitó el ruteado y redujo cruces innecesarios. Siempre que existían \textit{layouts} de referencia de los fabricantes, se tomó como guía para minimizar riesgos de integración. \\
+La disposición de componentes se realizó agrupando, en la medida de lo posible, los elementos de cada subsistema, lo que facilitó el ruteado y redujo cruces innecesarios. Siempre que existían \textit{layouts} de referencia de los fabricantes, se tomaron como guía para minimizar riesgos de integración.
 
-En cuanto a la fabricación, se seleccionó \textbf{JLCPCB} como proveedor, por lo que el diseño del \textit{layout} y las reglas de ruteado se ajustaron desde el inicio a sus capacidades y restricciones de proceso.
+\subsection{Requerimientos del fabricante}
+En cuanto a la fabricación, se seleccionó \textbf{JLCPCB} como proveedor. Por ello, antes de fijar el conjunto final de reglas de diseño, se revisaron sus capacidades de proceso para asegurar que el diseño fuese fabricable sin modificaciones. Para ello se consultaron las especificaciones del fabricante y se definieron reglas de diseño (DRC) acordes a los mínimos soportados. En la Figura \ref{fig:pcb_requirements} se muestran los valores mínimos de fabricación.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\linewidth]{imgs/pcb_requirements.png}
+    \caption{\textit{Requisitos mínimos de fabricación de JLCPCB.}}
+    \label{fig:pcb_requirements}
+\end{figure}
+
+A partir de estos límites, se establecieron las reglas internas de ruteado utilizadas durante el diseño: un ancho por defecto de 0.20 mm para señales, vías de 0.60 mm de diámetro con taladro de 0.30 mm, y un ancho mayor en pistas de potencia, incrementado hasta 0.80 mm en los tramos donde el espacio lo permitía, con el objetivo de reducir la caída de tensión y mejorar la distribución de corriente.
 
 \subsection{Apilado fisico (\textit{stack-up})}
 Para escoger el número de capas y el apilado físico se tuvieron en cuenta varios factores. El primero fue el coste: las placas de 2 capas son las más económicas, seguidas por las de 4 capas. Sin embargo, dado el número de componentes y señales del sistema, se optó por un diseño de 4 capas, que permite un ruteado más limpio y el uso de planos de masa continuos. \\
@@ -813,7 +824,7 @@ JLCPCB ofrece distintos espesores y opciones de fabricación para placas de 4 ca
     \label{fig:pcb_stackup}
 \end{figure}
 
-Respecto a la distribución por capas, la capa \textit{top} se reservó para la mayor parte de componentes y pistas de señal, con el objetivo de facilitar el ensamblaje. La \textit{inner1} se dedicó a un plano continuo de GND, lo cual mejora el retorno de corriente y ayuda al control de impedancia en líneas críticas. La \textit{inner2} se destinó principalmente a planos de alimentación, con la excepción de la zona RF, donde se mantuvo un plano de GND bajo la línea para asegurar una referencia adecuada. Por último, la capa \textit{bottom} se utilizó para las señales restantes cuando no era posible rutearlas en top debido a cortes o congestión de pistas, y para colocar el holder de la pila de backup. La Tabla \ref{tabla:layers} muestra un resumen de la disposición de capas.
+Respecto a la distribución por capas, la capa \textit{top} se reservó para la mayor parte de componentes y pistas de señal, con el objetivo de facilitar el ensamblaje. La \textit{inner1} se dedicó a un plano continuo de GND, el cual mejora el retorno de corriente y ayuda al control de impedancia en líneas críticas. La \textit{inner2} se destinó principalmente a planos de alimentación, con la excepción de la zona RF, donde se mantuvo un plano de GND bajo la línea para asegurar una referencia adecuada. Por último, la capa \textit{bottom} se utilizó para las señales restantes cuando no era posible rutearlas en la \textit{top} debido a cortes o congestión de pistas, y para colocar el \textit{holder} de la pila de \textit{back-up}. La Tabla \ref{tabla:layers} muestra un resumen de la disposición de capas.
 
 \begin{table}[H]
     \centering
@@ -835,23 +846,13 @@ Respecto a la distribución por capas, la capa \textit{top} se reservó para la 
     \label{tabla:layers}
 \end{table}
 
-\subsection{Requerimientos de JLCPCB}
-Además del \textit{stack-up}, fue necesario verificar que JLCPCB soportase los anchos de pista, separaciones y dimensiones de vías previstas. Para ello se consultaron las especificaciones del fabricante y se fijaron reglas de diseño (DRC) acordes a los mínimos soportados. En la Figura \ref{fig:pcb_requirements} se muestran los valores mínimos de fabricación.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\linewidth]{imgs/pcb_requirements.png}
-    \caption{\textit{Requisitos mínimos de fabricación de JLCPCB.}}
-    \label{fig:pcb_requirements}
-\end{figure}
-
 \subsection{Condensadores de desacoplo}
 Se prestó especial atención a la colocación y conexión de los condensadores de desacoplo, ya que tienen un papel fundamental en la estabilidad de los integrados y en la reducción de ruido en los raíles de alimentación. Para ello se siguieron las recomendaciones de diseño de la nota de aplicación \textit{SPMA056} \cite{spma056} que se observan en al Figura \ref{fig:decoupling_cap}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\linewidth]{imgs/decoupling_cap.png}
-    \caption{\textit{Recomendaciones de colocación y conexión de condensadores de desacoplo. SPMA056.}}
+    \caption{\textit{Recomendaciones de colocación y conexión de condensadores de desacoplo. Texas Instruments.}}
     \label{fig:decoupling_cap}
 \end{figure}
 
@@ -893,7 +894,7 @@ Para dimensionar las pistas de impedancia controlada se utilizó la herramienta 
     \label{fig:coplanar}
 \end{figure}
 
-Para el cálculo se requieren el stack-up, la impedancia objetivo y la separación entre la pista y el plano GND coplanar (0.16 mm en este diseño). Introduciendo estos parámetros en la calculadora, se obtiene el ancho óptimo de pista. Para simplificar el diseño y ajustarlo a valores redondeados, se adoptaron los siguientes anchos finales: para 50 $\Omega$ la calculadora devuelve 0.2695 mm y se utilizó 0.28 mm (Figura \ref{fig:pcb_50R}); para 62 $\Omega$ la calculadora devuelve 0.1537 mm y se utilizó 0.16 mm (Figura \ref{fig:pcb_62R}).
+Para el cálculo se requieren el \textit{stack-up}, la impedancia objetivo y la separación entre la pista y el plano GND coplanar (0.16 mm en este diseño). Introduciendo estos parámetros en la calculadora, se obtiene el ancho óptimo de pista. Para simplificar el diseño y ajustarlo a valores redondeados, se adoptaron los siguientes anchos finales: para 50 $\Omega$ la calculadora devuelve 0.2695 mm y se utilizó 0.28 mm (Figura \ref{fig:pcb_50R}); para 62 $\Omega$ la calculadora devuelve 0.1537 mm y se utilizó 0.16 mm (Figura \ref{fig:pcb_62R}).
 
 \begin{figure}[H]
     \centering
@@ -914,7 +915,7 @@ Para el diseño de la antena en PCB se siguieron las recomendaciones de STMicroe
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{imgs/anthenna.png}
-    \caption{\textit{Dimensiones recomendadas para la antena PCB.}}
+    \caption{\textit{Dimensiones recomendadas para la antena PCB. STMicroelectronics.}}
     \label{fig:anthenna}
 \end{figure}
 
@@ -973,7 +974,7 @@ Para el diseño de la antena en PCB se siguieron las recomendaciones de STMicroe
 Cuando se finalizó el diseño de la PCB se generaron los archivos de fabricación necesarios para realizar el pedido a JLCPCB. En concreto, los ficheros principales fueron los Gerbers, la lista de materiales (BOM) y el archivo de posición (\textit{Pick \& Place}), que permiten tanto la fabricación de la placa como el ensamblaje automático de los componentes.
 
 \subsection{Proceso de elección de componentes de JLCPCB}
-JLCPCB ofrece dos modalidades de fabricación: fabricar únicamente la PCB para que el ensamblaje lo realice el usuario, o fabricar la PCB y realizar también el ensamblaje con los componentes seleccionados. Dado que el sistema incorpora encapsulados QFN, difíciles de soldar manualmente con herramientas básicas, y pasivos de tamaño 0402, se optó por la segunda opción, delegando el ensamblaje automático en el fabricante para reducir riesgo de fallo por soldadura. \\
+JLCPCB ofrece dos modalidades de fabricación: fabricar únicamente la PCB para que el ensamblaje lo realice el usuario, o fabricar la PCB y realizar también el ensamblaje con los componentes seleccionados. Dado que el sistema incorpora encapsulados QFN, difíciles de soldar manualmente con herramientas básicas, y pasivos de tamaño 0402, se optó por la segunda opción, delegando el ensamblaje automático al fabricante para reducir riesgo de fallo por soldadura. \\
 
 Para que JLCPCB pueda montar los componentes es necesario asignar a cada referencia un número de parte de su catálogo \cite{jlcpcb_shop}. Durante el proceso de selección se tuvo en cuenta si los componentes pertenecían a la categoría \textit{Basic} o \textit{Extended}, ya que estos últimos conllevan un coste adicional por componente, lo que puede penalizar el presupuesto si se utilizan muchos componentes en dicha categoría. \\
 
@@ -1063,22 +1064,73 @@ Una vez enviados los archivos de fabricación y ensamblaje, se recibieron las pl
 
 En primer lugar se comprobó el encendido del LED de POWER, verificando la correcta alimentación y la presencia del bus de 3.3 V. A continuación se validó la MCU, ya que era uno de los puntos con mayor incertidumbre en la integración: se comprobó la programación mediante SWD y la ejecución básica de un programa. Posteriormente se verificó el bloque de monitorización de potencia, la memoria FRAM y la adquisición de datos de los sensores. Finalmente se comprobó el subsistema con mayor sensibilidad al \textit{layout}: la parte de RF, verificando la comunicación BLE y confirmando que el trazado y la antena funcionaban conforme a lo esperado. \\
 
-Tras confirmar que el ensamblaje era correcto, se procedió al montaje manual de los elementos no ensamblados por el fabricante. En particular, se soldó el AEM10941 junto con conectores y jumpers. La soldadura del AEM10941 resultó especialmente exigente debido a su encapsulado QFN, que requiere control térmico y correcta cantidad de estaño en los pads. Dado que el resto de componentes ya estaban montados, no era viable un proceso de \textit{reflow} completo en un horno, por lo que se recurrió a una pistola de aire caliente para su soldadura. Tras varias iteraciones de práctica y ajustes de temperatura y flujo, se consiguió una soldadura correcta del integrado y del resto de pines auxiliares.
+Tras confirmar que el ensamblaje era correcto, se procedió al montaje manual de los elementos no ensamblados por el fabricante. En particular, se soldó el AEM10941 junto con conectores y \textit{jumpers}. La soldadura del AEM10941 resultó especialmente exigente debido a su encapsulado QFN, que requiere control térmico y correcta cantidad de estaño en los pads. Dado que el resto de componentes ya estaban montados, no era viable un proceso de \textit{reflow} completo en un horno, por lo que se recurrió a una pistola de aire caliente para su soldadura. Tras varias iteraciones de práctica y ajustes de temperatura y flujo, se consiguió una soldadura correcta del integrado y del resto de pines auxiliares.
 
 \begin{figure}[H]
     \centering
-    %\includegraphics[width=1\linewidth]{}
+    \includegraphics[width=1\linewidth]{imgs/photo/circuit_6.jpg}
     \caption{\textit{PCB final completamente soldada. Elaboración propia.}}
-    \label{fig:pcb_solder}
+    \label{fig:circuit_6}
 \end{figure}
 
 \section{Integración en la lanza}
-???
+Para definir con claridad la integración física de la PCB dentro de la lanza meteorológica, se realizó un diseño 3D del conjunto completo. Las Figuras \ref{fig:full_spear}, \ref{fig:pcb_case} y \ref{fig:spear_sensors} muestran imágenes del diseño.
+
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.2\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{imgs/3d/full_spear.png}
+    \end{minipage}%
+    \begin{minipage}{0.22\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{imgs/3d/full_spear_45.png}
+    \end{minipage}%
+    \begin{minipage}{0.58\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{imgs/3d/solar_panels_45.png}
+    \end{minipage}
+    \caption{\textit{Diseño 3D de la lanza, los paneles solares y el sensor de irradiancia. Elaboración propia.}}
+    \label{fig:full_spear}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{imgs/3d/pcb_case.png}
+    \end{minipage}%
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{imgs/3d/pcb_case_45.png}
+    \end{minipage}
+    \caption{\textit{Diseño 3D del encapsulado de la PCB diseñada. Elaboración propia.}}
+    \label{fig:pcb_case}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.22\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{imgs/3d/air_sensor_spear_45.png}
+    \end{minipage}%
+    \begin{minipage}{0.56\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{imgs/3d/air_sensor_45.png}
+    \end{minipage}%
+    \begin{minipage}{0.22\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{imgs/3d/spear_end_45.png}
+    \end{minipage}
+    \caption{\textit{Diseño 3D del encapsulado y agujeros de los diferentes sensores. Elaboración propia.}}
+    \label{fig:spear_sensors}
+\end{figure}
 
 \chapter{Desarrollo software}
 
 \section{Entorno y herramientas}
-Para el desarrollo de firmware en microcontroladores STM32 existen distintas alternativas, sin embargo, para este proyecto se ha optado por el ecosistema oficial de STMicroelectronics por ser la opción más integrada y robusta: facilita la configuración del microcontrolador, genera automáticamente el código base de inicialización y ofrece herramientas consolidadas para programación y depuración. \\
+Para el desarrollo de \textit{firmware} en microcontroladores STM32 existen distintas alternativas, sin embargo, para este proyecto se ha optado por el ecosistema oficial de STMicroelectronics por ser la opción más integrada y robusta: facilita la configuración del microcontrolador, genera automáticamente el código base de inicialización y ofrece herramientas consolidadas para programación y depuración. \\
 
 Las herramientas principales empleadas han sido:
 
@@ -1088,10 +1140,17 @@ Las herramientas principales empleadas han sido:
     \item \textbf{STM32CubeProgrammer:} herramienta para programar y verificar el microcontrolador. Permite cargar binarios en memoria Flash, comprobar su integridad, leer/escribir memoria y configurar parámetros del dispositivo cuando es necesario.
 \end{itemize}
 
-En el caso del STM32WB55, para poder utilizar la pila BLE fue necesario cargar previamente el stack proporcionado por el fabricante en la memoria Flash. Para ello se empleó STM32CubeProgrammer y, siguiendo las indicaciones de STMicroelectronics, se programó en la dirección \texttt{0x080CE000} el archivo «\texttt{stm32wb5x\_BLE\_Stack\_full\_fw.bin}» \cite{ble_stack_github}.
+En el caso del STM32WB55, para poder utilizar la pila BLE fue necesario cargar previamente el \textit{stack} proporcionado por el fabricante en la memoria Flash. Para ello se empleó STM32CubeProgrammer y, siguiendo las indicaciones de STMicroelectronics, se programó en la dirección \texttt{0x080CE000} el archivo «\texttt{stm32wb5x\_BLE\_Stack\_full\_fw.bin}» \cite{ble_stack_github}.
 
 \section{Arquitectura del \textit{firmware}}
-???
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imgs/firmware_arch.png}
+    \caption{\textit{Diagrama conceptual de la arquitectura del firmware del sistema. Elaboración propia.}}
+    \label{fig:firmware_arch}
+\end{figure}
+
+La Figura \ref{fig:firmware_arch} muestra los flujos principales del \textit{firmware}. El ciclo normal se desencadena por el RTC, realizando la lectura de sensores y registro en la FRAM. Los eventos EXTI, BLE y UART se atienden de forma específica y, una vez completada la tarea, el sistema vuelve a un modo de bajo consumo para maximizar la autonomía.
 
 \section{\textit{Drivers}}
 Todos los \textit{drivers} de los componentes fueron desarrollados específicamente para este proyecto. Se decidió implementar \textit{drivers} propios en lugar de utilizar librerías de terceros para mantener el máximo control sobre el acceso al \textit{hardware}, reducir dependencias externas y comprender en profundidad el funcionamiento real de cada componente. \\
@@ -1115,7 +1174,7 @@ Además, la estructura de los \textit{drivers} sigue un patrón común. En gener
 \subsection{INA3221}
 El \textit{driver} del INA3221 se comunica mediante el bus I2C. El integrado trabaja como esclavo y su dirección I2C por defecto es \texttt{0x40}. Su funcionamiento se basa en la escritura y lectura de registros internos: por un lado registros de configuración y por otro registros de medida (tensión de bus y tensión en \textit{shunt}) para cada canal. \\
 
-El \textit{struct} del componente se denomina \texttt{INA3221\_t} y contiene el \textit{handle} de I2C de la librería HAL, los valores de las resistencias \textit{shunt} y una serie de parámetros de configuración necesarios para la inicialización: modo de promediado, tiempos de conversión de bus y \textit{shunt}, y modo de operación. De este modo, el \textit{driver} queda parametrizado desde software y no depende de constantes globales. \\
+El \textit{struct} del componente se denomina \texttt{INA3221\_t} y contiene el \textit{handle} de I2C de la librería HAL, los valores de las resistencias \textit{shunt} y una serie de parámetros de configuración necesarios para la inicialización: modo de promediado, tiempos de conversión de bus y \textit{shunt}, y modo de operación. \\
 
 Las funciones públicas expuestas por el \textit{driver} son:
 \begin{itemize}
@@ -1143,7 +1202,7 @@ El \textit{struct} del componente se denomina \texttt{MB85RS256B\_t} y contiene 
 
 Las funciones públicas expuestas por el \textit{driver} son:
 \begin{itemize}
-    \item \texttt{HAL\_StatusTypeDef MB85RS256B\_Init(MB85RS256B\_t *dev)}: inicializa el \textit{driver}..
+    \item \texttt{HAL\_StatusTypeDef MB85RS256B\_Init(MB85RS256B\_t *dev)}: inicializa el \textit{driver}.
     \item \texttt{HAL\_StatusTypeDef MB85RS256B\_Read(MB85RS256B\_t *dev, uint16\_t addr, uint8\_t *data, size\_t len)}: lee \texttt{len} bytes a partir de la dirección \texttt{addr} y los almacena en \texttt{data}.
     \item \texttt{HAL\_StatusTypeDef MB85RS256B\_Write(MB85RS256B\_t *dev, uint16\_t addr, const uint8\_t *data, size\_t len)}: escribe \texttt{len} bytes desde \texttt{data} a partir de la dirección \texttt{addr}.
 \end{itemize}
@@ -1162,27 +1221,25 @@ El proceso de uso habitual del componente sería:
 \subsection{TSL2591}
 El \textit{driver} del TSL2591 se comunica mediante el bus I2C. El integrado trabaja como esclavo y su dirección I2C por defecto es \texttt{0x29}. Su funcionamiento se basa en la escritura y lectura de registros internos: por un lado registros de control y por otro registros de medida que se leen para obtener el nivel de iluminación. \\
 
-El \textit{struct} del componente se denomina \texttt{TSL2591\_t} y contiene el \textit{handle} de I2C de la librería HAL, junto con los parámetros de configuración principales del sensor: ganancia y tiempo de integración. Estos parámetros determinan el rango dinámico y la sensibilidad del sensor, y se emplean durante la inicialización y el cálculo posterior de lux. \\
+El \textit{struct} del componente se denomina \texttt{TSL2591\_t} y contiene el \textit{handle} de I2C de la librería HAL, junto con los parámetros de configuración principales del sensor: ganancia y tiempo de integración. Estos parámetros determinan el rango dinámico y la sensibilidad del sensor, y se emplean durante la inicialización y el cálculo posterior de \textit{lux}. \\
 
 Las funciones públicas expuestas por el \textit{driver} son:
 \begin{itemize}
     \item \texttt{HAL\_StatusTypeDef TSL2591\_Init(TSL2591\_t *dev)}: inicializa el sensor y configura el registro de control.
-    \item \texttt{void TSL2591\_Enable(TSL2591\_t *dev)}: habilita el sensor escribiendo el registro de \textit{enable}.
-    \item \texttt{void TSL2591\_Disable(TSL2591\_t *dev)}: deshabilita el sensor.
     \item \texttt{HAL\_StatusTypeDef TSL2591\_ReadChannels(TSL2591\_t *dev, uint16\_t *ch0, uint16\_t *ch1)}: lee los registros de datos y devuelve los dos canales del sensor: canal completo y canal infrarrojo.
     \item \texttt{float TSL2591\_CalculateLux(TSL2591\_t *dev, uint16\_t full, uint16\_t ir)}: calcula el valor de iluminancia en \textit{lux} a partir de las lecturas de los canales, teniendo en cuenta la ganancia y el tiempo de integración configurados.
     \item \texttt{float TSL2591\_CalculateIrradiance(float lux)}: obtiene una irradiancia aproximada a partir de lux utilizando un factor de eficacia luminosa definido en el \textit{driver}.
 \end{itemize}
 
-Internamente, el \textit{driver} accede a los registros del sensor utilizando un \textit{command bit} que se añade a la dirección del registro. En la inicialización, primero se habilita el sensor (registro \textit{ENABLE}) y después se configura el registro \textit{CONTROL} combinando los campos de integración y ganancia en un único byte de configuración. La lectura de canales realiza una lectura I2C de 4 bytes consecutivos a partir del registro de datos del canal 0, y reconstruye los dos valores de 16 bits correspondientes al espectro (\texttt{CH0}) y infrarrojo (\texttt{CH1}). A partir de estas lecturas, el cálculo de lux ajusta la medida según la configuración actual. \\
+Internamente, el \textit{driver} accede a los registros del sensor utilizando un \textit{command bit} que se añade a la dirección del registro. En la inicialización, primero se habilita el sensor (registro \textit{ENABLE}) y después se configura el registro \textit{CONTROL} combinando los campos de integración y ganancia en un único byte de configuración. La lectura de canales realiza una lectura I2C de 4 bytes consecutivos a partir del registro de datos del canal 0, y reconstruye los dos valores de 16 bits correspondientes al espectro (\texttt{CH0}) y infrarrojo (\texttt{CH1}). A partir de estas lecturas, el cálculo de \textit{lux} ajusta la medida según la configuración actual. \\
 
 El proceso de uso habitual del componente sería:
 \begin{enumerate}
     \item Asignar los valores de configuración del \textit{struct} \texttt{TSL2591\_t}.
     \item Llamar a \texttt{TSL2591\_Init} para habilitar el sensor y programar la ganancia e integración.
     \item Llamar a \texttt{TSL2591\_ReadChannels} para obtener \texttt{full} e \texttt{ir}.
-    \item Calcular los lux con \texttt{TSL2591\_CalculateLux} a partir de \texttt{full} e \texttt{ir}.
-    \item Convertir lux a irradiancia aproximada con \texttt{TSL2591\_CalculateIrradiance}.
+    \item Calcular los \textit{lux} con \texttt{TSL2591\_CalculateLux} a partir de \texttt{full} e \texttt{ir}.
+    \item Convertir \textit{lux} a irradiancia aproximada con \texttt{TSL2591\_CalculateIrradiance}.
 \end{enumerate}
 
 \subsection{SHT3x}
@@ -1193,7 +1250,6 @@ El \textit{struct} del componente se denomina \texttt{SHT3X\_t} y contiene el \t
 Las funciones públicas expuestas por el \textit{driver} son:
 \begin{itemize}
     \item \texttt{HAL\_StatusTypeDef SHT3X\_Init(SHT3X\_t *dev)}: inicializa el componente realizando un \textit{soft reset}.
-    \item \texttt{HAL\_StatusTypeDef SHT3X\_SoftReset(SHT3X\_t *dev)}: envía el comando de reinicio del sensor.
     \item \texttt{HAL\_StatusTypeDef SHT3X\_ReadRaw(SHT3X\_t *dev, uint16\_t *rawT, uint16\_t *rawRH)}: realiza una medida \textit{single-shot} y devuelve los valores crudos de temperatura y humedad.
     \item \texttt{HAL\_StatusTypeDef SHT3X\_ReadSingleShot(SHT3X\_t *dev, float *temp\_c, float *rh\_perc)}: realiza una medida \textit{single-shot} y devuelve temperatura en $^\circ$C y humedad relativa en \%.
     \item \texttt{float SHT3X\_CalculateDewpoint(float temp\_c, float rh\_perc)}: calcula el punto de rocío a partir de temperatura y humedad.
@@ -1272,6 +1328,8 @@ Para salir de STOP2 en el núcleo principal existen cuatro vías:
     \item \textbf{UART:} usada para cargar parámetros como fecha y hora y ajustar el RTC.
 \end{enumerate}
 
+\newpage
+
 \section{Gestión de los datos}
 En la Figura \ref{fig:mem_structure} se observa la estructura a nivel de datos de la FRAM utilizada.
 
@@ -1282,7 +1340,9 @@ En la Figura \ref{fig:mem_structure} se observa la estructura a nivel de datos d
     \label{fig:mem_structure}
 \end{figure}
 
-Para lograr un uso eficiente, robusto y escalable, se decidió dividir la memoria en slots de tamaño fijo, concretamente de 32 bytes. Este enfoque simplifica la gestión (direcciones y tamaños constantes), facilita la detección de errores y permite implementar mecanismos de tolerancia a fallos. \\
+Para lograr un uso eficiente, robusto y escalable, se decidió dividir la memoria en slots de tamaño fijo, concretamente de 32 bytes. Este enfoque simplifica la gestión (direcciones y tamaños constantes), facilita la detección de errores y permite implementar mecanismos de tolerancia a fallos.
+
+\newpage
 
 \subsubsection{Cabecera}
 En la Tabla \ref{tabla:mem_header} se expone el contenido de la cabecera guardada en el Slot 0 de la memoria.
@@ -1309,9 +1369,9 @@ En la Tabla \ref{tabla:mem_header} se expone el contenido de la cabecera guardad
 
 En el bloque de información del dispositivo se almacenan datos como el identificador del dispositivo (ID) u otros campos útiles para trazabilidad o configuración. Los 8 bytes reservados se utilizan como mecanismo de verificación al arrancar: se escribe un patrón conocido, se lee de vuelta y se comprueba que coincide. Este test permite detectar problemas de comunicación con la FRAM o fallos de escritura/lectura antes de operar con datos reales. \\
 
-La gestión de la FRAM está diseñada para soportar cortes de alimentación sin perder completamente el estado interno del almacenamiento. Para ello se guardan metadatos tales como el puntero de escritura o un contador de slots ocupados. Estos metadatos se almacenan en dos copias alternas (A y B) de 8 bytes. En cada escritura de un nuevo dato, el firmware actualiza los metadatos, alternando entre A y B (usando un contador de secuencia). La idea es que, si hay una pérdida de alimentación durante la actualización de una de las copias, al reiniciar el sistema se pueda recuperar el estado usando la otra copia válida. Con esta estrategia, el peor caso es perder como máximo un slot. \\
+La gestión de la FRAM está diseñada para soportar cortes de alimentación sin perder completamente el estado interno del almacenamiento. Para ello se guardan metadatos tales como el puntero de escritura o un contador de slots ocupados. Estos metadatos se almacenan en dos copias alternas (A y B) de 8 bytes. En cada escritura de un nuevo dato, el \textit{firmware} actualiza los metadatos, alternando entre A y B (usando un contador de secuencia). La idea es que, si hay una pérdida de alimentación durante la actualización de una de las copias, al reiniciar el sistema se pueda recuperar el estado usando la otra copia válida. Con esta estrategia, en el peor caso se pierde como máximo una muestra. \\
 
-A continuación se observa el struct de los metadatos guardados en memoria:
+A continuación se observa el \textit{struct} de los metadatos guardados en memoria:
 
 \begin{verbatim}
 typedef struct {
@@ -1323,7 +1383,7 @@ typedef struct {
 } MetaFrame_t; // 8 bytes aligned
 \end{verbatim}
 
-Para asegurar que los metadatos recuperados son correctos se emplean dos mecanismos de robustez. Por un lado, se calcula y almacena un CRC. El CRC es un código de detección de errores que se obtiene aplicando una operación matemática sobre los bytes guardados. Si durante una escritura se corrompe algún byte, es extremadamente probable que el CRC calculado al leer no coincida con el CRC almacenado. Así, durante el arranque el sistema recomputa el CRC a partir de los campos del \textit{struct} y lo compara con el campo \texttt{crc}; si no coinciden, esa copia de metadatos se considera inválida y se descarta. \\
+Para asegurar que los metadatos recuperados son correctos se emplean dos mecanismos de robustez. Por un lado, se calcula y almacena un CRC (\textit{Cyclic Redundancy Check}), un código de detección de errores obtenido al aplicar un algoritmo determinista sobre los bytes almacenados. El CRC se calcula al guardar los metadatos y se vuelve a calcular al leerlos. Si durante una escritura  se corrompen uno o más bytes, lo habitual es que el CRC recalculado no coincida con el CRC almacenado. Así, durante el arranque, el sistema reconstruye el CRC a partir de los campos del \textit{struct} y lo compara con el valor guardado en el campo \texttt{crc}; si difieren, esa copia de metadatos se considera inválida y se descarta. \\
 
 Por otro lado, se incluye un byte de \textit{commit} que actúa como indicador de escritura completada: durante la actualización de metadatos se escribe primero el contenido con \texttt{commit = 0} y, una vez finalizada correctamente la operación, se actualiza el \texttt{commit = 1}. Así, si se interrumpe la alimentación a mitad del proceso, el \textit{commit} no queda validado y esa copia se descarta, recurriendo a la otra copia (A o B) que sí sea coherente. \\
 
@@ -1365,9 +1425,7 @@ _Static_assert(sizeof(MetaFrame_t) == 8, "MetaFrame_t must be 8 bytes");
 \end{verbatim}
 
 \chapter{Validación y pruebas}
-Una vez desarrollados el \textit{hardware} y el \textit{firmware} se inició el periodo de verificación experimental del prototipo completo. El objetivo de este capítulo es comprobar el funcionamiento del sistema en condiciones semi-reales de uso y validar los aspectos críticos del diseño. \\
-
-Las pruebas se han planteado siguiendo un enfoque incremental. En primer lugar se confirmó el correcto funcionamiento de la PCB final (\textit{bring-up}) como paso previo a ensayos prolongados (véase la Sección \ref{seccion:ensamblaje}). A continuación se validó el subsistema de memoria, al tratarse del elemento que garantiza el cumplimiento del requisito de almacenamiento local. Después se realizaron pruebas de autonomía en un escenario desfavorable, con el sistema operando durante 24 horas. Por último, se probaron individualmente los sensores y se verificó de forma independiente el funcionamiento básico de la radio mediante ejemplos del fabricante.
+Una vez desarrollados el \textit{hardware} y el \textit{firmware} se inició el periodo de verificación experimental del prototipo completo, con el objetivo de comprobar el funcionamiento del sistema en condiciones semi-reales de uso y validar los aspectos críticos del diseño.
 
 \section{Pruebas de memoria}
 Se diseñaron pruebas para validar tanto la lectura/escritura básica como el comportamiento del sistema en escenarios límite. En todos los casos el objetivo es asegurar que el registro de datos es consistente y que el sistema puede operar durante periodos prolongados sin degradación del almacenamiento. \\
@@ -1380,6 +1438,8 @@ Como prueba inicial se implementó un ensayo en el que el sistema escribe un reg
 Criterio de aceptación: la lectura posterior debe coincidir con lo escrito durante un número elevado de ciclos consecutivos, sin errores ni valores inconsistentes. \\
 
 En el \textit{log} se observa que, tras cada escritura, la lectura del mismo \textit{slot} es correcta y el registro se marca como válido (\texttt{Read Valid: 1}). Además, durante la inicialización se detecta que ambas copias de metadatos son válidas (\texttt{Both meta valid}), lo cual confirma que el sistema puede recuperar el contexto previamente almacenado.
+
+\newpage
 
 \scriptsize
 \begin{verbatim}
@@ -1403,6 +1463,7 @@ Write Count: 3
 Write Meta B
 Read Slot: 2 (0x0060)
 Read Valid: 1
+...
 \end{verbatim}
 \normalsize
 
@@ -1415,6 +1476,7 @@ En el \textit{log} se observa que al llegar al valor máximo del contador (\text
 
 \scriptsize
 \begin{verbatim}
+...
 Write Slot: 304 (0x2620)
 Write Count: 1022
 Write Meta B
@@ -1438,6 +1500,7 @@ Write Count: 1023
 Write Meta A
 Read Slot: 307 (0x2680)
 Read Valid: 1
+...
 \end{verbatim}
 \normalsize
 
@@ -1450,6 +1513,7 @@ En el \textit{log} se aprecia que, tras el reset lógico (\texttt{Reset FRAM}), 
 
 \scriptsize
 \begin{verbatim}
+...
 Write Slot: 9 (0x0140)
 Write Count: 10
 Write Meta A
@@ -1480,6 +1544,7 @@ Write Count: 3
 Write Meta B
 Read Slot: 2 (0x0060)
 Read Valid: 1
+...
 \end{verbatim}
 \normalsize
 
@@ -1515,6 +1580,7 @@ Write Count: 2
 Write Meta A
 Read Slot: 1 (0x0040)
 Read Valid: 1
+...
 \end{verbatim}
 \normalsize
 
@@ -1544,13 +1610,13 @@ Adicionalmente, se aprecia que a partir de las 18:05 la irradiancia pasa a 0 $\m
 Aun con estas condiciones, la caída de tensión observada es baja: 64 mV en 24 h. Si se realizase una extrapolación lineal, considerando una batería totalmente cargada en torno a $V_\mathrm{OVCH}\approx 4.12~\mathrm{V}$ y un umbral de descarga $V_\mathrm{OVDIS}=3.6~\mathrm{V}$, el tiempo para alcanzar dicho umbral sería:
 
 \[
-t \approx \frac{V_\mathrm{OVCH}-V_\mathrm{OVDIS}}{0.064}\approx \frac{4.12-3.6}{0.064}\approx 8.1~\mathrm{dias}
+t \approx \frac{V_\mathrm{OVCH}-V_\mathrm{OVDIS}}{0.064}\approx \frac{4.12-3.6}{0.064}\approx 8.1~\mathrm{días}
 \]
 
 En conclusión, aunque el ensayo presenta un balance neto ligeramente negativo en un escenario conservador, el comportamiento observado sugiere que en un entorno real el sistema debería mejorar de forma significativa su balance energético y, por tanto, su autonomía efectiva.
 
 \section{Pruebas de sensores}
-A continuación se realizaron una serie de experimentos para evaluara el comportamiento de los sensores integrados en el prototipo.
+A continuación se realizaron una serie de experimentos para evaluar el comportamiento de los sensores integrados en el prototipo.
 
 \subsubsection{Consistencia de temperatura y humedad durante 24 h}
 Con el objetivo de validar la coherencia de las medidas en funcionamiento continuo, se reutilizaron los datos registrados durante el experimento de autonomía. En este ensayo, ambos sensores de temperatura (SHT31 y DS18B20) se encontraban midiendo en aire, por lo que sus lecturas deberían ser comparables. Como se observa en la Figura \ref{fig:temp_hum}, ambas curvas siguen una tendencia muy similar durante todo el periodo, con diferencias pequeñas, lo que constituye una buena señal del correcto funcionamiento de ambos sensores y de su calibración relativa. \\
@@ -1565,9 +1631,9 @@ En cuanto a la humedad relativa medida por el SHT31, se mantiene estable dentro 
 \end{figure}
 
 \subsubsection{Pruebas de humedad relativa ante cambios bruscos}
-Además del análisis a 24 h, se realizó una prueba específica para evaluar la respuesta temporal del sensor de humedad relativa (SHT31) ante cambios rápidos del entorno. Para ello se configuró un muestreo rápido, tomando una medida cada 2 s, y se generaron dos incrementos forzados de humedad aplicando vapor de agua cerca del sensor. \\
+Además del análisis de 24 h, se realizó una prueba específica para evaluar la respuesta temporal del sensor de humedad relativa (SHT31) ante cambios rápidos del entorno. Para ello se configuró un muestreo rápido, tomando una medida cada 2 s, y se generaron dos incrementos forzados de humedad aplicando vapor de agua cerca del sensor. \\
 
-En la Figura \ref{fig:humedad_relativa} se observa que el sensor responde de forma clara ante ambos estímulos, alcanzando valores cercanos a saturación y posteriormente recuperándose hacia el nivel base. La prueba se repitió dos veces y se aprecia un comportamiento distinto en la fase de recuperación: en el primer pico la humedad decrece de forma más lenta, mientras que en el segundo la caída es considerablemente más rápida. Esta diferencia se atribuye a las condiciones de ventilación: durante el primer ensayo apenas había circulación de aire, mientras que en el segundo sí existía ventilación, acelerando la renovación del aire y, por tanto, la recuperación de la humedad relativa hacia el valor inicial. \\
+En la Figura \ref{fig:humedad_relativa} se observa que el sensor responde de forma clara ante ambos estímulos, alcanzando valores cercanos a la saturación y posteriormente recuperándose hacia el nivel base. La prueba se repitió dos veces y se aprecia un comportamiento distinto en la fase de recuperación: en el primer pico la humedad decrece de forma más lenta, mientras que en el segundo la caída es considerablemente más rápida. Esta diferencia se atribuye a las condiciones de ventilación: durante el primer pico apenas había circulación de aire, mientras que en el segundo sí existía ventilación, acelerando la renovación del aire y, por tanto, la recuperación de la humedad relativa hacia el valor inicial.
 
 \begin{figure}[H]
     \centering
@@ -1576,11 +1642,32 @@ En la Figura \ref{fig:humedad_relativa} se observa que el sensor responde de for
     \label{fig:humedad_relativa}
 \end{figure}
 
+\newpage
+
 \subsubsection{Pruebas de humedad en terreno}
+Para validar el sensor de humedad de suelo se realizó un ensayo sencillo en una maceta, clavando el sensor en el sustrato y registrando simultáneamente la lectura de humedad (SEN0308) y la temperatura de suelo (DS18B20). El objetivo fue obtener una calibración absoluta, sino comprobar que el sensor responde de forma clara ante cambios de humedad y que el sistema es capaz de registrar dicha variación de manera estable.
 
-% \textit{[Opcional para completar cuando quieras: añadir valores numéricos del pico máximo alcanzado en cada estímulo y el tiempo aproximado de recuperación (p.ej. tiempo hasta volver al 50\% del incremento).]}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{imgs/maceta.jpg}
+    \caption{\textit{Montaje del ensayo de humedad de suelo con los sensores insertado en una maceta. Elaboración propia.}}
+    \label{fig:maceta}
+\end{figure}
 
-humedad del suelo: se utiliza una maceta donde se clava el sensor. al principio esta seca y se deposita un poco de agua para comprobar que muestra bien la variacion. la calibracion del sensor se hace midiendo en aire y despues completamente sumergido en agua con lo que nos da el valor de 0\% y 100\% humedo, a partir de aqui se extrapola el valor medido.
+La Figura \ref{fig:maceta} muestra el montaje del experimento. Previamente, para disponer de una conversión aproximada a porcentaje, se realizó una calibración por dos puntos extremos: lectura en aire como referencia de 0\% (seco) y lectura con el sensor completamente sumergido en agua como referencia de 100\% (húmedo). A partir de estos dos valores se extrapoló linealmente el porcentaje para las medidas intermedias en la maceta. \\
+
+La evolución temporal de las medidas se muestra en la Figura \ref{fig:hum_temp_terreno}. Al inicio del experimento se añadieron aproximadamente 100 mL de agua a la maceta, lo que provocó un incremento repentino en la humedad del suelo. Tras este aporte, la humedad descendió lentamente hasta aproximadamente las 12:00, momento a partir del cual el sol incide directamente sobre la maceta. Esta exposición directa acelera la evaporación y se observa una caída más rápida de la humedad medida. Cuando finaliza la incidencia directa del sol, la humedad se recupera parcialmente y tiende a estabilizarse alrededor del 50\%. Cabe recalcar que el experimento se llevó a cabo en exterior y en invierno, lo que en general dificulta la evaporación del agua y hace que la evolución temporal observada sea conservadora.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imgs/hum_temp_terreno.png}
+    \caption{\textit{Evolución de la humedad y la temperatura de suelo durante el experimento en la maceta. Elaboración propia.}}
+    \label{fig:hum_temp_terreno}
+\end{figure}
+
+En cuanto a la temperatura, se observa una perturbación en el instante en el que se añade el agua, atribuible a la redistribución térmica en el terreno: la tierra se encontraba fría tras haber permanecido expuesta durante la noche y, al añadir el agua, la temperatura medida aumenta de forma puntual. Posteriormente, la temperatura asciende progresivamente hasta aproximadamente las 11:30, donde comienza a descender. Cuando el sol incide directamente sobre la maceta, se aprecia un ligero incremento adicional, tras el cual la temperatura vuelve a disminuir gradualmente hasta el final del ensayo. \\
+
+Finalmente, conviene destacar que esta calibración (aire como 0\% y agua como 100\%) es orientativa y depende del tipo de suelo y sus propiedades. Por tanto, la medida debe interpretarse como un indicador relativo del estado hídrico del terreno a menos que se realice una calibración específica para el sustrato de interés.
 
 \section{Pruebas de conexión inalámbrica}
 Debido a limitaciones de tiempo, no se integró la funcionalidad BLE completa en el \textit{firmware} final del prototipo. No obstante, se validó el correcto funcionamiento del subsistema inalámbrico del microcontrolador mediante ejemplos de código proporcionados por STMicroelectronics, en concreto se uso el \texttt{BLE\_p2pServer}. Este \textit{firmware} de demostración implementa un servicio BLE sencillo de tipo \textit{peer-to-peer}, con características para el intercambio básico de datos entre el dispositivo y un \textit{cliente} (en nuestro caso un teléfono móvil), permitiendo comprobar de forma aislada la pila BLE y el funcionamiento de la radio. \\
@@ -1595,3 +1682,17 @@ Durante la validación se comprobó que el dispositivo:
 Como resultado, se considera validada la operatividad del \textit{hardware} de radio y la viabilidad de incorporar en el futuro el volcado de datos almacenados en FRAM mediante un servicio BLE, quedando dicha integración fuera del alcance del presente trabajo.
 
 \chapter{Conclusiones y trabajo futuro}
+Este Trabajo de Fin de Grado ha consistido en el diseño y desarrollo de un prototipo de una lanza meteorológica para la monitorización ambiental, abarcando el ciclo completo del proyecto: definición del sistema, selección de componentes, diseño de la electrónica, fabricación y puesta en marcha, desarrollo del \textit{firmware} y pruebas iniciales de verificación. \\
+
+En relación con los requerimientos planteados, el prototipo cumple los objetivos principales de adquisición y almacenamiento local, además de un funcionamiento periódico utilizando el RTC, con lectura de sensores y registro en la FRAM. A nivel de diseño físico, la PCB se ha desarrollado teniendo en cuenta las restricciones del fabricante y buenas prácticas de ruteado y distribución por capas, obteniendo una plataforma integrable en la lanza y preparada para evolucionar. \\
+
+Los resultados obtenidos en las pruebas controladas muestran un comportamiento coherente de la sensórica y del sistema de registro. En particular, se ha verificado la lectura periódica y el almacenamiento consistente de las muestras, así como la respuesta esperada de los sensores ante cambios en el entorno. Además, se ha validado el funcionamiento básico del subsistema inalámbrico, confirmando que la plataforma \textit{hardware} permite incorporar comunicación BLE como canal de volcado, aunque dicha integración queda fuera del alcance actual. \\
+
+Desde el punto de vista de utilidad, el trabajo aporta a la empresa Domo21 una base técnica concreta y documentada sobre la que construir una solución de monitorización en campo: una arquitectura validada, una PCB propia fabricable, y un \textit{firmware} modular que ya resuelve el ciclo de medida y el registro local. Para mí, el proyecto ha supuesto una experiencia completa de desarrollo de un sistema embebido real, integrando diseño electrónico, consideraciones de fabricación, gestión de bajo consumo, estructuración de datos y validación experimental, con un resultado tangible y reutilizable.
+
+\subsubsection{Trabajo futuro}
+Como continuación natural del proyecto, el primer paso sería completar la parte de la comunicación inalámbrica, implementando el BLE de forma completa en el \textit{firmware}, permitiendo el volcado de los datos almacenados en la FRAM a un dispositivo externo. \\
+
+En segundo lugar, el prototipo necesita tiempo de campo. Las pruebas en laboratorio han servido para comprobar el comportamiento básico, pero una validación real exige semanas de operación continua, con días buenos y malos, y cambios de temperatura, humedad y radiación solar. Estas campañas permitirían verificar la autonomía en condiciones representativas, observar la estabilidad de las medidas a lo largo del tiempo y descubrir detalles prácticos que solo aparecen al desplegar el sistema. \\
+
+Finalmente, se plantearía integrar el sistema como parte del proyecto de monitorización con drones, evolucionando el prototipo hacia una solución más completa. Con la experiencia obtenida, sería posible desarrollar una versión mejorada y más funcional, alineada con el objetivo final del proyecto.

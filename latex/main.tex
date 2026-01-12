@@ -5,8 +5,11 @@
 \usepackage{longtable}
 \usepackage[x11names]{xcolor}
 \usepackage[table]{xcolor}
+\PassOptionsToPackage{draft}{graphicx}
 \usepackage{graphicx}
 \graphicspath{{imgs/}}
+
+\usepackage{pdfpages}
 
 \usepackage{hyperref}
 
@@ -31,7 +34,7 @@
 
 \begin{document}
 
-\input{portada}
+\includepdf[pages=-,fitpaper=true]{pdfs/portada.pdf}
 
 \input{resumen.tex}
 
@@ -46,5 +49,7 @@
 \input{memoria.tex}
 
 \input{references.tex}
+
+\input{anexo.tex}
 
 \end{document}

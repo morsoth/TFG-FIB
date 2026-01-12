@@ -1,0 +1,30 @@
+hacer lanza en 3D y redactar apartado integracion en la lanza: diseñar 3d de la lanza y
+de como se integra la electronica; todo OK en HW
+
+redactar apartado Arquitectura del software?
+
+
+
+que tarseas son de desarrollo y cuales de diseño?
+
+cambiar descripcion actores implicados: codirector, domo21...
+
+añadir parrafo AEM10941 (seleccion de componentes) explicando como funciona el diagrama de
+estados Vovch, Vchrdy, Vovdis...
+
+la parte de los drivers es un coñazo
+
+modificar apartados de GEP?
+
+
+redactar conclusion
+
+revisar explicacion de cambio de alcance, etc.
+
+hacer gantt (actualizar recurso digital)
+
+revisar horas tareas
+
+revisar presupuesto
+
+revisar diametro taladro placa fresada

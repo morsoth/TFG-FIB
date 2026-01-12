@@ -586,7 +586,7 @@
 	)
 	(text_box "Page 1 - Top Sheet\nPage 2 - STM32WB55RG\nPage 3 - Power Management\nPage 4 - RF\nPage 5 - External Sensors"
 		(exclude_from_sim no)
-		(at 17.78 60.96 0)
+		(at 17.78 35.56 0)
 		(size 83.82 11.43)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
@@ -624,26 +624,6 @@
 			)
 		)
 		(uuid "5ec3846c-d85c-43cf-a354-c8c0a459875d")
-	)
-	(text_box "a"
-		(exclude_from_sim no)
-		(at 17.78 29.21 0)
-		(size 83.82 22.86)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill
-			(type none)
-		)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left top)
-		)
-		(uuid "5edf4795-8828-4540-98b4-741066d99345")
 	)
 	(text_box "Solar Panels"
 		(exclude_from_sim no)
@@ -689,7 +669,7 @@
 	)
 	(text_box "Table of Contents"
 		(exclude_from_sim no)
-		(at 17.78 55.88 0)
+		(at 17.78 30.48 0)
 		(size 83.82 3.81)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
@@ -1678,7 +1658,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 25.4 110.49 0)
+		(at 25.4 85.09 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -1687,7 +1667,7 @@
 		(fields_autoplaced yes)
 		(uuid "0696e7a2-6058-4ab4-b22a-c82bd319bddf")
 		(property "Reference" "H1"
-			(at 27.94 109.2199 0)
+			(at 27.94 83.8199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1696,7 +1676,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 27.94 111.7599 0)
+			(at 27.94 86.3599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1705,7 +1685,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1714,7 +1694,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1723,7 +1703,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole M2"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1732,7 +1712,7 @@
 			)
 		)
 		(property "Manufacturer" "-"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1741,7 +1721,7 @@
 			)
 		)
 		(property "Package" "NPTH"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1750,7 +1730,7 @@
 			)
 		)
 		(property "Supplier" "-"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1759,7 +1739,7 @@
 			)
 		)
 		(property "Supplier Part #" "-"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1768,7 +1748,7 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1777,7 +1757,7 @@
 			)
 		)
 		(property "Component" "-"
-			(at 25.4 110.49 0)
+			(at 25.4 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1796,7 +1776,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 25.4 129.54 0)
+		(at 25.4 104.14 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -1805,7 +1785,7 @@
 		(fields_autoplaced yes)
 		(uuid "3fdbe469-3b4a-4454-be41-9471b4230218")
 		(property "Reference" "H4"
-			(at 27.94 128.2699 0)
+			(at 27.94 102.8699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1814,7 +1794,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 27.94 130.8099 0)
+			(at 27.94 105.4099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1823,7 +1803,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1832,7 +1812,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1841,7 +1821,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole M2"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1850,7 +1830,7 @@
 			)
 		)
 		(property "Manufacturer" "-"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1859,7 +1839,7 @@
 			)
 		)
 		(property "Package" "NPTH"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1868,7 +1848,7 @@
 			)
 		)
 		(property "Supplier" "-"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1877,7 +1857,7 @@
 			)
 		)
 		(property "Supplier Part #" "-"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1886,7 +1866,7 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1895,7 +1875,7 @@
 			)
 		)
 		(property "Component" "-"
-			(at 25.4 129.54 0)
+			(at 25.4 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1914,7 +1894,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 25.4 123.19 0)
+		(at 25.4 97.79 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -1923,7 +1903,7 @@
 		(fields_autoplaced yes)
 		(uuid "959536bd-c64e-4ad2-96b1-fa1a386bbac4")
 		(property "Reference" "H3"
-			(at 27.94 121.9199 0)
+			(at 27.94 96.5199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1932,7 +1912,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 27.94 124.4599 0)
+			(at 27.94 99.0599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1941,7 +1921,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1950,7 +1930,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1959,7 +1939,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole M2"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1968,7 +1948,7 @@
 			)
 		)
 		(property "Manufacturer" "-"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1977,7 +1957,7 @@
 			)
 		)
 		(property "Package" "NPTH"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1986,7 +1966,7 @@
 			)
 		)
 		(property "Supplier" "-"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1995,7 +1975,7 @@
 			)
 		)
 		(property "Supplier Part #" "-"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2004,7 +1984,7 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2013,7 +1993,7 @@
 			)
 		)
 		(property "Component" "-"
-			(at 25.4 123.19 0)
+			(at 25.4 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2032,7 +2012,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 25.4 116.84 0)
+		(at 25.4 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -2041,7 +2021,7 @@
 		(fields_autoplaced yes)
 		(uuid "e6bc65ec-17e3-4146-9d78-900e007016ef")
 		(property "Reference" "H2"
-			(at 27.94 115.5699 0)
+			(at 27.94 90.1699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2050,7 +2030,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 27.94 118.1099 0)
+			(at 27.94 92.7099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2059,7 +2039,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2068,7 +2048,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2077,7 +2057,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole M2"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2086,7 +2066,7 @@
 			)
 		)
 		(property "Manufacturer" "-"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2095,7 +2075,7 @@
 			)
 		)
 		(property "Package" "NPTH"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2104,7 +2084,7 @@
 			)
 		)
 		(property "Supplier" "-"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2113,7 +2093,7 @@
 			)
 		)
 		(property "Supplier Part #" "-"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2122,7 +2102,7 @@
 			)
 		)
 		(property "Supplier Part Type" "-"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2131,7 +2111,7 @@
 			)
 		)
 		(property "Component" "-"
-			(at 25.4 116.84 0)
+			(at 25.4 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2149,7 +2129,7 @@
 		)
 	)
 	(sheet
-		(at 17.78 78.74)
+		(at 17.78 53.34)
 		(size 39.37 5.08)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2165,7 +2145,7 @@
 		)
 		(uuid "401ae2bf-b50a-48e9-9bd2-721497aaba14")
 		(property "Sheetname" "STM32WB55RG"
-			(at 17.78 78.0284 0)
+			(at 17.78 52.6284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2174,7 +2154,7 @@
 			)
 		)
 		(property "Sheetfile" "STM32WB55RG.kicad_sch"
-			(at 17.78 84.4046 0)
+			(at 17.78 59.0046 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2191,7 +2171,7 @@
 		)
 	)
 	(sheet
-		(at 62.23 78.74)
+		(at 62.23 53.34)
 		(size 39.37 5.08)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2207,7 +2187,7 @@
 		)
 		(uuid "b888a684-3263-4153-9730-9658fff4b3b0")
 		(property "Sheetname" "Power Management"
-			(at 62.23 78.0284 0)
+			(at 62.23 52.6284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2216,7 +2196,7 @@
 			)
 		)
 		(property "Sheetfile" "Power Management.kicad_sch"
-			(at 62.23 84.4046 0)
+			(at 62.23 59.0046 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2233,7 +2213,7 @@
 		)
 	)
 	(sheet
-		(at 62.23 91.44)
+		(at 62.23 66.04)
 		(size 39.37 5.08)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2249,7 +2229,7 @@
 		)
 		(uuid "d5b9bfcf-d450-4bf8-81e3-a3843fc9b180")
 		(property "Sheetname" "External Connections"
-			(at 62.23 90.7284 0)
+			(at 62.23 65.3284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2258,7 +2238,7 @@
 			)
 		)
 		(property "Sheetfile" "External Connections.kicad_sch"
-			(at 62.23 97.1046 0)
+			(at 62.23 71.7046 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2275,7 +2255,7 @@
 		)
 	)
 	(sheet
-		(at 17.78 91.44)
+		(at 17.78 66.04)
 		(size 39.37 5.08)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2291,7 +2271,7 @@
 		)
 		(uuid "ec8f88e8-78d2-4fac-b943-5ef9b1e2e231")
 		(property "Sheetname" "RF"
-			(at 17.78 90.7284 0)
+			(at 17.78 65.3284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2300,7 +2280,7 @@
 			)
 		)
 		(property "Sheetfile" "RF.kicad_sch"
-			(at 17.78 97.1046 0)
+			(at 17.78 71.7046 0)
 			(effects
 				(font
 					(size 1.27 1.27)

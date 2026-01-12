@@ -1,0 +1,78 @@
+Esquematicos
+	potencia y alimentacion
+		control de potencia
+			- circuito aem10941 (foto datasheet)
+			- configuracion LDOs: ENVH = HIGH, ENVL = LOW (HIGH logico es BUCK)
+			- como no usamos LVOUT (Low Voltage Output) lo dejamos flotando
+			- configuracion bateria: CFG[2:0] = 111, bateria Li-ion. (tabla voltajes)
+			- no usamos un modo personalizado por lo que no conectamos SET_OVDIS, SET_CHRDY, SET_OVCH ni FB_HV.
+			- configuracion MPPT: SELMPP[1:0] = 00, 70% justificacion
+			- pin BATT nunca flotando, bateria recambiable: añadir capacitor minimo de 150uF
+			- no usamos bateria secundaria por lo que PRIM, FB_PRIM_U y FB_PRIM_D a GND.
+			- explicar cada pin status
+			- foto diagrama de operacion
+		
+		monitoreo de potencia
+			- circuito INA3221
+			- calculo R shunt. V_shunt_max = 33mV, I_max = 150mA, R_shunt = 0.22 ohm.
+			- P_shunt = 4.95W (enseñar calculo)
+			- I_LSB = 40uV / 0.22 = 0.182mA/bit (comprobar calculos)
+			- 220 mOhm nos da una precision aceptable a cambio de una caida de voltaje minima. temp tampoco sera un problema
+			- filtro de entrada: 10 ohm en en serie y un cap entre IN+ e IN- de 100nF
+			- explicar pines de alerta del ina3221
+
+		bus 3.3 V
+			- El bus de 3.3V está diseñado para por defecto alimentarse desde el pin HVOUT del AEM. Sin embargo para facilitar la programación y pruebas del sistema se añade la opción de alimentar el bus 3.3V desde un conector externo. Para ello se incorpora un jumper para cambiar el origen de la alimentación del sistema.
+
+		Switch de la alimentación de sensores
+			- Para encender y apagar la alimentación a los sensores utilizaremos un transistor MOSFET pmos. El bus de 3.3V estará conectado al source (S), la alimentación de los sensores al drain (D) y un GPIO del STM32 a la gate (G). Además se utilizará una resistencia de pull-up de 100k entre el source y la gate para forzar el estado por defecto del switch a apagado. La resistencia es tan grande para facilitar al micro modificar el estado de la gate.
+			- Se utilizará un sólo interruptor para todos los sensores ambientales.
+			- El interruptor sólo afectará a los sensores, no al STM32 ni al INA3221.
+			- Al source del MOSFET entra el bus de 3.3V después de pasar por en INA3221.
+
+	
+	MCU
+		STM32WB55RG
+			explicar que nos basamos mucho en los esquematicos publicos de la placa de desarrollo de la NUCLEO-WB55RG para diseñar los esquematicos del STM32.
+			pin de reset
+			pin de boot0
+			
+		Alimentación del microcontrolador
+			condensadores de desacoplo de 100nF por pin por defecto (nos inspiramos en los esquematicos de la nucleo)
+
+		Osciladores
+			HSE
+				32 MHz
+				usamos uns osc lo mas parecido al de la nucleo (sobretodo en capacitancia)
+				Cl = 6-8pF y ESR max = 100 ohms
+				no necesita capaitores externos ya que se puede configurar por firmware
+			LSE
+				32.786 kHz
+				Cs = 3pF (capacitancia de la pista)
+				formula calcular los capacitores de entrada y salida del osc
+
+		RF
+			filtro de señal
+				se utiliza el MLPF-WB55-01E3 y un filtro en H de 2 capacitores y 1 inductor
+				el primer capacitor se elimina ya que así hacen en el NUCLEO-WB55RG
+			antena pcb
+				https://www.st.com/resource/en/application_note/an5129-guidelines-for-meander-design-using-lowcost-pcb-antennae-with-24-ghz-radio-for-stm32wbwb0-mcus-stmicroelectronics.pdf
+				https://www.st.com/resource/en/application_note/an6335-mlpfwb-and-mlpfnrg-pcb-design-guidelines-and-reference-hardware-stmicroelectronics.pdf
+			pistas de impedancia
+				se utilizo la calculadora online de JLC
+				se selecciono el stack-up por defecto de 4 capas
+				pista entre pin RF1 y mlpf 62 ohms y de mlps a antena de 50
+				Filtro a la antena: 50Ω → 0.2695 mm (~0.28 mm)
+				STM32 al filtro: 62Ω → 0.1537 mm (~0.16mm)
+		
+		FRAM
+			capacitor de desacoplo
+			pines WP y HOLD
+
+		LEDs
+			eleccion de colores (unicos que habian disponibles)
+			conectados a GND no a 3.3V (pull-down)
+			calculo corriente consumida
+
+
+

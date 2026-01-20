@@ -50,7 +50,7 @@ void DumpFRAM();
 
 void I2C_bus_scan();
 
-uint16_t cycle = 1;
+uint16_t cycle = 0;
 
 volatile uint8_t g_wakeRTC = 1;
 volatile uint8_t g_wakeEXTI = 0;
@@ -65,9 +65,6 @@ SHT3X_t sht;
 DS18B20_t dfr;
 SEN0308_t sen;
 
-RTC_TimeTypeDef time;
-RTC_DateTypeDef date;
-
 float irradiance_Wm2;
 
 float airTemp_C;
@@ -77,7 +74,9 @@ uint8_t airHumidity_perc;
 uint8_t soilMoisture_perc;
 
 uint16_t batteryVoltage_mV;
-float pvVoltage_V;
+
+RTC_TimeTypeDef time;
+RTC_DateTypeDef date;
 
 // INTERRUPTIONS ------------------------------------------------------------
 
@@ -103,12 +102,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 void setup() {
 	//I2C_bus_scan();
 
-	time.Hours = 10;
-	time.Minutes = 45;
+	time.Hours = 0;
+	time.Minutes = 0;
 	time.Seconds = 0;
 	if (HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN) != HAL_OK) Error_Handler();
 
-	date.Date = 8;
+	date.Date = 20;
 	date.Month = RTC_MONTH_JANUARY;
 	date.Year = 26;
 
@@ -116,7 +115,6 @@ void setup() {
 
 	InitFRAM();
 	FRAM_Reset(&mem);
-	printf("Ciclo,Hum Suelo (),Temp Suelo (C)\r\n");
 
 	InitINA3221();
 	InitTSL2591();
@@ -124,7 +122,7 @@ void setup() {
 	InitDFR0198();
 	InitSEN0308();
 
-	RTC_Wakeup_Config(10);
+	RTC_Wakeup_Config(2);
 
 	HAL_Delay(500);
 }
@@ -155,49 +153,31 @@ void loop() {
 			.year = date.Year
 		};
 
-		FRAM_SaveData(&mem, &data);
+		/*FRAM_SaveData(&mem, &data);
 
 		DataSample_t rx = {0};
+		uint16_t slot = mem.write_idx-1;
 		uint8_t valid = 0;
 
-		FRAM_GetSlot(&mem, mem.write_idx-1, &rx, &valid);
+		FRAM_GetSlot(&mem, slot, &rx, &valid);
 
-		if (valid) {/*
-			printf("FRAM Slot: %u\r\n", mem.write_idx-1);
+		if (valid) {
+			printf("FRAM Slot: %u\r\n", slot);
 			printf("%02d/%02d/20%02d %02d:%02d:%02d\r\n", rx.day, rx.month, rx.year, rx.hours, rx.minutes, rx.seconds);
 			printf("Battery: %.3f V\r\n", rx.batteryVoltage_mV/1000.0);
 			printf("Irradiance: %.3f W/m2\r\n", rx.irradiance_Wm2);
 			printf("Air: %.3f ºC, %u %%\r\n", rx.airTemp_C, rx.airHumidity_perc);
-			printf("Soil: %.3f ºC, %u %%\r\n", rx.soilTemp_C, rx.soilMoisture_perc);*/
-
-			printf("%u,%u,%.3f\r\n", cycle++, rx.soilMoisture_perc, rx.soilTemp_C);
+			printf("Soil: %.3f ºC, %u %%\r\n", rx.soilTemp_C, rx.soilMoisture_perc);
 		}
-		else printf("Slot not valid\r\n");
-	}
-	else if (g_wakeEXTI) {
-		g_wakeEXTI = 0;
+		else printf("Slot %u not valid\r\n", slot);*/
 
-		switch(g_extiPin) {
-			case PV_INA_Pin:
-				//
-				break;
-			case CRI_INA_Pin:
-				//
-				break;
-			case WAR_INA_Pin:
-				//
-				break;
-			case S0_AEM_Pin:
-				//
-				break;
-			case S1_AEM_Pin:
-				//
-				break;
-		}
-
-		ReadRTC();
-		printf("%02d:%02d:%02d", time.Hours, time.Minutes, time.Seconds);
-		printf(" - EXTI%u\r\n", __builtin_ctz(g_extiPin));
+		printf("Cycle: %u\r\n", cycle++);
+		printf("%02d/%02d/20%02d %02d:%02d:%02d\r\n", date.Date, date.Month, date.Year, time.Hours, time.Minutes, time.Seconds);
+		printf("Battery: %.3f V\r\n", batteryVoltage_mV/1000.0);
+		printf("Irradiance: %.3f W/m2\r\n", irradiance_Wm2);
+		printf("Air: %.3f ºC, %u %%\r\n", airTemp_C, airHumidity_perc);
+		printf("Soil: %.3f ºC, %u %%\r\n", soilTemp_C, soilMoisture_perc);
+		printf("\r\n");
 	}
 
 	EnterStop2();
@@ -314,7 +294,7 @@ void ReadRTC() {
 	}
 	// Error while reading RTC time
 	else {
-		//printf("Error while reading RTC time\r\n");
+		printf("Error while reading RTC time\r\n");
 	}
 
 	// Reads RTC date
@@ -323,7 +303,7 @@ void ReadRTC() {
 	}
 	// Error while reading RTC date
 	else {
-		//printf("Error while reading RTC date\r\n");
+		printf("Error while reading RTC date\r\n");
 	}
 }
 
@@ -343,14 +323,13 @@ void ReadINA3221() {
 		}
 		// Error while reading the sensor
 		else {
-			//printf("Error while reading INA3221\r\n\r\n");
+			printf("Error while reading INA3221\r\n\r\n");
 
 			return;
 		}
 	}
 
 	batteryVoltage_mV = (uint16_t)(busVoltage_V[1] * 1000);
-	pvVoltage_V = busVoltage_V[0];
 }
 
 void ReadTSL2591() {
@@ -367,7 +346,7 @@ void ReadTSL2591() {
 	}
 	// Error while reading the sensor
 	else {
-		//printf("Error while reading TSL2591\r\n\r\n");
+		printf("Error while reading TSL2591\r\n\r\n");
 	}
 }
 
@@ -383,18 +362,18 @@ void ReadSHT3X() {
 		}
 		// Error while reading the sensor
 		else {
-			//printf("Error while reading SHT3x\r\n\r\n");
+			printf("Error while reading SHT3x\r\n\r\n");
 
 			return;
 		}
 
 		// RH > 95% or T-Td < 1ºC - Activate heater
 		if (airHumidity_perc > 90.0f || airTemp_C - dewPoint_C < 1.0f) {
-			printf("Heater ON");
-			SHT3X_Heater(&sht, SHT3X_HEATER_ON);
-			HAL_Delay(500);
-			SHT3X_Heater(&sht, SHT3X_HEATER_OFF);
-			printf("Heater OFF");
+			//printf("Heater ON");
+			//SHT3X_Heater(&sht, SHT3X_HEATER_ON);
+			//HAL_Delay(500);
+			//SHT3X_Heater(&sht, SHT3X_HEATER_OFF);
+			//printf("Heater OFF");
 		}
 		// Valid reading
 		else {
@@ -412,7 +391,7 @@ void ReadDFR0198() {
 	}
 	// Error while reading the sensor
 	else {
-		//printf("Error while reading DFR0198\r\n\r\n");
+		printf("Error while reading DFR0198\r\n\r\n");
 	}
 }
 
@@ -425,7 +404,7 @@ void ReadSEN0308() {
 	}
 	// Error while reading the sensor
 	else {
-		//printf("Error while reading SEN0308\r\n\r\n");
+		printf("Error while reading SEN0308\r\n\r\n");
 	}
 }
 

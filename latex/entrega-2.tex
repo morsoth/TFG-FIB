@@ -18,38 +18,38 @@ La realización de este proyecto se realizó en gran medida en horas laborales d
 
 \subsection{Estudio Previo}
 \begin{itemize}
-    \item \textbf{EP1 $\Rightarrow$ Estudio y selección de componentes (18 h):} Investigación y comparación de alternativas para cada bloque del sistema: microcontrolador, sensores ambientales, regulación de alimentación, etc. Se valoran criterios de precisión, interfaz utilizada, consumo, disponibilidad, coste y facilidad de integración.
-    \item \textbf{EP2 $\Rightarrow$ Diseño de la arquitectura del sistema (12 h):} Definición de la arquitectura general del prototipo: diagrama de bloques, buses de comunicación, estrategia de muestreo, gestión de energía y enfoque de almacenamiento y transmisión de datos orientado a las pruebas.
-    \item \textbf{EP3 $\Rightarrow$ Primeras pruebas con placas de evaluación (20 h):} Pruebas iniciales con placas de evaluación para asegurar que los sensores y el microcontrolador se entienden correctamente. Se revisan lecturas, configuración y estabilidad básica, detectando posibles problemas antes del diseño definitivo. \textcolor{Red3}{Dependencias: EP1, EP2}
+    \item \textbf{EP1 $\Rightarrow$ Estudio y selección de componentes (30 h):} Investigación y comparación de alternativas para cada bloque del sistema: microcontrolador, sensores ambientales, regulación de alimentación, etc. Se valoran criterios de precisión, interfaz utilizada, consumo, disponibilidad, coste y facilidad de integración.
+    \item \textbf{EP2 $\Rightarrow$ Diseño de la arquitectura del sistema (20 h):} Definición de la arquitectura general del prototipo: diagrama de bloques, buses de comunicación, estrategia de muestreo, gestión de energía y enfoque de almacenamiento y transmisión de datos orientado a las pruebas.
+    \item \textbf{EP3 $\Rightarrow$ Primeras pruebas con placas de evaluación (30 h):} Pruebas iniciales con placas de evaluación para asegurar que los sensores y el microcontrolador se entienden correctamente. Se revisan lecturas, configuración y estabilidad básica, detectando posibles problemas antes del diseño definitivo. \textcolor{Red3}{Dependencias: EP1, EP2}
 \end{itemize}
 
 \subsection{Desarrollo Hardware}
 \begin{itemize}
-    \item \textbf{HW1 $\Rightarrow$ Selección final de componentes (16 h):} Elección definitiva de los componentes a utilizar, con elaboración de una BOM preliminar y comprobación de compatibilidades eléctricas y mecánicas. \textcolor{Red3}{Dependencias: EP1}
-    \item \textbf{HW2 $\Rightarrow$ Prototipo con placa fresada (16 h):} Integración preliminar de los componentes principales en un prototipo de cobre fresado para validar conexiones a bajo coste. \textcolor{Red3}{Dependencias: HW1, EP3}
-    \item \textbf{HW3 $\Rightarrow$ Diseño esquemático PCB principal (22 h):} Desarrollo del esquemático completo de la placa principal: alimentación, MCU, buses, conectores para sensores, conector de programación/depuración, protecciones y puntos de test. \textcolor{Red3}{Dependencias: HW2}
-    \item \textbf{HW4 $\Rightarrow$ Diseño \textit{layout} PCB principal (26 h):} Diseño físico y enrutado de la placa: colocación, reglas de diseño, planos de masa, ubicación de componentes y conectores. \textcolor{Red3}{Dependencias: HW3}
-    \item \textbf{HW5 $\Rightarrow$ Fabricación y montaje (10 h):} Preparación y envío de la documentación de fabricación a una empresa especializada, seguimiento del proceso y resolución de incidencias. Recepción de la PCB, inspección visual y finalización del montaje mediante soldadura manual de los componentes no ensamblados por el proveedor. Verificación básica de continuidad y revisión de posibles errores de montaje antes de iniciar las pruebas funcionales. \textcolor{Red3}{Dependencias: HW4}
+    \item \textbf{HW1 $\Rightarrow$ Selección final de componentes (25 h):} Elección definitiva de los componentes a utilizar, con elaboración de una BOM preliminar y comprobación de compatibilidades eléctricas y mecánicas. \textcolor{Red3}{Dependencias: EP1}
+    \item \textbf{HW2 $\Rightarrow$ Prototipo con placa fresada (30 h):} Integración preliminar de los componentes principales en un prototipo de cobre fresado para validar conexiones a bajo coste. \textcolor{Red3}{Dependencias: HW1, EP3}
+    \item \textbf{HW3 $\Rightarrow$ Diseño esquemático PCB principal (45 h):} Desarrollo del esquemático completo de la placa principal: alimentación, MCU, buses, conectores para sensores, conector de programación/depuración, protecciones y puntos de test. \textcolor{Red3}{Dependencias: HW2}
+    \item \textbf{HW4 $\Rightarrow$ Diseño \textit{layout} PCB principal (55 h):} Diseño físico y enrutado de la placa: colocación, reglas de diseño, planos de masa, ubicación de componentes y conectores. \textcolor{Red3}{Dependencias: HW3}
+    \item \textbf{HW5 $\Rightarrow$ Fabricación y montaje (35 h):} Preparación y envío de la documentación de fabricación a una empresa especializada, seguimiento del proceso y resolución de incidencias. Recepción de la PCB, inspección visual y finalización del montaje mediante soldadura manual de los componentes no ensamblados por el proveedor. Verificación básica de continuidad y revisión de posibles errores de montaje antes de iniciar las pruebas funcionales. \textcolor{Red3}{Dependencias: HW4}
 \end{itemize}
 
 \subsection{Desarrollo Firmware}
 \begin{itemize}
-    \item \textbf{FW1 $\Rightarrow$ \textit{Drivers} (24 h):} Implementación de \textit{drivers} para los componentes seleccionados y sus interfaces. Incluye inicialización, configuración, lectura de medidas, conversión a unidades físicas y gestión básica de errores. \textcolor{Red3}{Dependencias: EP3, HW5}
-    \item \textbf{FW2 $\Rightarrow$ Flujo de programa principal (16 h):} Desarrollo del flujo principal del sistema: arranque, inicialización de periféricos, temporización del muestreo y estructura general de ejecución. \textcolor{Red3}{Dependencias: FW1}
-    \item \textbf{FW3 $\Rightarrow$ Estructura de memoria y formato de registro (18 h):} Diseño de cómo se almacenan los datos en memoria: organización del espacio, estructura de bloques y registros, metadatos asociados y mecanismos de integridad. Incluye el tratamiento de casos límite como memoria llena, datos inválidos y recuperación tras reinicios. \textcolor{Red3}{Dependencias: FW1}
-    \item \textbf{FW4 $\Rightarrow$ Comunicación inalábrica (12 h):} Implementación de una interfaz inalámbrica básica para enviar datos. Esta tarea se plantea como funcionalidad no prioritaria y puede limitarse a un perfil mínimo según el tiempo disponible. \textcolor{Red3}{Dependencias: FW2, FW3}
+    \item \textbf{FW1 $\Rightarrow$ \textit{Drivers} (60 h):} Implementación de \textit{drivers} para los componentes seleccionados y sus interfaces. Incluye inicialización, configuración, lectura de medidas, conversión a unidades físicas y gestión básica de errores. \textcolor{Red3}{Dependencias: EP3, HW5}
+    \item \textbf{FW2 $\Rightarrow$ Flujo de programa principal (35 h):} Desarrollo del flujo principal del sistema: arranque, inicialización de periféricos, temporización del muestreo y estructura general de ejecución. \textcolor{Red3}{Dependencias: FW1}
+    \item \textbf{FW3 $\Rightarrow$ Estructura de memoria y formato de registro (45 h):} Diseño de cómo se almacenan los datos en memoria: organización del espacio, estructura de bloques y registros, metadatos asociados y mecanismos de integridad. Incluye el tratamiento de casos límite como memoria llena, datos inválidos y recuperación tras reinicios. \textcolor{Red3}{Dependencias: FW1}
+    \item \textbf{FW4 $\Rightarrow$ Comunicación inalábrica (25 h):} Implementación de una interfaz inalámbrica básica para enviar datos. Esta tarea se plantea como funcionalidad no prioritaria y puede limitarse a un perfil mínimo según el tiempo disponible. \textcolor{Red3}{Dependencias: FW2, FW3}
 \end{itemize}
 
 \subsection{Pruebas y Validación}
 \begin{itemize}
-    \item \textbf{PV1 $\Rightarrow$ Verificación eléctrica y funcional de la PCB (14 h):} Puesta en marcha de la placa: comprobación de tensiones, reguladores y consumo, verificación del acceso de programación/depuración y pruebas básicas de comunicación con los periféricos. Si aparecen problemas, se aplican correcciones de montaje o ajustes de \textit{firmware} para dejar una base estable. \textcolor{Red3}{Dependencias: HW5}
-    \item \textbf{PV2 $\Rightarrow$ Pruebas de los sensores en entornos controlados (18 h):} Validación de cada sensor en un entorno controlado para observar su respuesta a cambios y confirmar que el comportamiento es coherente con lo esperado. \textcolor{Red3}{Dependencias: PV1, FW2, FW3}
-    \item \textbf{PV3 $\Rightarrow$ Pruebas del sistema completo en entornos controlados (12 h):} Pruebas del sistema integrado durante periodos prolongados para observar estabilidad, continuidad de adquisición y gestión de datos. \textcolor{Red3}{Dependencias: PV2}
+    \item \textbf{PV1 $\Rightarrow$ Verificación eléctrica y funcional de la PCB (30 h):} Puesta en marcha de la placa: comprobación de tensiones, reguladores y consumo, verificación del acceso de programación/depuración y pruebas básicas de comunicación con los periféricos. Si aparecen problemas, se aplican correcciones de montaje o ajustes de \textit{firmware} para dejar una base estable. \textcolor{Red3}{Dependencias: HW5}
+    \item \textbf{PV2 $\Rightarrow$ Pruebas de los sensores en entornos controlados (45 h):} Validación de cada sensor en un entorno controlado para observar su respuesta a cambios y confirmar que el comportamiento es coherente con lo esperado. \textcolor{Red3}{Dependencias: PV1, FW2, FW3}
+    \item \textbf{PV3 $\Rightarrow$ Pruebas del sistema completo en entornos controlados (35 h):} Pruebas del sistema integrado durante periodos prolongados para observar estabilidad, continuidad de adquisición y gestión de datos. \textcolor{Red3}{Dependencias: PV2}
 \end{itemize}
 
 \subsection{Documentación}
 \begin{itemize}
-    \item \textbf{DOC1 $\Rightarrow$ Redactar el TFG (90 h):} Elaboración de la memoria del Trabajo de Fin de Grado.
+    \item \textbf{DOC1 $\Rightarrow$ Redactar el TFG (110 h):} Elaboración de la memoria del Trabajo de Fin de Grado.
 \end{itemize}
 
 \section{Recursos}
